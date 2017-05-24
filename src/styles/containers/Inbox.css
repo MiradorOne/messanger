@@ -11,9 +11,17 @@
     padding: 35px 0; }
     .Inbox .link-group li {
       padding: 10px;
-      cursor: pointer; }
+      cursor: pointer;
+      position: relative; }
       .Inbox .link-group li:hover {
         color: #fff; }
+      .Inbox .link-group li .count {
+        color: #fff;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px; }
     .Inbox .link-group .active {
       color: #fff;
       border-radius: 4px;

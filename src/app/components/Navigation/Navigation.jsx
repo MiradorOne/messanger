@@ -7,10 +7,10 @@ export default class Navigation extends Component {
         return (
             <div className="Navigation">
                 <ul className="link-group messages-group bottom-border">
-                    <li>All messages</li>
-                    <li>Unread</li>
-                    <li className="active">Important</li>
-                    <li>Drafs</li>
+                    <li>All messages <span className="count">21</span></li>
+                    <li>Unread <span className="count">1337</span></li>
+                    <li className="active">Important <span className="count">228</span></li>
+                    <li>Drafs <span className="count">66</span></li>
                 </ul>
                 <ul className="link-group media-group bottom-border">
                     <li>Teams</li>

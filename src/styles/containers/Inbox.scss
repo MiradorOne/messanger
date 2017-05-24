@@ -16,8 +16,18 @@
 		 li {
 			 padding: 10px;
 			 cursor: pointer;
+			 position: relative;
 			 &:hover {
 				 color: #fff;
+			 }
+
+			 .count {
+				 color: #fff;
+				 position: absolute;
+				 right: 10px;
+				 top: 50%;
+				 transform: translateY(-50%);
+				 font-size: 11px;
 			 }
 		 }
 
