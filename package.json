@@ -6,6 +6,8 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "bourbon-neat": "^1.8.0",
+    "firebase": "^4.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "redux": "^3.6.0"

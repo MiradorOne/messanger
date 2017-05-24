@@ -1,0 +1,28 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-size: 14px;
+	background-color: #eee;
+}
+
+ul {
+	list-style: none;
+	margin-left: 0;
+}
+
+.bottom-border {
+	border-bottom: 1px solid rgba(224, 228, 234, 0.1);
+}
+
+//======== Components grid ========//
+
+.Inbox {
+	@include span-columns(3 of 12);
+}
+
+.Friend-List {
+	@include span-columns(5 of 12);
+}

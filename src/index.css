@@ -1,5 +1,38 @@
-body {
-  margin: 0;
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+* {
   padding: 0;
-  font-family: sans-serif;
-}
+  margin: 0; }
+
+body {
+  font-size: 14px;
+  background-color: #eee; }
+
+ul {
+  list-style: none;
+  margin-left: 0; }
+
+.bottom-border {
+  border-bottom: 1px solid rgba(224, 228, 234, 0.1); }
+
+.Inbox {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%; }
+  .Inbox:last-child {
+    margin-right: 0; }
+
+.Friend-List {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 40.29137%; }
+  .Friend-List:last-child {
+    margin-right: 0; }
+
+/*# sourceMappingURL=index.css.map */

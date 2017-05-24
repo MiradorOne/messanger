@@ -1,0 +1,23 @@
+.Inbox {
+  background-color: #1D242C;
+  display: block;
+  padding: 30px;
+  color: #a1a5a7;
+  font-family: 'Roboto', sans-serif; }
+  .Inbox h2 {
+    padding-left: 10px;
+    color: #fff; }
+  .Inbox .link-group {
+    padding: 35px 0; }
+    .Inbox .link-group li {
+      padding: 10px;
+      cursor: pointer; }
+      .Inbox .link-group li:hover {
+        color: #fff; }
+    .Inbox .link-group .active {
+      color: #fff;
+      border-radius: 4px;
+      background-color: rgba(64, 74, 83, 0.56);
+      box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, 0.06); }
+
+/*# sourceMappingURL=Inbox.css.map */
