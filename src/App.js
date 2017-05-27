@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import { initDB } from './db/index';
 import Inbox from './app/containers/Inbox';
 import FriendList from './app/containers/FriendList';
+import Chat from './app/containers/Chat';
 
 class App extends Component {
 
@@ -18,6 +19,7 @@ class App extends Component {
                 <div className="App-header">
                     <Inbox />
                     <FriendList />
+                    <Chat />
                 </div>
             </div>
         );

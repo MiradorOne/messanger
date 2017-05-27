@@ -1,0 +1,25 @@
+.Enter-Message {
+	background-color: #F8F8F9;
+	padding: 30px;
+
+	.attach, .enter-field,.emoji, button {
+		display: inline-block;
+	}
+
+	.enter-field {
+		width:80%;
+	}
+
+	input {
+		font-weight: 300;
+		font-size: 16px;
+		border: none;
+		background-color: #F8F8F9;
+		width:100%;
+	}
+
+	.send {
+		background-color: transparent;
+		cursor: pointer;
+	}
+}

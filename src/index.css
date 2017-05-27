@@ -6,7 +6,8 @@ html {
 
 * {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  box-sizing: border-box; }
 
 body {
   font-size: 14px;
@@ -22,7 +23,17 @@ ul {
 .input-default {
   outline: none;
   appearance: none;
-  border: none; }
+  border: none;
+  font-family: 'Roboto', sans-serif; }
+
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .container::after {
+    clear: both;
+    content: "";
+    display: block; }
 
 .Inbox {
   float: left;
@@ -37,7 +48,8 @@ ul {
   float: left;
   display: block;
   margin-right: 1.16509%;
-  width: 24.12618%; }
+  width: 24.12618%;
+  margin-right: 0; }
   .Friend-List:last-child {
     margin-right: 0; }
   .Friend-List .Friend img {
@@ -64,5 +76,48 @@ ul {
 
 .Search {
   width: 100%; }
+
+.Chat {
+  float: left;
+  display: block;
+  margin-right: 1.16509%;
+  width: 40.98703%; }
+  .Chat:last-child {
+    margin-right: 0; }
+
+.Enter-Message, .Chat-Messages {
+  width: 100%; }
+
+.icon {
+  width: 20px;
+  height: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block; }
+
+.icon-call {
+  background-image: url("./static/images/icons/call.png");
+  width: 23px; }
+
+.icon-favourite {
+  background-image: url("./static/images/icons/favourite.png"); }
+
+.icon-videocall {
+  background-image: url("./static/images/icons/videocall.png");
+  width: 23px; }
+
+.icon-attach {
+  background-image: url("./static/images/icons/attach.png");
+  height: 25px; }
+
+.icon-emoji {
+  background-image: url("./static/images/icons/emojis.png");
+  width: 22px;
+  height: 21px; }
+
+.icon-send {
+  background-image: url("./static/images/icons/send.png");
+  width: 40px;
+  height: 40px; }
 
 /*# sourceMappingURL=index.css.map */

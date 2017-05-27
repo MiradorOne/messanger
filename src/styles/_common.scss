@@ -1,6 +1,7 @@
 * {
 	padding: 0;
 	margin: 0;
+	box-sizing: border-box;
 }
 
 body {
@@ -21,9 +22,14 @@ ul {
 	outline: none;
 	appearance: none;
 	border: none;
+	font-family:'Roboto', sans-serif;
 }
 
 //======== Components grid ========//
+
+.container {
+	@include outer-container;
+}
 
 .Inbox {
 	@include span-columns(4 of 24);
@@ -32,6 +38,7 @@ ul {
 
 .Friend-List {
 	@include span-columns(6 of 24);
+	@include omega;
 
 	.Friend {
 		img {
@@ -49,5 +56,13 @@ ul {
 }
 
 .Search {
+	@include fill-parent();
+}
+
+.Chat {
+	@include span-columns(10 of 24);
+}
+
+.Enter-Message, .Chat-Messages {
 	@include fill-parent();
 }
