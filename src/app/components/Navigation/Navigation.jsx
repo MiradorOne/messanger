@@ -19,7 +19,7 @@ export default class Navigation extends Component {
                     <li>Locations</li>
                     <li>Media</li>
                 </ul>
-                <ul className="link-group settings-group bottom-border">
+                <ul className="link-group settings-group">
                     <li>Help</li>
                     <li>Settings</li>
                 </ul>
