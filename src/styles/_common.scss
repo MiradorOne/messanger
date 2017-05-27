@@ -17,12 +17,37 @@ ul {
 	border-bottom: 1px solid rgba(224, 228, 234, 0.1);
 }
 
+.input-default {
+	outline: none;
+	appearance: none;
+	border: none;
+}
+
 //======== Components grid ========//
 
 .Inbox {
-	@include span-columns(3 of 12);
+	@include span-columns(4 of 24);
+	@include omega;
 }
 
 .Friend-List {
-	@include span-columns(5 of 12);
+	@include span-columns(6 of 24);
+
+	.Friend {
+		img {
+			@include span-columns(3 of 12);
+		}
+
+		.content {
+			@include span-columns(7 of 12);
+		}
+
+		.additional {
+			@include span-columns(2 of 12);
+		}
+	}
+}
+
+.Search {
+	@include fill-parent();
 }

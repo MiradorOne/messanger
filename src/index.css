@@ -19,20 +19,50 @@ ul {
 .bottom-border {
   border-bottom: 1px solid rgba(224, 228, 234, 0.1); }
 
+.input-default {
+  outline: none;
+  appearance: none;
+  border: none; }
+
 .Inbox {
   float: left;
   display: block;
-  margin-right: 2.35765%;
-  width: 23.23176%; }
+  margin-right: 1.16509%;
+  width: 15.69576%;
+  margin-right: 0; }
   .Inbox:last-child {
     margin-right: 0; }
 
 .Friend-List {
   float: left;
   display: block;
-  margin-right: 2.35765%;
-  width: 40.29137%; }
+  margin-right: 1.16509%;
+  width: 24.12618%; }
   .Friend-List:last-child {
     margin-right: 0; }
+  .Friend-List .Friend img {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%; }
+    .Friend-List .Friend img:last-child {
+      margin-right: 0; }
+  .Friend-List .Friend .content {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 57.35098%; }
+    .Friend-List .Friend .content:last-child {
+      margin-right: 0; }
+  .Friend-List .Friend .additional {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 14.70196%; }
+    .Friend-List .Friend .additional:last-child {
+      margin-right: 0; }
+
+.Search {
+  width: 100%; }
 
 /*# sourceMappingURL=index.css.map */

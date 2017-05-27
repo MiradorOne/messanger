@@ -1,0 +1,16 @@
+.Friend-List {
+	padding: 20px 0;
+	//background-color: #21282F;
+	background: -webkit-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: -moz-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: -o-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: -ms-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: linear-gradient(-67deg, #242a31 31%, #2d343c 69%);
+	box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
+	font-family:'Roboto', sans-serif;
+
+	ul {
+		padding: 0 25px;
+	}
+
+}
