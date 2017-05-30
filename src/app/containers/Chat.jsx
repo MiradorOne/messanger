@@ -15,6 +15,11 @@ export default class Chat extends Component {
                 <ChatMessages />
                 <div className="messages">
                     <Message/>
+                    <Message/>
+                    <Message/>
+                    <Message/>
+                    <Message/>
+                    <Message/>
                 </div>
                 <EnterMessage />
             </div>
