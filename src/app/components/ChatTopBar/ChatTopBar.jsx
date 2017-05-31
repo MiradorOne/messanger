@@ -9,7 +9,7 @@ export default class ChatTopBar extends Component {
                 <div className="status">
                     <p>Kirsten Mckellar is typing...</p>
                 </div>
-                <div className="actions">
+                <div className="user-actions">
                     <div className="favourite">
                         <i className="icon icon-favourite"/>
                     </div>

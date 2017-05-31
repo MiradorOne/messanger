@@ -1,0 +1,91 @@
+.Friend-Profile {
+	background-color: #fff;
+
+	.top-bar, .user-image {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);		
+	}
+
+	.top-bar {
+		display: flex;
+		justify-content: space-between;
+		padding: 30px;
+		flex-basis: 100%;
+		text-align: right;
+		font-weight: 300;
+
+		i {
+			display: none;
+		}
+
+		.user-menu {
+			cursor: pointer;
+			display: inline-block;
+		}
+	}
+
+	.user-image {
+		padding: 40px 0 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		position: relative;
+
+		img {
+			min-width: 120px;
+			min-height: 120px;
+			margin-bottom: 30px;
+		}
+
+		.actions {
+			background-color: rgba(0, 0, 0, 0.6);
+			top: 20px;
+			left: 80%;
+			position: absolute;
+			cursor: pointer;
+		}
+
+		h3 {
+			display: block;
+			margin: 0 15px;
+			text-align: center;
+			color:  rgba(41, 48, 55, 0.8);
+			font-weight: 500;
+			font-size: 20px;
+
+			span {
+				color:  rgba(41, 48, 55, 0.8);
+				font-size: 14px;
+				font-weight: 300;
+				display: block;
+			}
+		}
+	}
+
+	.full-info {
+		padding: 30px 15px;
+		overflow: hidden;
+		font-size: 13px;
+
+		li {
+			width: 100%;
+			display: block;
+			overflow: hidden;
+			padding: 20px 0;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+			}
+
+			.title {
+				float: left;
+				font-weight: 500;
+			}
+
+			.value {
+				float: right;
+				font-weight: 300;
+			}
+		}
+	} 
+}

@@ -6,6 +6,7 @@ import { initDB } from './db/index';
 import Inbox from './app/containers/Inbox';
 import FriendList from './app/containers/FriendList';
 import Chat from './app/containers/Chat';
+import ProfileBar from './app/containers/ProfileBar';
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
                     <Inbox />
                     <FriendList />
                     <Chat />
+                    <ProfileBar />
                 </div>
             </div>
         );

@@ -26,10 +26,32 @@ ul {
   border: none;
   font-family: 'Roboto', sans-serif; }
 
+.actions {
+  position: relative;
+  top: 5px;
+  left: 18px;
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 50%; }
+  .actions:before, .actions:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: inherit;
+    border-radius: inherit; }
+  .actions:before {
+    left: 9px; }
+  .actions:after {
+    left: 18px; }
+
 .container {
   max-width: 1200px;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  min-height: 100%; }
   .container::after {
     clear: both;
     content: "";
@@ -38,20 +60,16 @@ ul {
 .Inbox {
   float: left;
   display: block;
-  margin-right: 1.16509%;
-  width: 15.69576%;
-  margin-right: 0; }
+  width: 16.86085%; }
   .Inbox:last-child {
-    margin-right: 0; }
+    width: 15.69576%; }
 
 .Friend-List {
   float: left;
   display: block;
-  margin-right: 1.16509%;
-  width: 24.12618%;
-  margin-right: 0; }
+  width: 25.29127%; }
   .Friend-List:last-child {
-    margin-right: 0; }
+    width: 24.12618%; }
   .Friend-List .Friend img {
     float: left;
     display: block;
@@ -80,13 +98,19 @@ ul {
 .Chat {
   float: left;
   display: block;
-  margin-right: 1.16509%;
-  width: 40.98703%; }
+  width: 42.15212%; }
   .Chat:last-child {
-    margin-right: 0; }
+    width: 40.98703%; }
 
 .Enter-Message, .Chat-Messages {
   width: 100%; }
+
+.Profile-Bar {
+  float: left;
+  display: block;
+  width: 16.86085%; }
+  .Profile-Bar:last-child {
+    width: 15.69576%; }
 
 .icon {
   width: 20px;

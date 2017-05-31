@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserImage from '../../../static/images/user-image.png';
 
 const messageStyles = {

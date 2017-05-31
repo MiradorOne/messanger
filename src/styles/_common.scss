@@ -25,20 +25,46 @@ ul {
 	font-family:'Roboto', sans-serif;
 }
 
+.actions {
+	position: relative;
+	top:5px;
+	left:18px;
+	width: 4px;
+	height: 4px;
+	background-color: #fff;
+	border-radius: 50%;
+	&:before, &:after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		background-color: inherit;
+		border-radius: inherit;
+	}
+
+	&:before {
+		left: 9px;
+	}
+
+	&:after {
+		left: 18px;
+	}
+}
+
 //======== Components grid ========//
 
 .container {
 	@include outer-container;
+	min-height: 100%;
 }
 
 .Inbox {
-	@include span-columns(4 of 24);
-	@include omega;
+	@include span-columns(4 of 24, block-collapse);
 }
 
 .Friend-List {
-	@include span-columns(6 of 24);
-	@include omega;
+	@include span-columns(6 of 24, block-collapse);
 
 	.Friend {
 		img {
@@ -60,9 +86,13 @@ ul {
 }
 
 .Chat {
-	@include span-columns(10 of 24);
+	@include span-columns(10 of 24, block-collapse);
 }
 
 .Enter-Message, .Chat-Messages {
 	@include fill-parent();
+}
+
+.Profile-Bar {
+	@include span-columns(4 of 24, block-collapse);
 }

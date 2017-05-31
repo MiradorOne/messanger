@@ -1,6 +1,6 @@
 .Chat-TopBar {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-	.status, .actions ,.favourite, .call, .videocall {
+	.status, .user-actions ,.favourite, .call, .videocall {
 		display: inline-block;
 	}
 
@@ -10,7 +10,7 @@
 		cursor: pointer;
 	}
 
-	.actions {
+	.user-actions {
 		float: right;
 	}
 

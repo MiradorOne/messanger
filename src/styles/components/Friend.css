@@ -24,26 +24,6 @@
       font-weight: 300; }
   .Friend div.additional {
     text-align: right; }
-    .Friend div.additional .actions {
-      position: relative;
-      top: 5px;
-      left: 18px;
-      width: 4px;
-      height: 4px;
-      background-color: #fff;
-      border-radius: 50%; }
-      .Friend div.additional .actions:before, .Friend div.additional .actions:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        background-color: inherit;
-        border-radius: inherit; }
-      .Friend div.additional .actions:before {
-        left: 9px; }
-      .Friend div.additional .actions:after {
-        left: 18px; }
     .Friend div.additional .message-date {
       padding-top: 15px;
       display: inline-block;

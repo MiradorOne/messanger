@@ -33,32 +33,7 @@
 
 	div.additional {
 		text-align: right;
-		.actions {
-			position: relative;
-			top:5px;
-			left:18px;
-			width: 4px;
-			height: 4px;
-			background-color: #fff;
-			border-radius: 50%;
-			&:before, &:after {
-				content: "";
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				top: 0;
-				background-color: inherit;
-				border-radius: inherit;
-			}
 
-			&:before {
-				left: 9px;
-			}
-
-			&:after {
-				left: 18px;
-			}
-		}
 		.message-date {
 			padding-top: 15px;
 			display: inline-block;
