@@ -7,6 +7,7 @@
 body {
 	font-size: 14px;
 	background-color: #eee;
+	height:100vh;
 }
 
 ul {
@@ -82,14 +83,14 @@ ul {
 
 //======== Components grid ========//
 
-.App {
+#root, .App, .App-header {
 	overflow: hidden;
-	max-height: 100vh;
+	height:100%;
 }
 
 .container {
 	@include outer-container;
-	min-height: 100vh;
+	height: 100%;
 }
 
 .Inbox {

@@ -3,7 +3,9 @@
   padding: 30px;
   margin-top: 30px;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  position: absolute;
+  bottom: 0; }
   .Enter-Message .attach, .Enter-Message .enter-field, .Enter-Message .emoji, .Enter-Message button {
     display: inline-block; }
   .Enter-Message .enter-field {

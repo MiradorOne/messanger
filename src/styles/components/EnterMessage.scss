@@ -4,6 +4,8 @@
 	margin-top: 30px;
 	display: flex;
 	align-items: center;
+	position: absolute;
+	bottom: 0;
 
 	.attach, .enter-field,.emoji, button {
 		display: inline-block;

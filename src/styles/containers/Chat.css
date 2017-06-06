@@ -1,6 +1,7 @@
 .Chat {
   background-color: #E8EBF0;
   font-family: 'Roboto', sans-serif;
-  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25); }
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
+  position: relative; }
 
 /*# sourceMappingURL=Chat.css.map */
