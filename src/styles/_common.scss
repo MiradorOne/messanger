@@ -26,6 +26,14 @@ ul {
 	font-family:'Roboto', sans-serif;
 }
 
+.btn-default {
+	outline: none;
+	appearance: none;
+	border: 1px solid rgba(0,0,0,0.4);
+	background-color: rgba(0,0,0,0);
+	padding: 15px 30px;
+}
+
 .actions {
 	position: relative;
 	top:5px;
@@ -51,6 +59,14 @@ ul {
 	&:after {
 		left: 18px;
 	}
+}
+
+.Auth-Modal {
+	background: #284571;
+	background: -moz-linear-gradient(-45deg, #284571 0%, #2989d8 43%, #207cca 52%, #2c3642 100%, #2c3642 100%);
+	background: -webkit-linear-gradient(-45deg, #284571 0%,#2989d8 43%,#207cca 52%,#2c3642 100%,#2c3642 100%);
+	background: linear-gradient(135deg, #284571 0%,#2989d8 43%,#207cca 52%,#2c3642 100%,#2c3642 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#284571', endColorstr='#2c3642',GradientType=1 );
 }
 
 //======== Scrollbar styles ========//
