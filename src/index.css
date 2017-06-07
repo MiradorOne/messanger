@@ -30,7 +30,9 @@ ul {
 .btn-default {
   outline: none;
   appearance: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid white;
+  color: #fff;
+  cursor: pointer;
   background-color: transparent;
   padding: 15px 30px; }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const componentStyles = {
     width: '100%',
@@ -12,7 +12,9 @@ const modalStyles = {
     top: '50%',
     left: '50%',
     transform: 'translateY(-50%) translateX(-50%)',
-    backgroundColor: 'rgba(35,42,50,0.5)',
+    backgroundColor: 'rgba(35,42,50,0)',
+    border: '2px solid #fff',
+    borderRadius: '5px',
     padding: '50px 80px',
     textAlign: 'center'
 };
@@ -23,40 +25,57 @@ const inputStyles = {
     margin: '15px 0'
 };
 
-const AuthModal = ({ type }) => {
+class AuthModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            passwordConfirm: ''
+        };
 
-    const login = () => {
+    }
+
+    handleChange(type,e) {
+        this.setState({
+            ...this.state,
+            [type]: e.target.value
+        })
+    }
+
+    render() {
+        const login = () => {
+            return (
+                <div className="modal login" >
+                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password)}>
+                        <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
+                        <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
+                        <button className="btn-default" type="submit">Sign in</button>
+                    </form>
+                </div>
+            )
+        };
+
+        const register = () => {
+            return (
+                <div className="modal register">
+                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password, this.state.passwordConfirm)}>
+                        <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
+                        <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
+                        <input type="password" placeholder="Confirm password" name="password_confirm" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'passwordConfirm')}/>
+                        <button className="btn-default" type="submit">Sign up</button>
+                    </form>
+                </div>
+            )
+        };
         return (
-            <div className="modal login" >
-                <form action="#">
-                    <input type="text" placeholder="Email" className="input-default" style={inputStyles}/>
-                    <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles}/>
-                    <button className="btn-default" type="submit">Sign in</button>
-                </form>
+            <div className="Auth-Modal" style={componentStyles}>
+                <div className="modal-group" style={modalStyles}>
+                    { this.props.type === 'signIn' ? login() : register() }
+                </div>
             </div>
         )
-    };
-
-    const register = () => {
-        return (
-            <div className="modal register">
-                <form action="#">
-                    <input type="text" placeholder="Email" className="input-default" style={inputStyles}/>
-                    <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles}/>
-                    <input type="password" placeholder="Confirm password" name="password_confirm" className="input-default" style={inputStyles}/>
-                    <button className="btn-default" type="submit">Sign up</button>
-                </form>
-            </div>
-        )
-    };
-
-    return (
-        <div className="Auth-Modal" style={componentStyles}>
-            <div className="modal-group" style={modalStyles}>
-                { type === 'signIn' ? login() : register() }
-            </div>
-        </div>
-    )
+    }
 };
 
 export default AuthModal;
