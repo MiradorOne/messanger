@@ -9,13 +9,12 @@ class FriendProfile extends Component {
 				<div className="top-bar">
 					<i className="icon notifications" />
 					<div className="user-menu">
-						Matt Thompson
+						{this.props.currentUser.displayName ? this.props.currentUser.displayName : this.props.currentUser.email}
 					</div>
 				</div>
 				<div className="user-image friend-profile">
 					<div className="actions"></div>
-					<img src={FriendImage} />
-
+					<img src={FriendImage} alt=""/>
 					<h3 className='friend-info'>
 						Kirsten Mckellar
 						<span className="location">Cape Town, RSA</span>

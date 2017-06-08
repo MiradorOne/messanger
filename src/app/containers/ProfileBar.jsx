@@ -7,7 +7,7 @@ class ProfileBar extends Component {
 	render() {
 		return (
 			<div className="container Profile-Bar">
-				<FriendProfile />
+				<FriendProfile currentUser={this.props.currentUser}/>
 			</div>
 		);
 	}

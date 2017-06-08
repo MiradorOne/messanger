@@ -14,19 +14,37 @@ class App extends Component {
     constructor() {
         super();
         initDB();
+        this.authObserver();
 
         this.state = {
-            currentUser: firebase.auth().currentUser,
+            currentUser: ''
         };
 
         this.checkCredentials = this.checkCredentials.bind(this);
     }
 
+    authObserver() {
+        const self = this;
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                self.setState({
+                    currentUser: user
+                })
+            }
+        });
+    }
+
     checkCredentials(email,password,e) {
         e.preventDefault();
+        let self = this;
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            console.warn(error);
+            self.setState({
+                currentUser: null
+            });
+            throw new Error(error);
         });
+
+        console.info(this.authObserver());
         if (firebase.auth().currentUser) {
             this.setState({
                 currentUser: firebase.auth().currentUser
@@ -44,7 +62,7 @@ class App extends Component {
                     <Inbox />
                     <FriendList />
                     <Chat />
-                    <ProfileBar />
+                    <ProfileBar currentUser={this.state.currentUser}/>
                 </div>
             </div>
         );
