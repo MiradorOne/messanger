@@ -14,6 +14,11 @@ body {
   background-color: #eee;
   height: 100vh; }
 
+a {
+  text-decoration: none; }
+  a:visited {
+    color: #000; }
+
 ul {
   list-style: none;
   margin-left: 0; }

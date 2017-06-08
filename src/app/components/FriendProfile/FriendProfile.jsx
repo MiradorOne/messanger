@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
 import '../../../styles/components/FriendProfile.css';
 import FriendImage from '../../../static/images/friend-image.png';
+import UserMenu from '../_common/userMenu';
 
 class FriendProfile extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			userMenuIsVisible: false
+		}
+	}
+
+	showUserMenu() {
+		this.setState({
+			userMenuIsVisible: !this.state.userMenuIsVisible
+		})
+	}
+
 	render() {
 		return (
 			<div className="Friend-Profile">
 				<div className="top-bar">
 					<i className="icon notifications" />
-					<div className="user-menu">
+					<div className="user-menu" style={ {position: 'relative'} } onClick={this.showUserMenu.bind(this)}>
+						{this.state.userMenuIsVisible ? <UserMenu /> : ''}
 						{this.props.currentUser.displayName ? this.props.currentUser.displayName : this.props.currentUser.email}
 					</div>
 				</div>

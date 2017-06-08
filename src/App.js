@@ -44,7 +44,6 @@ class App extends Component {
             throw new Error(error);
         });
 
-        console.info(this.authObserver());
         if (firebase.auth().currentUser) {
             this.setState({
                 currentUser: firebase.auth().currentUser

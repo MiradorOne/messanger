@@ -10,6 +10,14 @@ body {
 	height:100vh;
 }
 
+a {
+	text-decoration: none;
+
+	&:visited {
+		color: #000;
+	}
+}
+
 ul {
 	list-style: none;
 	margin-left: 0;
