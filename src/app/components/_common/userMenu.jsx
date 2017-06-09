@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signOut } from '../../../db/index';
+import * as firebase from 'firebase';
 
 const menuStyles = {
     border: '1px solid #eee',
@@ -16,7 +16,10 @@ class UserMenu extends Component {
         return (
             <div className="user-menu" style={menuStyles}>
                 <ul>
-                    <li style={{ borderBottom: '1px solid #eee', padding: '10px 0', textAlign: 'center' }}><a href="#" onClick={signOut()}>Log out</a></li>
+                    <li style={{ borderBottom: '1px solid #eee', padding: '10px 0', textAlign: 'center' }}><a href="#" 
+                    onClick={() => {firebase.auth().signOut().then(() => {
+                        
+                    })}}>Log out</a></li>
                     <li style={{ padding: '10px 0', textAlign: 'center' }}><a href="#">Help</a></li>
                 </ul>
             </div>

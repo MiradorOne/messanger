@@ -12,7 +12,3 @@ const config = {
 export const initDB = () => {
     firebase.initializeApp(config);
 };
-
-export const signOut = () => {
-    firebase.auth().signOut();
-};
