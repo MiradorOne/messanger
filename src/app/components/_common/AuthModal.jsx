@@ -29,9 +29,10 @@ class AuthModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            signIn: true,            
             email: '',
             password: '',
-            passwordConfirm: ''
+            passwordConfirm: '',
         };
 
     }
@@ -43,15 +44,22 @@ class AuthModal extends Component {
         })
     }
 
+    changeType() {
+        this.setState({
+            signIn: !this.state.signIn
+        })
+    }
+
     render() {
         const login = () => {
             return (
                 <div className="modal login" >
-                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password)}>
+                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password, this.state.signIn)}>
                         <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
                         <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
                         <button className="btn-default" type="submit">Sign in</button>
                     </form>
+                    <button className="btn-default" style={{ marginTop: '15px', width: '102px' }} onClick={this.changeType.bind(this)}>Register</button>
                 </div>
             )
         };
@@ -59,19 +67,20 @@ class AuthModal extends Component {
         const register = () => {
             return (
                 <div className="modal register">
-                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password, this.state.passwordConfirm)}>
+                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password, this.state.passwordConfirm, this.state.signIn)}>
                         <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
                         <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
                         <input type="password" placeholder="Confirm password" name="password_confirm" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'passwordConfirm')}/>
-                        <button className="btn-default" type="submit">Sign up</button>
+                        <button className="btn-default" type="submit">Register</button>
                     </form>
+                    <button className="btn-default" style={{ marginTop: '15px', width: '102px' }} onClick={this.changeType.bind(this)}>Sign in</button>
                 </div>
             )
         };
         return (
             <div className="Auth-Modal" style={componentStyles}>
                 <div className="modal-group" style={modalStyles}>
-                    { this.props.type === 'signIn' ? login() : register() }
+                    { this.state.signIn ? login() : register() }
                 </div>
             </div>
         )

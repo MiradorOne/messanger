@@ -17,12 +17,20 @@ class App extends Component {
         this.authObserver();
 
         this.state = {
-            currentUser: ''
+            currentUser: '',
         };
 
         this.checkCredentials = this.checkCredentials.bind(this);
     }
-
+    
+    componentDidUpdate(nextProps, nextState) {
+        // firebase.database().ref('users/'+ this.state.currentUser.uid).set({
+        //     username: 'Dimon',
+        //     role: 'Bog',
+        //     email: '228@gmail.com'
+        // })
+    }
+    
     authObserver() {
         const self = this;
         firebase.auth().onAuthStateChanged(function(user) {
@@ -34,15 +42,28 @@ class App extends Component {
         });
     }
 
-    checkCredentials(email,password,e) {
+    checkCredentials(email,password,passwordConfirm,signIn,e) {
         e.preventDefault();
         let self = this;
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            self.setState({
-                currentUser: null
+        if (signIn) {
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                self.setState({
+                    currentUser: null
+                });
+                throw new Error(error);
             });
-            throw new Error(error);
-        });
+        } else {
+            if (password === passwordConfirm) {
+                firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+                    firebase.database().ref('users/'+ firebase.auth().currentUser.uid).set({
+                        email: email,
+                        conversation: []
+                    })
+                })
+            } else {
+                console.error('Password confirmaion fail'); // TODO: Add form validation
+            }
+        }
 
         if (firebase.auth().currentUser) {
             this.setState({
@@ -55,7 +76,7 @@ class App extends Component {
         return (
             <div className="App">
 
-                { this.state.currentUser ? '' : <AuthModal type="signIn" submitHandler={this.checkCredentials}/>}
+                { this.state.currentUser ? '' : <AuthModal submitHandler={this.checkCredentials}/>}
 
                 <div className="App-header">
                     <Inbox />
