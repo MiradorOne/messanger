@@ -80,7 +80,7 @@ class App extends Component {
 
                 <div className="App-header">
                     <Inbox />
-                    <FriendList />
+                    <FriendList currentUser={this.state.currentUser}/>
                     <Chat />
                     <ProfileBar currentUser={this.state.currentUser}/>
                 </div>

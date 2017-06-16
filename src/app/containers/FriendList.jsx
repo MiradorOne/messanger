@@ -11,12 +11,15 @@ const KEYS_TO_FILTERS = ['firstName', 'lastName', 'email'];
 export default class FriendList extends Component {
     constructor() {
         super()
-        this.getUsers();
 
         this.state = {
-            usersList: [],
+            conversations: [],
             searchTerm: ''
         }
+    }
+
+    componentWillReceiveProps() {
+        this.getConversation(); 
     }
 
     handleChange(e) {
@@ -25,28 +28,52 @@ export default class FriendList extends Component {
         })
     }
 
-    getUsers() {
+    getConversation() {
         let self = this;
-        firebase.database().ref('/users').once('value').then(function(snapshot) {
-            self.setState({
-                usersList: snapshot.val()
-            })
+        firebase.database().ref(`/users/${this.props.currentUser.uid}/conversation`).once('value').then(function(snapshot) {
+
+            const object = snapshot.val();
+
+            if (object && object !== "null") {
+                self.setState({
+                    conversations: Object.keys(object).map((key) => {return object[key]})
+                })
+            }
+         
         });
     }
 
     render() {
-        const searchResult = Object.keys(this.state.usersList).filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+        const searchResult = this.state.conversations.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+
+        const noConversationsMessage = () => {
+            return (
+                <li>
+                    You don't have conversation yet! Search friend to start conversation
+                </li>
+            )
+        }
+
+        const conversations = this.state.conversations.map((value) => {
+            return (
+                <Friend data={value}/>
+            )
+        })
         return (
             <div className="container Friend-List">
                 <Search handleChange={this.handleChange.bind(this)}/>
                 <ul>                
-                {searchResult.map((value,i) => {
-                    return (
-                    <li key={i}>
-                        <Friend email={this.state.usersList[value].email}/>
-                    </li>
-                    )
-                })}
+                    {
+                        this.state.conversations.length === 0 ? noConversationsMessage() : 
+                        searchResult.map((value, i) => {
+                            return (
+                                <li key={i}>
+                                    <Friend email={value.email}/>
+                                </li>
+                            )
+                        })
+                    }
+                    
                 </ul>
             </div>
         )
