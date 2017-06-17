@@ -13,7 +13,7 @@ export default class Friend extends Component {
                 </div>
                 <div className="content">
                     <div className="username">
-                        Matt Thompson
+                        {this.props.firstName + ' ' + this.props.lastName}
                     </div>
                     <span className="last-message">
                     Lorem ipsum dolore

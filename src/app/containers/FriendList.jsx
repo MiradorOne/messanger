@@ -18,8 +18,8 @@ export default class FriendList extends Component {
         }
     }
 
-    componentWillReceiveProps() {
-        this.getConversation();
+    componentWillReceiveProps({currentUser}) {
+        this.getConversation(currentUser.uid);
     }
 
     handleChange(e) {
@@ -28,35 +28,55 @@ export default class FriendList extends Component {
         })
     }
 
-    getConversation() {
+    getConversation(uid) {
         let self = this;
-        firebase.database().ref(`/users/${this.props.currentUser.uid}/conversation`).once('value').then(function(snapshot) {
+        firebase.database().ref(`/users/${uid}/conversations`).once('value').then(function(snapshot) {
+                
+            const result = snapshot.val();
 
-            const object = snapshot.val();
+            snapshot.val().map((value,result) => {
 
-            if (object && object !== "null") {
-                self.setState({
-                    conversations: Object.keys(object).map((key) => {return object[key]})
+                firebase.database().ref(`/conversations/${value}/users/1`).once('value').then(function(snapshot) {
+
+                    const conversationDetails = snapshot.val();                    
+
+                    result = {
+                        ...result,
+                        [value]: conversationDetails
+                    }
+                    
+                }).then(() => {
+                    if (result && result !== "null") {
+                        self.setState({
+                            conversations: result
+                        })
+                    }
                 })
-            }
 
-        });
+            })
+        })
     }
 
-    render() {
-        const searchResult = this.state.conversations.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+    selectConversation() {
 
+    }
+
+    render() {       
+        const searchResult = Object.keys(this.state.conversations)
+                            .map(value => {return this.state.conversations[value]})
+                            .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+                            
         const noConversationsMessage = () => {
             return (
                 <li className="no-conversation">
-                    You don't have conversation yet! Search friend to start conversation
+                    You don't have conversations yet! Search friend to start conversation
                 </li>
             )
         }
 
-        const conversations = this.state.conversations.map((value) => {
+        const conversations = Object.keys(this.state.conversations).map((value) => {
             return (
-                <Friend data={value}/>
+                <Friend data={this.state.conversations[value]}/>
             )
         })
         return (
@@ -64,11 +84,11 @@ export default class FriendList extends Component {
                 <Search handleChange={this.handleChange.bind(this)}/>
                 <ul>
                     {
-                        this.state.conversations.length === 0 ? noConversationsMessage() :
+                        Object.keys(this.state.conversations).length === 0 ? noConversationsMessage() :
                         searchResult.map((value, i) => {
                             return (
                                 <li key={i}>
-                                    <Friend email={value.email}/>
+                                    <Friend firstName={value.firstName} lastName={value.lastName} onClick={this.selectConversation.bind(this)}/>
                                 </li>
                             )
                         })

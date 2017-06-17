@@ -10,7 +10,14 @@
 	font-family:'Roboto', sans-serif;
 
 	ul {
-		padding: 0 25px;
+		li {
+			cursor: pointer;
+			padding: 0 25px;
+			transition: background-color ease 0.15s;
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+		}
 	}
 	.no-conversation
 {

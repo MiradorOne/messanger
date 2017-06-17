@@ -7,8 +7,12 @@
   background: linear-gradient(-67deg, #242a31 31%, #2d343c 69%);
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
   font-family: 'Roboto', sans-serif; }
-  .Friend-List ul {
-    padding: 0 25px; }
+  .Friend-List ul li {
+    cursor: pointer;
+    padding: 0 25px;
+    transition: background-color ease 0.15s; }
+    .Friend-List ul li:hover {
+      background-color: rgba(0, 0, 0, 0.1); }
   .Friend-List .no-conversation {
     text-align: center;
     margin: 175px 10px;
@@ -17,3 +21,4 @@
     font-size: 17px;
     font-weight: 300; }
 
+/*# sourceMappingURL=FriendList.css.map */
