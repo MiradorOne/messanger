@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchInput, {createFilter} from 'react-search-input';
 import * as firebase from 'firebase';
+import NewFriend from '../_common/NewFriend';
 
 const popupStyles = {
 	border: '1px solid #eee',
@@ -70,7 +71,7 @@ class SearchPopup extends Component {
 				<ul className="search-result" style={resultStyles}>
 					{ this.state.searchTerm.length === 0 ? '' : searchResult.map((user,i) => {
 						return (
-							<li key={i}>{user.email}</li>
+							<li key={i}><NewFriend firstName="Dimon" lastName="Fedko" email={user.email}/></li>
 						)
 					})}
 				</ul>
