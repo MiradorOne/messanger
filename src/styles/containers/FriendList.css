@@ -9,11 +9,11 @@
   font-family: 'Roboto', sans-serif; }
   .Friend-List ul {
     padding: 0 25px; }
-
-/*# sourceMappingURL=FriendList.css.map */
-  .Friend-List .dnth_conv {
+  .Friend-List .no-conversation {
     text-align: center;
     margin: 175px 10px;
     text-align: center;
     color: #b7e7f1;
-    font-size: 17px; }
+    font-size: 17px;
+    font-weight: 300; }
+

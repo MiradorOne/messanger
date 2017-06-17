@@ -48,7 +48,7 @@ export default class FriendList extends Component {
 
         const noConversationsMessage = () => {
             return (
-                <li className="dnth_conv">
+                <li className="no-conversation">
                     You don't have conversation yet! Search friend to start conversation
                 </li>
             )
