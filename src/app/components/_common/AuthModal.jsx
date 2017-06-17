@@ -54,7 +54,7 @@ class AuthModal extends Component {
         const login = () => {
             return (
                 <div className="modal login" >
-                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password, this.state.signIn)}>
+                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password,'',this.state.signIn)}>
                         <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
                         <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
                         <button className="btn-default" type="submit">Sign in</button>

@@ -23,14 +23,6 @@ class App extends Component {
         this.checkCredentials = this.checkCredentials.bind(this);
     }
     
-    componentDidUpdate(nextProps, nextState) {
-        // firebase.database().ref('users/'+ this.state.currentUser.uid).set({
-        //     username: 'Dimon',
-        //     role: 'Bog',
-        //     email: '228@gmail.com'
-        // })
-    }
-    
     authObserver() {
         const self = this;
         firebase.auth().onAuthStateChanged(function(user) {
