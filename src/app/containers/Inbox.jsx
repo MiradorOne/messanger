@@ -23,10 +23,7 @@ export default class Inbox extends Component {
     render() {
         return (
             <div className="container Inbox">
-                <h2>Inbox<i className="icon-add-user"></i></h2>
-                <span style={{ float: 'right', cursor: 'pointer',position: 'relative' }}
-                onClick={this.showSearchPopup.bind(this)}>
-                </span>
+                <h2>Inbox<i className="icon-add-user" style={{ cursor: 'pointer' }} onClick={this.showSearchPopup.bind(this)}></i></h2>
                 { this.state.showSearchPopup ? <SearchPopup/> : ''}
                 <Navigation/>
             </div>
