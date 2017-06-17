@@ -9,5 +9,11 @@
   font-family: 'Roboto', sans-serif; }
   .Friend-List ul {
     padding: 0 25px; }
+  .Friend-List .no-conversation {
+    text-align: center;
+    margin: 175px 10px;
+    text-align: center;
+    color: #b7e7f1;
+    font-size: 17px;
+    font-weight: 300; }
 
-/*# sourceMappingURL=FriendList.css.map */
