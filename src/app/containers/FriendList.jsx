@@ -19,7 +19,7 @@ export default class FriendList extends Component {
     }
 
     componentWillReceiveProps() {
-        this.getConversation(); 
+        this.getConversation();
     }
 
     handleChange(e) {
@@ -39,7 +39,7 @@ export default class FriendList extends Component {
                     conversations: Object.keys(object).map((key) => {return object[key]})
                 })
             }
-         
+
         });
     }
 
@@ -48,7 +48,7 @@ export default class FriendList extends Component {
 
         const noConversationsMessage = () => {
             return (
-                <li>
+                <li className="dnth_conv">
                     You don't have conversation yet! Search friend to start conversation
                 </li>
             )
@@ -62,9 +62,9 @@ export default class FriendList extends Component {
         return (
             <div className="container Friend-List">
                 <Search handleChange={this.handleChange.bind(this)}/>
-                <ul>                
+                <ul>
                     {
-                        this.state.conversations.length === 0 ? noConversationsMessage() : 
+                        this.state.conversations.length === 0 ? noConversationsMessage() :
                         searchResult.map((value, i) => {
                             return (
                                 <li key={i}>
@@ -73,7 +73,7 @@ export default class FriendList extends Component {
                             )
                         })
                     }
-                    
+
                 </ul>
             </div>
         )
