@@ -3,10 +3,21 @@
   display: block;
   padding: 30px;
   color: #a1a5a7;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  position: relative; }
   .Inbox h2 {
     padding-left: 10px;
     color: #fff; }
+  .Inbox .Search-Popup {
+    position: relative; }
+    .Inbox .Search-Popup::before {
+      position: absolute;
+      content: '';
+      display: block;
+      left: -15px;
+      border-style: solid;
+      border-width: 12.5px 15px 12.5px 0;
+      border-color: transparent #ffffff transparent transparent; }
   .Inbox .link-group {
     padding: 25px 0 35px; }
     .Inbox .link-group li {
