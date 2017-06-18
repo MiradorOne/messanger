@@ -1,4 +1,5 @@
 import './index.css';
+import './styles/scrollbar.css';
 
 import React, {Component} from 'react';
 import * as firebase from 'firebase';

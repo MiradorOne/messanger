@@ -79,34 +79,6 @@ ul {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#284571', endColorstr='#2c3642',GradientType=1 );
 }
 
-//======== Scrollbar styles ========//
-
-::-webkit-scrollbar {
-	background-color: rgba(0,0,0,0);
-	width: 9px;
-	}
-
-::-webkit-scrollbar-thumb {
-		border: none;
-		border-radius: 5px;
-		width: 9px;
-		background-clip: padding-box;
-	}
-
-.Friend-List {
-	::-webkit-scrollbar-thumb {
-		background-color:  rgba(0,0,0,0.4);
-	}
-}
-
-.Chat {
-	::-webkit-scrollbar-thumb {
-		background-color:  rgba(255,255,255,0.5);
-	}
-}
-
-
-
 //======== Components grid ========//
 
 #root, .App, .App-header {

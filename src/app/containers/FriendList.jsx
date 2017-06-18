@@ -79,7 +79,7 @@ export default class FriendList extends Component {
         return (
             <div className="container Friend-List">
                 <Search handleChange={this.handleChange.bind(this)}/>
-                <ul>
+                <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px' }}>
                     {
                         Object.keys(this.state.conversations).length === 0 ? noConversationsMessage() :
                         searchResult.map((value, i) => {
