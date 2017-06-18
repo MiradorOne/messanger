@@ -3,10 +3,13 @@ import React from 'react';
 const NewFriend = ({firstName, lastName, email}) => {
 	return (
 		<div className="New-Friend">
-			<span>{firstName}</span>
-			<span>{lastName}</span>
-			<span>{email}</span>
-		</div>
+			<div className="fisrtName">{firstName}</div>
+			<div className="SecondName">{lastName}</div>
+			<div className="email">{email}</div>
+			<hr></hr>
+			<div className="StartConversation"> Start <span>&#8594;</span></div>
+
+</div>
 	);
 };
 
