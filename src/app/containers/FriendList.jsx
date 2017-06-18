@@ -31,40 +31,48 @@ export default class FriendList extends Component {
 
     getConversation(uid) {
         let self = this;
-        firebase.database().ref(`/users/${uid}/conversations`).once('value').then(function(snapshot) {
+        firebase.database().ref(`/users/${uid}/conversations`).on('value', function(snapshot) {
                 
-            const result = snapshot.val();
+            const result = snapshot.val() || null;
 
-            snapshot.val().map((value,result) => {
+            if (snapshot.val()) {
+                Object.keys(snapshot.val()).map((value,i,result) => {
 
-                firebase.database().ref(`/conversations/${value}/users/`).once('value').then(function(snapshot) {
+                firebase.database().ref('/conversations/' + value + '/users/').once('value').then(function(snapshot) {
+                    let conversationDetails = null;
+                    if (snapshot.val()) {
+                        conversationDetails = snapshot.val().filter((user) => {
+                            if (user.email !== firebase.auth().currentUser.email) {
+                                return user;
+                            }
+                        });
 
-                    const conversationDetails = snapshot.val().filter((user) => {
-                        if (user.email !== firebase.auth().currentUser.email) {
-                            return user;
-                        }
-                    });    
-
-                    result = {
-                        ...result,
-                        [value]: conversationDetails[0]
+                        result = {
+                            [value]: conversationDetails[0],
+                        }   
                     }
                     
                 }).then(() => {
                     if (result && result !== "null") {
                         self.setState({
-                            conversations: result
+                            conversations: {
+                                ...self.state.conversations,
+                                ...result
+                            }
                         })
                     }
                 })
-
             })
+            }
         })
     }
 
     render() {       
         const searchResult = Object.keys(this.state.conversations)
-                            .map(value => {return this.state.conversations[value]})
+                            .map(value => {return {
+                                ...this.state.conversations[value],
+                                convID: value
+                            }})
                             .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
                             
         const noConversationsMessage = () => {
@@ -88,7 +96,10 @@ export default class FriendList extends Component {
                         Object.keys(this.state.conversations).length === 0 ? noConversationsMessage() :
                         searchResult.map((value, i) => {
                             return (
-                                <li key={i} className={this.state.conversations[this.props.activeConversation] ? 'selected' : ''} 
+                                <li key={i} 
+                                className={this.state.conversations[this.props.activeConversation] && 
+                                    this.state.conversations[this.props.activeConversation].email === value.email ? 'selected' : ''} 
+
                                 onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
                                     <Friend firstName={value.firstName} 
                                     lastName={value.lastName}
