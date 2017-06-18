@@ -37,13 +37,17 @@ export default class FriendList extends Component {
 
             snapshot.val().map((value,result) => {
 
-                firebase.database().ref(`/conversations/${value}/users/1`).once('value').then(function(snapshot) {
+                firebase.database().ref(`/conversations/${value}/users/`).once('value').then(function(snapshot) {
 
-                    const conversationDetails = snapshot.val();    
+                    const conversationDetails = snapshot.val().filter((user) => {
+                        if (user.email !== firebase.auth().currentUser.email) {
+                            return user;
+                        }
+                    });    
 
                     result = {
                         ...result,
-                        [value]: conversationDetails
+                        [value]: conversationDetails[0]
                     }
                     
                 }).then(() => {
