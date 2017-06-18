@@ -1,5 +1,6 @@
 import React from 'react';
 import UserImage from '../../../static/images/user-image.png';
+import * as firebase from 'firebase';
 
 const messageStyles = {
     backgroundColor: '#fff',
@@ -26,16 +27,20 @@ const imageStyles = {
     height: '35px',
 };
 
-const Message = () => {
+const Message = ({data}) => {
+
+    const messageType = () => {
+        return data.from === firebase.auth().currentUser.email ? 'message-row my-message' : 'messsage-row';
+    }
+
     return (
-        <div className="message-row" style={rowStyles}>
+        <div className={messageType()} style={rowStyles}>
             <div className="user" style={userStyles}>
                 <img src={UserImage} alt="User" style={imageStyles}/>
             </div>
             <div className="message" style={messageStyles}>
                 <p>
-                    This is a test message lorem ipsum
-                    lorem ipsum lorem ipsum
+                    {data.value}
                 </p>
             </div>
         </div>

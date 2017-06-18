@@ -106,6 +106,13 @@ ul {
   .Inbox:last-child {
     width: 15.69576%; }
 
+.my-message {
+  flex-direction: row-reverse; }
+  .my-message .message {
+    background-color: #0084FF !important;
+    color: #fff;
+    text-align: right; }
+
 .Friend-List {
   float: left;
   display: block;
@@ -196,3 +203,4 @@ ul {
   margin-left: 83px;
   vertical-align: middle; }
 
+/*# sourceMappingURL=index.css.map */

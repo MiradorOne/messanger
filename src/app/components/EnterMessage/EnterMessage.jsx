@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../../styles/components/EnterMessage.css';
+import * as firebase from 'firebase';
 
 export default class EnterMessage extends Component {
     constructor() {
@@ -12,7 +13,17 @@ export default class EnterMessage extends Component {
 
     handleKeyPress(e) {
         if (e.charCode === 13) {
-            console.log('Enter pressed!');
+            this.sendMessage(e.target.value);
+            e.target.value = '';
+        }
+    }
+
+    sendMessage(messageValue) {
+        if (this.props.currentConversation && this.props.currentConversation !== 'null') {
+            firebase.database().ref(`/conversations/${this.props.currentConversation}`).child('messages').push({
+                from: firebase.auth().currentUser.email,
+                value: messageValue
+            })
         }
     }
 
@@ -22,8 +33,13 @@ export default class EnterMessage extends Component {
         })
     }
 
-    handleClick(e) {
-
+    handleClick() {
+        if (this.props.currentConversation && this.props.currentConversation !== 'null') {
+            firebase.database().ref(`/conversations/${this.props.currentConversation}`).child('messages').push({
+                from: firebase.auth().currentUser.email,
+                value: this.state.message
+            })
+        }
     }
 
     render() {

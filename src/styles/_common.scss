@@ -123,6 +123,15 @@ ul {
 	@include span-columns(4 of 24, block-collapse);
 }
 
+.my-message {
+	flex-direction: row-reverse;
+	.message {
+		background-color: #0084FF !important;
+		color: #fff;
+		text-align: right;		
+	}
+}
+
 .Friend-List {
 	@include span-columns(6 of 24, block-collapse);
 

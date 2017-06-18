@@ -14,13 +14,14 @@ export default class FriendList extends Component {
 
         this.state = {
             conversations: [],
-            searchTerm: ''
+            searchTerm: '',
         }
     }
 
     componentWillReceiveProps({currentUser}) {
         this.getConversation(currentUser.uid);
     }
+
 
     handleChange(e) {
         this.setState({
@@ -38,7 +39,7 @@ export default class FriendList extends Component {
 
                 firebase.database().ref(`/conversations/${value}/users/1`).once('value').then(function(snapshot) {
 
-                    const conversationDetails = snapshot.val();                    
+                    const conversationDetails = snapshot.val();    
 
                     result = {
                         ...result,
@@ -55,10 +56,6 @@ export default class FriendList extends Component {
 
             })
         })
-    }
-
-    selectConversation() {
-
     }
 
     render() {       
@@ -87,8 +84,12 @@ export default class FriendList extends Component {
                         Object.keys(this.state.conversations).length === 0 ? noConversationsMessage() :
                         searchResult.map((value, i) => {
                             return (
-                                <li key={i}>
-                                    <Friend firstName={value.firstName} lastName={value.lastName} onClick={this.selectConversation.bind(this)}/>
+                                <li key={i} className={this.state.conversations[this.props.activeConversation] ? 'selected' : ''} 
+                                onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
+                                    <Friend firstName={value.firstName} 
+                                    lastName={value.lastName}
+                                    convID={value.id} 
+                                    />
                                 </li>
                             )
                         })

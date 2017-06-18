@@ -12,34 +12,47 @@ export default class Chat extends Component {
         super();
 
         this.state = {
-            conversations: [],
+            messages: [],
         }
     }
 
-    getConversation() {
+    getMessages(convID) {
         let self = this;
-        firebase.database().ref(`/users/${this.props.currentUser.uid}/conversations`).once('value').then(function(snapshot) {
 
-            const object = snapshot.val();
+        if (convID && convID !== 'null') {
+            firebase.database().ref(`/conversations/${convID}/messages`).on('value',function(snapshot) {
 
-            if (object && object !== "null") {
-                self.setState({
-                    conversations: Object.keys(object).map((key) => {return object[key]})
-                })
-            }
+                const object = snapshot.val();
 
-        });
+                if (object && object !== "null") {
+                    self.setState({
+                        messages: object
+                    })
+                }
+
+            });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.getMessages(nextProps.activeConversation);
     }
 
     render() {
+        const messages = Object.keys(this.state.messages).map((value,i) => {
+            return (
+                <Message key={i} data={this.state.messages[value]}/>
+            )
+        })
+
         return (
             <div className="container Chat">
                 <ChatTopBar />
                 <ChatMessages />
                 <div className="messages">
-                    <Message/>
+                    {messages}
                 </div>
-                <EnterMessage />
+                <EnterMessage currentConversation={this.props.activeConversation}/>
             </div>
         )
     }

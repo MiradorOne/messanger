@@ -7,7 +7,7 @@ export default class Friend extends Component {
 
     render() {
         return (
-            <div className="Friend is-online">
+            <div className="Friend is-online" >
                 <div className="profile-img">
                     <img src={UserImage} alt="User Image"/>
                 </div>

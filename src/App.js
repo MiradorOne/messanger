@@ -18,9 +18,11 @@ class App extends Component {
 
         this.state = {
             currentUser: '',
+            activeConversation: null,
         };
 
         this.checkCredentials = this.checkCredentials.bind(this);
+        this.selectConversation = this.selectConversation.bind(this);
     }
     
     authObserver() {
@@ -32,6 +34,12 @@ class App extends Component {
                 })
             }
         });
+    }
+
+    selectConversation(convID) {
+        this.setState({
+            activeConversation: convID
+        })
     }
 
     checkCredentials(email,password,passwordConfirm,signIn,e) {
@@ -72,8 +80,13 @@ class App extends Component {
 
                 <div className="App-header">
                     <Inbox />
-                    <FriendList currentUser={this.state.currentUser}/>
-                    <Chat />
+
+                    <FriendList currentUser={this.state.currentUser} 
+                    activeConversation={this.state.activeConversation} 
+                    selectConversation={this.selectConversation}/>
+
+                    <Chat activeConversation={this.state.activeConversation}/>
+                    
                     <ProfileBar currentUser={this.state.currentUser}/>
                 </div>
             </div>
