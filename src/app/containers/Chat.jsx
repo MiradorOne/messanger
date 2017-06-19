@@ -26,7 +26,11 @@ export default class Chat extends Component {
 
                 if (object && object !== "null") {
                     self.setState({
-                        messages: object
+                        messages: object 
+                    })
+                } else {
+                    self.setState({
+                        messages: [] 
                     })
                 }
 
@@ -50,7 +54,14 @@ export default class Chat extends Component {
                 <ChatTopBar />
                 <ChatMessages />
                 <div className="messages">
-                    {messages}
+                    {messages.length > 0 ? messages : (<div style={{
+                        position: 'absolute',
+                        fontSize:'16px', 
+                        textTransform:'uppercase',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translateY(-50%) translateX(-50%)'
+                    }}>Send your first message!</div>)}
                 </div>
                 <EnterMessage currentConversation={this.props.activeConversation}/>
             </div>

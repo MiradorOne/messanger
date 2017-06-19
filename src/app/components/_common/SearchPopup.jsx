@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchInput, {createFilter} from 'react-search-input';
 import * as firebase from 'firebase';
 import NewFriend from '../_common/NewFriend';
+import _ from 'lodash';
 
 const popupStyles = {
 	border: '1px solid #eee',
@@ -60,21 +61,41 @@ class SearchPopup extends Component {
 
 		firebase.database().ref(`users/${firebase.auth().currentUser.uid}/conversations/${id}/`).set(id);
 		firebase.database().ref(`users/${user.id}/conversations/${id}/`).set(id);
+		firebase.database().ref(`users/${user.id}/friends/${firebase.auth().currentUser.uid}/`).update([
+			id
+		]);
+		firebase.database().ref(`users/${firebase.auth().currentUser.uid}/friends/${user.id}/`).update([
+			id
+		]);
 	}
 
 	searchUsers() {
 		let self = this;
-		firebase.database().ref('/users').once('value').then(function (snapshot) {
-			const object = snapshot.val();
+		let users = {};
+
+		firebase.database().ref(`users/${firebase.auth().currentUser.uid}/friends`).once('value').then((snapshot) => {
 			self.setState({
-				usersList: Object.keys(object).map((key) => {
+				friendList: snapshot.val(), 
+			})
+		}).then(() => {
+			firebase.database().ref('/users').on('value', function (snapshot) {
+			
+			users = _.pickBy(snapshot.val(),(value, key) => {return key !== firebase.auth().currentUser.uid});
+			if (self.state.friendList) {
+				users = _.pickBy(users,(value, key ) => {return !self.state.friendList[key]});
+			}
+
+			self.setState({
+				usersList: Object.keys(users).map((key) => {
 					return {
-						...object[key],
+						...users[key],
 						id: key
 					}
 				})
 			})
-		});
+			});
+		})
+
     }
 
 	handleChange(e) {
