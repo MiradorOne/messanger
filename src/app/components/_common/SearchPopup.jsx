@@ -29,8 +29,8 @@ const resultStyles = {
 const KEYS_TO_FILTERS = ['firstName', 'lastName', 'email'];
 
 class SearchPopup extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			searchTerm: '',
@@ -44,20 +44,24 @@ class SearchPopup extends Component {
 
 	startConversation(user) {
 		const id = Math.random().toString(36).substr(2, 9);
-		firebase.database().ref(`/conversations/${id}/`).child('/users').set([
-			{
-				email: firebase.auth().currentUser.email,
-				firstName: 'NO Name',
-				lastName: 'No last name',
-				id: firebase.auth().currentUser.uid
-			},
-			{
-				email: user.email,
-				firstName: user.firstName,
-				lastName: user.lastName,
-				id: user.id
-			},
-		])
+
+		firebase.database().ref(`/users/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
+			firebase.database().ref(`/conversations/${id}/`).child('/users').set([
+				{
+					email: firebase.auth().currentUser.email,
+					firstName: snapshot.val().firstName,
+					lastName: snapshot.val().lastName,
+					id: firebase.auth().currentUser.uid
+				},
+				{
+					email: user.email,
+					firstName: user.firstName,
+					lastName: user.lastName,
+					id: user.id
+				},
+			])
+		})
+
 
 		firebase.database().ref(`users/${firebase.auth().currentUser.uid}/conversations/${id}/`).set(id);
 		firebase.database().ref(`users/${user.id}/conversations/${id}/`).set(id);
@@ -67,6 +71,7 @@ class SearchPopup extends Component {
 		firebase.database().ref(`users/${firebase.auth().currentUser.uid}/friends/${user.id}/`).update([
 			id
 		]);
+		this.props.hidePopup()
 	}
 
 	searchUsers() {
@@ -117,8 +122,8 @@ class SearchPopup extends Component {
 					{ this.state.searchTerm.length === 0 ? '' : searchResult.map((user,i) => {
 						return (
 							<li key={i}>
-								<NewFriend firstName="First Name" id={user.id} lastName="Last Name" 
-								startConversation={this.startConversation} email={user.email}/>
+								<NewFriend firstName={user.firstName} id={user.id} lastName={user.lastName}
+								startConversation={this.startConversation.bind(this)} email={user.email}/>
 							</li>
 						)
 					})}

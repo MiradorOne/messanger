@@ -43,7 +43,7 @@ class App extends Component {
         })
     }
 
-    checkCredentials(email,password,passwordConfirm,signIn,e) {
+    checkCredentials(email,password,passwordConfirm,firstName,lastName,signIn,e) {
         e.preventDefault();
         let self = this;
         if (signIn) {
@@ -58,6 +58,8 @@ class App extends Component {
                 firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
                     firebase.database().ref('users/'+ firebase.auth().currentUser.uid).set({
                         email: email,
+                        firstName: firstName,
+                        lastName: lastName,
                         conversation: []
                     })
                 })
