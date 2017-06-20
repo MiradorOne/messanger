@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import ChatTopBar from '../components/ChatTopBar/ChatTopBar';
 import ChatMessages from '../components/ChatMessages/ChatMessages';
 import EnterMessage from '../components/EnterMessage/EnterMessage';
 import Message from '../components/_common/Message';
 import * as firebase from 'firebase';
+import _ from 'lodash';
 
 import '../../styles/containers/Chat.css';
 
@@ -14,6 +16,12 @@ export default class Chat extends Component {
         this.state = {
             messages: [],
         }
+    }
+
+    componentDidUpdate() {
+        const node = ReactDOM.findDOMNode(this.refs['scroll']);
+        const messageNode = _.last(node.childNodes);
+        messageNode.scrollIntoView(false);
     }
 
     getMessages(convID) {
@@ -53,7 +61,7 @@ export default class Chat extends Component {
             <div className="container Chat">
                 <ChatTopBar />
                 <ChatMessages />
-                <div className="messages">
+                <div className="messages" ref='scroll'>
                     {messages.length > 0 ? messages : (<div style={{
                         position: 'absolute',
                         fontSize:'16px', 
