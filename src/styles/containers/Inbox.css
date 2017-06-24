@@ -41,12 +41,11 @@
 
 .New-Friend {
   display: inline-block;
-  height: 120px;
-  width: 215px;
+  height: auto;
+  width: 100%;
   border-radius: 5px;
   border: 1px solid #eee;
   text-align: left;
-  margin: 10px 0;
   padding: 3px; }
   .New-Friend .fisrtName, .New-Friend .SecondName, .New-Friend .email {
     display: inline-block;
@@ -54,6 +53,8 @@
     padding-left: 5px;
     padding-top: 5px;
     font-weight: 300; }
+  .New-Friend .SecondName {
+    padding-inline-end: 50%; }
   .New-Friend .StartConversation {
     color: rgba(41, 48, 55, 0.8);
     text-align: right;
@@ -63,17 +64,13 @@
   .New-Friend .StartConversation span {
     vertical-align: 1px; }
   .New-Friend .StartConversation:hover {
-    margin-top: 7px;
     color: #18d67b;
     font-weight: 800;
     cursor: pointer; }
   .New-Friend .email:hover {
-    color: #052b75;
-    padding-left: 3px; }
+    color: #052b75; }
 
 .New-Friend hr {
   position: relative;
   margin-top: 29px;
   color: rgba(238, 238, 238, 0.3); }
-
-/*# sourceMappingURL=Inbox.css.map */

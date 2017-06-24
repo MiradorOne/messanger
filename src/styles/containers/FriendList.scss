@@ -11,13 +11,7 @@
 
 	ul {
 		li {
-			cursor: pointer;
-			padding: 0 25px;
 			transition: background-color ease 0.15s;
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.1);
-			}
-
 			&.selected {
 				background-color: rgba(0, 0, 0, 0.1);
 			}
@@ -25,9 +19,6 @@
 	}
 	.no-conversation
 {
-	text-align: center;
-	margin: 175px 10px;
-	text-align: center;
 	color: rgb(183, 231, 241);
 	font-size: 17px;
 	font-weight: 300;

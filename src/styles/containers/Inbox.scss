@@ -56,12 +56,11 @@
 .New-Friend
 {
 display: inline-block;
-height: 120px;
-width: 215px;
+height: auto;
+width: 100%;
 border-radius: 5px;
 border:  1px solid #eee;
 text-align: left;
-margin: 10px 0;
 padding: 3px;
 
   .fisrtName ,.SecondName , .email
@@ -72,6 +71,9 @@ padding: 3px;
 		 padding-top: 5px;
 		 font-weight: 300;
    }
+	 .SecondName {
+		 padding-inline-end: 50%;
+	 }
      .StartConversation
      {
 	     color: rgba(41, 48, 55, 0.8);
@@ -85,14 +87,12 @@ padding: 3px;
 			 }
      .StartConversation:hover
        {
-	         margin-top: 7px;
 	         color: #18d67b;
 	         font-weight: 800;
 					 cursor: pointer;
         }
 				.email:hover{
 				     color: #052b75;
-						 padding-left: 3px;
 					}
 }
 .New-Friend hr
