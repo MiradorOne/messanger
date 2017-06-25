@@ -79,7 +79,7 @@ export default class FriendList extends Component {
             return (
                 <li>
                  <div className="no-conversation">
-                    You don't have conversations yet! Search friend to start conversation
+                    You don't have conversations yet!<br></br> Search friend to start conversation
                  </div>
                 </li>
             )

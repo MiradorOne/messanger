@@ -12,6 +12,11 @@
     .Friend-List ul li.selected {
       background-color: rgba(0, 0, 0, 0.1); }
   .Friend-List .no-conversation {
+    height: inherit;
+    display: inline-block;
+    width: 100%;
+    vertical-align: -832%;
     color: #b7e7f1;
     font-size: 17px;
-    font-weight: 300; }
+    font-weight: 300;
+    text-align: center; }
