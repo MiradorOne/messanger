@@ -1,14 +1,14 @@
 .Friend {
   display: flex;
   overflow: hidden;
-  padding: 25px 0;
+  padding: 4% 2%;
   align-items: center;
   position: relative; }
   .Friend.is-online:before {
     content: '';
     position: absolute;
     top: 20px;
-    left: 0;
+    left: 0.37%;
     border-radius: 50%;
     background-color: #2dc100;
     width: 6px;
