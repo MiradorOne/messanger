@@ -5,7 +5,7 @@ const NewFriend = ({firstName, id, lastName, startConversation, email}) => {
 		<div className="New-Friend">
 			<div className="fisrtName">{firstName}</div>
 			<div className="SecondName">{lastName}</div>
-			<div className="email">{email}</div>
+			<p><div className="email">{email}</div></p>
 			<hr></hr>
 			<div className="StartConversation" onClick={startConversation.bind(this,{
 				firstName,
