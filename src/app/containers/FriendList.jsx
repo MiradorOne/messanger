@@ -77,11 +77,13 @@ export default class FriendList extends Component {
 
         const noConversationsMessage = () => {
             return (
+            <div className="align-no-conversation">
                 <li>
                  <div className="no-conversation">
-                    You don't have conversations yet!<br></br> Search friend to start conversation
+                    You don't have conversations yet!<p>Search friend to start conversation</p>
                  </div>
                 </li>
+                </div>
             )
         }
 
