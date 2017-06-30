@@ -63,37 +63,68 @@ border:  1px solid #eee;
 text-align: left;
 padding: 3px;
 
-  .fisrtName ,.SecondName , .email
+  .fisrtName ,.SecondName,.email
    {
 		 display: inline-block;
 		 color: rgba(41, 48, 55, 0.8);
-		padding: 3% 3% 0% 3%;
-		 font-weight: 300;
+	   padding: 3% 0% 0% 3%;
+		 font-weight: 400;
+		 font-style: normal;
    }
-     .StartConversation
-     {
-	     color: rgba(41, 48, 55, 0.8);
-	     text-align: right;
-	     font-weight: 400;
-	     margin-right: 22px;
-	     margin-top: 5px;
-     }
-		 .StartConversation span{
-        vertical-align: 1px;
-			 }
-     .StartConversation:hover
-       {
-	         color: #18d67b;
-	         font-weight: 800;
-					 cursor: pointer;
-        }
-				.email:hover{
-				     color: #052b75;
+	.email:hover{
+    color: #052b75;
 					}
 }
-.New-Friend hr
-{
+.user-list-button-position {
+	background-color: #cce2ff;
+color: rgba(0,0,0,.87);
+}
+	.user-list-button {
+    cursor: pointer;
+    display: inline-block;
+    min-height: 1em;
+		float: right;
+    outline: 0;
+    border: none;
+    background: #E8EBF0 none;
+    background-color: #E8EBF0;
+    color: rgba(0,0,0,.6);
+    margin: 0 .25em 0 0;
+    padding: .78571429em 1.5em .78571429em;
+    text-transform: none;
+    text-shadow: none;
+    font-weight: 400;
+    line-height: 1em;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    border-radius: .28571429rem;
+    box-shadow: 0 0 0 1px transparent inset,0 0 0 0 rgba(34,36,38,.15) inset;
+}
+.user-list-button:hover {
+	 background-color: #cacbcd;
+	 background-image: none;
+	 box-shadow: 0 0 0 1px transparent inset,0 0 0 0 rgba(34,36,38,.15) inset;
+	 color: rgba(0,0,0,.8);
+}
+.user-list-button:active {
+	background-color: #F8F8F9;
+}
+.user-list-image {
+display:inline-block;
+width: 2em;
+height: 2em;
+border-radius: 500rem;
 position: relative;
-margin-top: 29px;
-color: rgba(238, 238, 238, 0.3);
+border: 1px black solid;
+vertical-align: middle;
+margin: 0% 2% 1% 1%;
+}
+.position-align {
+	display: inline;
+	padding: 2%;
+}
+.position-align > .email {
+	float: right;
+	padding-right: 1%;
 }
