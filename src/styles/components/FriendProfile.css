@@ -14,11 +14,6 @@
     .Friend-Profile .top-bar .user-menu {
       cursor: pointer;
       display: inline-block; }
-  .Friend-Profile .usermenu:hover {
-    background-color: rgba(182, 182, 182, 0.21);
-    font-weight: 500; }
-  .Friend-Profile .usermenu:active {
-    background-color: rgba(162, 162, 162, 0.21); }
   .Friend-Profile .user-image {
     padding: 40px 0 30px;
     display: flex;
