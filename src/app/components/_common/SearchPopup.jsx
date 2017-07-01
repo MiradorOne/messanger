@@ -8,7 +8,7 @@ const popupStyles = {
 	border: '1px solid #eee',
 	position: 'absolute',
 	zIndex: '10',
-	width: '200%',
+	width: '100%',
 	background: '#fff',
 	top: '25px',
 	left: '230px',
@@ -80,11 +80,11 @@ class SearchPopup extends Component {
 
 		firebase.database().ref(`users/${firebase.auth().currentUser.uid}/friends`).once('value').then((snapshot) => {
 			self.setState({
-				friendList: snapshot.val(),
+				friendList: snapshot.val(), 
 			})
 		}).then(() => {
 			firebase.database().ref('/users').on('value', function (snapshot) {
-
+			
 			users = _.pickBy(snapshot.val(),(value, key) => {return key !== firebase.auth().currentUser.uid});
 			if (self.state.friendList) {
 				users = _.pickBy(users,(value, key ) => {return !self.state.friendList[key]});
@@ -108,14 +108,14 @@ class SearchPopup extends Component {
             searchTerm: e.target.value
         })
     }
-
+	
 	render() {
 		const searchResult = this.state.usersList.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
 		return (
 			<div className="Search-Popup" style={popupStyles}>
-				<input type="text" className="input-default" placeholder="Enter friend name or email"
-				style={inputStyles}
+				<input type="text" className="input-default" placeholder="Enter friend name or email" 
+				style={inputStyles} 
 				onChange={this.handleChange.bind(this)}/>
 
 				<ul className="search-result" style={resultStyles}>
