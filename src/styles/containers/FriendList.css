@@ -8,19 +8,18 @@
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
   font-family: 'Roboto', sans-serif; }
   .Friend-List ul li {
-    cursor: pointer;
-    padding: 0 25px;
     transition: background-color ease 0.15s; }
-    .Friend-List ul li:hover {
-      background-color: rgba(0, 0, 0, 0.1); }
     .Friend-List ul li.selected {
       background-color: rgba(0, 0, 0, 0.1); }
+  .Friend-List .align-no-conversation {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
   .Friend-List .no-conversation {
-    text-align: center;
-    margin: 175px 10px;
-    text-align: center;
+    width: 100%;
     color: #b7e7f1;
     font-size: 17px;
-    font-weight: 300; }
-
-/*# sourceMappingURL=FriendList.css.map */
+    font-weight: 300;
+    text-align: center; }

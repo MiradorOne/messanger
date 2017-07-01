@@ -69,6 +69,45 @@ ul {
   background: linear-gradient(135deg, #284571 0%, #2989d8 43%, #207cca 52%, #2c3642 100%, #2c3642 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#284571', endColorstr='#2c3642',GradientType=1 ); }
 
+.Auth-Modal-input-decor {
+  position: relative;
+  overflow: hidden; }
+  .Auth-Modal-input-decor:before, .Auth-Modal-input-decor:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: .2em;
+    position: absolute;
+    left: 0;
+    transition: transform .2s ease-out, opacity .2s ease-out; }
+  .Auth-Modal-input-decor:before {
+    top: 19%;
+    transform: translate3d(-100%, 0, 0); }
+  .Auth-Modal-input-decor:after {
+    bottom: 18%;
+    transform: translate3d(100%, 0, 0); }
+  .Auth-Modal-input-decor:hover, .Auth-Modal-input-decor:focus {
+    color: #fff;
+    outline: none; }
+    .Auth-Modal-input-decor:hover:before, .Auth-Modal-input-decor:hover:after, .Auth-Modal-input-decor:hover .border-decor:before, .Auth-Modal-input-decor:hover .border-decor:after, .Auth-Modal-input-decor:focus:before, .Auth-Modal-input-decor:focus:after, .Auth-Modal-input-decor:focus .border-decor:before, .Auth-Modal-input-decor:focus .border-decor:after {
+      background-color: #fff;
+      transform: translate3d(0, 0, 0);
+      opacity: 1; }
+  .Auth-Modal-input-decor .border-decor:before, .Auth-Modal-input-decor .border-decor:after {
+    content: "";
+    display: block;
+    width: .2em;
+    height: 63%;
+    position: absolute;
+    top: 19%;
+    transition: transform .2s ease-out, opacity .2s ease-out; }
+  .Auth-Modal-input-decor .border-decor:before {
+    left: 0;
+    transform: translate3d(0%, -100%, 0); }
+  .Auth-Modal-input-decor .border-decor:after {
+    right: 0;
+    transform: translate3d(0%, 100%, 0); }
+
 #root, .App, .App-header {
   overflow: hidden;
   height: 100%; }
@@ -179,12 +218,12 @@ ul {
 
 .icon-add-user {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 15%;
+  height: 33px;
   background-image: url("../src/static/images/icons/add-user-icon.png");
   background-repeat: no-repeat;
   background-position: center;
-  margin-left: 83px;
-  vertical-align: middle; }
+  vertical-align: middle;
+  float: right; }
 
 /*# sourceMappingURL=index.css.map */

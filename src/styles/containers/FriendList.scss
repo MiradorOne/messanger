@@ -11,25 +11,25 @@
 
 	ul {
 		li {
-			cursor: pointer;
-			padding: 0 25px;
 			transition: background-color ease 0.15s;
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.1);
-			}
-
 			&.selected {
 				background-color: rgba(0, 0, 0, 0.1);
 			}
 		}
 	}
+	.align-no-conversation {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 	.no-conversation
 {
-	text-align: center;
-	margin: 175px 10px;
-	text-align: center;
+	width: 100%;
 	color: rgb(183, 231, 241);
 	font-size: 17px;
 	font-weight: 300;
+	text-align: center;
 }
 }
