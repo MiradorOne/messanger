@@ -16,7 +16,7 @@ import AuthModal from './app/components/_common/AuthModal';
 export class App extends Component {
     constructor() {
         super();
-        // initDB();
+        initDB();
         // this.authObserver();
 
         this.state = {
@@ -25,7 +25,7 @@ export class App extends Component {
         };
 
         this.checkCredentials = this.checkCredentials.bind(this);
-        // this.selectConversation = this.selectConversation.bind(this);
+        this.selectConversation = this.selectConversation.bind(this);
     }
     //
     // authObserver() {

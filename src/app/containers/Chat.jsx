@@ -6,6 +6,7 @@ import EnterMessage from '../components/EnterMessage/EnterMessage';
 import Message from '../components/_common/Message';
 import * as firebase from 'firebase';
 import { firebaseConnect } from 'react-redux-firebase';
+import _ from 'lodash';
 
 import '../../styles/containers/Chat.css';
 

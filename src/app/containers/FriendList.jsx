@@ -12,8 +12,8 @@ import Friend from '../components/Friend/Friend';
 const KEYS_TO_FILTERS = ['firstName', 'lastName', 'email'];
 
 export class FriendList extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             conversations: [],
@@ -22,10 +22,6 @@ export class FriendList extends Component {
     }
 
     componentWillReceiveProps({allConversations, profile}) {
-        // console.log('FriendList: ', conversations);
-        // console.log('profile: ', profile);
-
-
         const userConversations = _.reduce(profile && profile.conversations, function(result, value, key) {
             return _.isEqual(value, allConversations[key]) ?
                 result : _.assign(result,{[key]: allConversations[value]});
@@ -34,11 +30,6 @@ export class FriendList extends Component {
         this.setState({
             conversations: userConversations,
         });
-
-        console.log(userConversations);
-
-
-        // this.getConversation(currentUser.uid);
     }
 
 
@@ -73,13 +64,12 @@ export class FriendList extends Component {
                         searchResult.map((value, i) => {
                             return (
                                 <li key={i} 
-                                className={this.state.conversations[this.props.activeConversation] && 
-                                    this.state.conversations[this.props.activeConversation].email === value.email ? 'selected' : ''} 
+                                className={_.get(this.state.conversations[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
                                 onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
-                                    <Friend firstName={value.firstName} 
-                                    lastName={value.lastName}
-                                    convID={value.id} 
+                                    <Friend firstName={value.users[1].firstName}
+                                    lastName={value.users[1].lastName}
+                                    convID={value.users[1].id}
                                     />
                                 </li>
                             )
