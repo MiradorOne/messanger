@@ -2,7 +2,9 @@ import './index.css';
 import './styles/scrollbar.css';
 
 import React, {Component} from 'react';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import { connect } from 'react-redux'
+import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase'
 
 import { initDB } from './db/index';
 import Inbox from './app/containers/Inbox';
@@ -11,11 +13,11 @@ import Chat from './app/containers/Chat';
 import ProfileBar from './app/containers/ProfileBar';
 import AuthModal from './app/components/_common/AuthModal';
 
-class App extends Component {
+export class App extends Component {
     constructor() {
         super();
-        initDB();
-        this.authObserver();
+        // initDB();
+        // this.authObserver();
 
         this.state = {
             currentUser: '',
@@ -23,19 +25,19 @@ class App extends Component {
         };
 
         this.checkCredentials = this.checkCredentials.bind(this);
-        this.selectConversation = this.selectConversation.bind(this);
+        // this.selectConversation = this.selectConversation.bind(this);
     }
-    
-    authObserver() {
-        const self = this;
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                self.setState({
-                    currentUser: user
-                })
-            }
-        });
-    }
+    //
+    // authObserver() {
+    //     const self = this;
+    //     firebase.auth().onAuthStateChanged(function(user) {
+    //         if (user) {
+    //             self.setState({
+    //                 currentUser: user
+    //             })
+    //         }
+    //     });
+    // }
 
     selectConversation(convID) {
         this.setState({
@@ -45,46 +47,25 @@ class App extends Component {
 
     checkCredentials(email,password,passwordConfirm,firstName,lastName,signIn,e) {
         e.preventDefault();
-        let self = this;
-        if (signIn) {
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-                self.setState({
-                    currentUser: null
-                });
-                throw new Error(error);
-            });
-        } else {
-            if (password === passwordConfirm) {
-                firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-                    firebase.database().ref('users/'+ firebase.auth().currentUser.uid).set({
-                        email: email,
-                        firstName: firstName,
-                        lastName: lastName,
-                        conversation: []
-                    })
-                })
-            } else {
-                console.error('Password confirmaion fail'); // TODO: Add form validation
-            }
-        }
-
-        if (firebase.auth().currentUser) {
+        this.props.firebase.login({
+            email: email,
+            password: password,
+            type: 'redirect',
+        }).then((user) => {
             this.setState({
-                currentUser: firebase.auth().currentUser
+                currentUser: user
             })
-        }
+        })
     }
 
     render() {
         return (
             <div className="App">
-
-                { this.state.currentUser ? '' : <AuthModal submitHandler={this.checkCredentials}/>}
+                { this.props.profile ? '' : <AuthModal submitHandler={this.checkCredentials}/>}
 
                 <div className="App-header">
                     <Inbox />
-
-                    <FriendList currentUser={this.state.currentUser} 
+                    <FriendList currentUser={this.props.auth && this.props.auth.uid}
                     activeConversation={this.state.activeConversation} 
                     selectConversation={this.selectConversation}/>
 
@@ -97,4 +78,17 @@ class App extends Component {
     }
 }
 
-export default App;
+const wrappedApp = firebaseConnect([
+    // '/users',
+    '/conversations'
+])(App);
+
+export default connect(
+    ({ firebase }) => ({
+        // users: dataToJS(firebase, 'users'),
+        conversation: dataToJS(firebase, 'conversations'),
+        authError: pathToJS(firebase, 'authError'),
+        auth: pathToJS(firebase, 'auth'),
+        profile: pathToJS(firebase, 'profile')
+    })
+)(wrappedApp)

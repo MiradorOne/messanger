@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-const config = {
+export const config = {
     apiKey: "AIzaSyDMEFuLSiNgU9DKZMCWuHDfusO1SxbrhVA",
     authDomain: "messanger-74db7.firebaseapp.com",
     databaseURL: "https://messanger-74db7.firebaseio.com",

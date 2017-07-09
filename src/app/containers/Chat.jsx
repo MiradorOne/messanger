@@ -5,7 +5,7 @@ import ChatMessages from '../components/ChatMessages/ChatMessages';
 import EnterMessage from '../components/EnterMessage/EnterMessage';
 import Message from '../components/_common/Message';
 import * as firebase from 'firebase';
-import _ from 'lodash';
+import { firebaseConnect } from 'react-redux-firebase';
 
 import '../../styles/containers/Chat.css';
 
@@ -55,7 +55,7 @@ export default class Chat extends Component {
             return (
                 <Message key={i} data={this.state.messages[value]}/>
             )
-        })
+        });
 
         return (
             <div className="container Chat">

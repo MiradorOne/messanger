@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
-import SearchInput, {createFilter} from 'react-search-input';
+// import * as firebase from 'firebase';
+import {createFilter} from 'react-search-input';
+import {firebaseConnect, dataToJS, pathToJS, getFirebase} from 'react-redux-firebase';
+import {connect} from 'react-redux';
+import _ from 'lodash';
 
 import '../../styles/containers/FriendList.css';
 import Search from '../components/Search/Search';
@@ -8,9 +11,9 @@ import Friend from '../components/Friend/Friend';
 
 const KEYS_TO_FILTERS = ['firstName', 'lastName', 'email'];
 
-export default class FriendList extends Component {
+export class FriendList extends Component {
     constructor() {
-        super()
+        super();
 
         this.state = {
             conversations: [],
@@ -18,8 +21,24 @@ export default class FriendList extends Component {
         }
     }
 
-    componentWillReceiveProps({currentUser}) {
-        this.getConversation(currentUser.uid);
+    componentWillReceiveProps({allConversations, profile}) {
+        // console.log('FriendList: ', conversations);
+        // console.log('profile: ', profile);
+
+
+        const userConversations = _.reduce(profile && profile.conversations, function(result, value, key) {
+            return _.isEqual(value, allConversations[key]) ?
+                result : _.assign(result,{[key]: allConversations[value]});
+        }, {});
+
+        this.setState({
+            conversations: userConversations,
+        });
+
+        console.log(userConversations);
+
+
+        // this.getConversation(currentUser.uid);
     }
 
 
@@ -29,45 +48,7 @@ export default class FriendList extends Component {
         })
     }
 
-    getConversation(uid) {
-        let self = this;
-        firebase.database().ref(`/users/${uid}/conversations`).on('value', function(snapshot) {
-                
-            const result = snapshot.val() || null;
-
-            if (snapshot.val()) {
-                Object.keys(snapshot.val()).map((value,i,result) => {
-
-                firebase.database().ref('/conversations/' + value + '/users/').once('value').then(function(snapshot) {
-                    let conversationDetails = null;
-                    if (snapshot.val()) {
-                        conversationDetails = snapshot.val().filter((user) => {
-                            if (user.email !== firebase.auth().currentUser.email) {
-                                return user;
-                            }
-                        });
-
-                        result = {
-                            [value]: conversationDetails[0],
-                        }   
-                    }
-                    
-                }).then(() => {
-                    if (result && result !== "null") {
-                        self.setState({
-                            conversations: {
-                                ...self.state.conversations,
-                                ...result
-                            }
-                        })
-                    }
-                })
-            })
-            }
-        })
-    }
-
-    render() {       
+    render() {
         const searchResult = Object.keys(this.state.conversations)
                             .map(value => {return {
                                 ...this.state.conversations[value],
@@ -81,13 +62,8 @@ export default class FriendList extends Component {
                     You don't have conversations yet! Search friend to start conversation
                 </li>
             )
-        }
+        };
 
-        const conversations = Object.keys(this.state.conversations).map((value) => {
-            return (
-                <Friend data={this.state.conversations[value]}/>
-            )
-        })
         return (
             <div className="container Friend-List">
                 <Search handleChange={this.handleChange.bind(this)}/>
@@ -115,3 +91,16 @@ export default class FriendList extends Component {
         )
     }
 }
+
+const wrappedComponent = firebaseConnect((props,firebase) => [
+    '/conversations#'
+])(FriendList);
+
+export default connect(
+    ({ firebase }) => ({
+        allConversations: dataToJS(firebase, 'conversations'),
+        profile: pathToJS(firebase, 'profile')
+    })
+)(wrappedComponent);
+
+
