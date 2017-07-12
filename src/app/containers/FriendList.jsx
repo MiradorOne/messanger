@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import * as firebase from 'firebase';
 import {createFilter} from 'react-search-input';
 import {firebaseConnect, dataToJS, pathToJS, getFirebase} from 'react-redux-firebase';
 import {connect} from 'react-redux';
@@ -21,10 +20,10 @@ export class FriendList extends Component {
         }
     }
 
-    componentWillReceiveProps({allConversations, profile}) {
+    componentWillReceiveProps({allConversations, profile}) { // Filter all conversations for user conversations
         const userConversations = _.reduce(profile && profile.conversations, function(result, value, key) {
             return _.isEqual(value, allConversations[key]) ?
-                result : _.assign(result,{[key]: allConversations[value]});
+                result : _.assign(result,{[key]: allConversations[value]}); //TODO: find better approach
         }, {});
 
         this.setState({

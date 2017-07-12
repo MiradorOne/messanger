@@ -25,7 +25,9 @@ class FriendProfile extends Component {
 					<i className="icon notifications" />
 					<div className="user-menu" style={ {position: 'relative'} } onClick={this.showUserMenu.bind(this)}>
 						{this.state.userMenuIsVisible ? <UserMenu /> : ''}
-						{this.props.currentUser.displayName ? this.props.currentUser.displayName : 'User email'}
+						{this.props.currentUser ?
+							`${this.props.currentUser.firstName} ${this.props.currentUser.lastName}`
+							: 'No name'}
 					</div>
 				</div>
 				<div className="user-image friend-profile">

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ChatTopBar from '../components/ChatTopBar/ChatTopBar';
-import ChatMessages from '../components/ChatMessages/ChatMessages';
 import EnterMessage from '../components/EnterMessage/EnterMessage';
 import Message from '../components/_common/Message';
 import * as firebase from 'firebase';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firebaseConnect, pathToJS, dataToJS } from 'react-redux-firebase';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import '../../styles/containers/Chat.css';
@@ -61,7 +61,6 @@ export default class Chat extends Component {
         return (
             <div className="container Chat">
                 <ChatTopBar />
-                <ChatMessages />
                 <div className="messages" ref='scroll'>
                     {messages.length > 0 ? messages : (<div style={{
                         position: 'absolute',

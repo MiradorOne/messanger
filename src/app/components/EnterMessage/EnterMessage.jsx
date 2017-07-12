@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import '../../../styles/components/EnterMessage.css';
 import * as firebase from 'firebase';
+import { firebaseConnect } from 'react-redux-firebase';
 
-export default class EnterMessage extends Component {
-    constructor() {
-        super();
+class EnterMessage extends Component {
+    constructor(props) {
+        super(props);
 
         this.state = {
             message: ''
@@ -20,10 +21,11 @@ export default class EnterMessage extends Component {
 
     sendMessage(messageValue) {
         if (this.props.currentConversation && this.props.currentConversation !== 'null') {
-            firebase.database().ref(`/conversations/${this.props.currentConversation}`).child('messages').push({
+            this.props.firebase.push(`/conversations/${this.props.currentConversation}/messages`, {
                 from: firebase.auth().currentUser.email,
-                value: messageValue
-            })
+                value: messageValue,
+                timestamp: + new Date(),
+            });
         }
     }
 
@@ -35,10 +37,11 @@ export default class EnterMessage extends Component {
 
     handleClick() {
         if (this.props.currentConversation && this.props.currentConversation !== 'null') {
-            firebase.database().ref(`/conversations/${this.props.currentConversation}`).child('messages').push({
+            this.props.firebase.push(`/conversations/${this.props.currentConversation}/messages`, {
                 from: firebase.auth().currentUser.email,
-                value: this.state.message
-            })
+                value: this.state.message,
+                timestamp: + new Date(),
+            });
         }
     }
 
@@ -60,3 +63,5 @@ export default class EnterMessage extends Component {
         )
     }
 }
+
+export default firebaseConnect()(EnterMessage);

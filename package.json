@@ -8,6 +8,7 @@
   "dependencies": {
     "bourbon-neat": "^1.8.0",
     "firebase": "^4.0.0",
+    "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
