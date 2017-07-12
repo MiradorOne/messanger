@@ -9,7 +9,7 @@ import '../../styles/containers/FriendList.css';
 import Search from '../components/Search/Search';
 import Friend from '../components/Friend/Friend';
 
-const KEYS_TO_FILTERS = ['firstName', 'lastName', 'email'];
+const KEYS_TO_FILTERS = ['users.firstName', 'users.lastName', 'users.email'];
 
 export class FriendList extends Component {
     constructor(props) {
@@ -41,10 +41,13 @@ export class FriendList extends Component {
 
     render() {
         const searchResult = Object.keys(this.state.conversations)
-                            .map(value => {return {
-                                ...this.state.conversations[value],
-                                convID: value
-                            }})
+                            .map(value => {
+                                console.log(...this.state.conversations[value]);
+                                return {
+                                    users: _.get(this.state.conversations[value],'users'),
+                                    convID: value
+                                }
+                            })
                             .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
                             
         const noConversationsMessage = () => {
