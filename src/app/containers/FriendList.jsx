@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {createFilter} from 'react-search-input';
-import {firebaseConnect, dataToJS, pathToJS, getFirebase} from 'react-redux-firebase';
+import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 

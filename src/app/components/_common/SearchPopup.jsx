@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchInput, {createFilter} from 'react-search-input';
+import {createFilter} from 'react-search-input';
 import * as firebase from 'firebase';
 import NewFriend from '../_common/NewFriend';
 import _ from 'lodash';

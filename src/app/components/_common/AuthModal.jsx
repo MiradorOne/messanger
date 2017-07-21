@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { firebaseConnect, pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 const componentStyles = {
     width: '100%',

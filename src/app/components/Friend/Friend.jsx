@@ -9,7 +9,7 @@ export default class Friend extends Component {
         return (
             <div className="Friend is-online" >
                 <div className="profile-img">
-                    <img src={UserImage} alt="User Image"/>
+                    <img src={UserImage} alt=""/>
                 </div>
                 <div className="content">
                     <div className="username">

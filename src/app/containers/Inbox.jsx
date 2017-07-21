@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 
 import SearchPopup from '../components/_common/SearchPopup';
 import Navigation from '../components/Navigation/Navigation';

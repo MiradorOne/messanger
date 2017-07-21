@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import {store} from './app/store/index';
 import App from './App';
 import AuthModal from './app/components/_common/AuthModal';
-import { Router, Route, browserHistory, Redirect } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux'
 import './index.css';
 
 const history = syncHistoryWithStore(browserHistory, store)
