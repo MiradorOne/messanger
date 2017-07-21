@@ -69,8 +69,8 @@ export class FriendList extends Component {
                                 className={_.get(this.state.conversations[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
                                 onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
-                                    <Friend firstName={value.users[1].firstName}
-                                    lastName={value.users[1].lastName}
+                                    <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
+                                    lastName={value.users[1].lastName === this.props.profile.lastName ? value.users[0].lastName : value.users[1].lastName}
                                     convID={value.users[1].id}
                                     />
                                 </li>
@@ -91,7 +91,8 @@ const wrappedComponent = firebaseConnect((props,firebase) => [
 export default connect(
     ({ firebase }) => ({
         allConversations: dataToJS(firebase, 'conversations'),
-        profile: pathToJS(firebase, 'profile')
+        profile: pathToJS(firebase, 'profile'),
+        auth: pathToJS(firebase, 'auth')
     })
 )(wrappedComponent);
 
