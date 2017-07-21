@@ -59,10 +59,12 @@ const Message = ({data}) => {
                 </p>
             </div>
             <span className="timestamp" style={{
-                fontSize: '12px',
-                color: '#000',
+                fontSize:'11px',
+                color: '#a5a9ae',
                 display: 'block',
-                width: '36px'
+                width: '70px',
+                paddingRight: '.3em',
+                paddingLeft: '0.6em'
             }}>{detectTime(data.timestamp)}</span>
         </div>
     )
