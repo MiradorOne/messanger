@@ -20,12 +20,15 @@ class EnterMessage extends Component {
     }
 
     sendMessage(messageValue) {
-        if (this.props.currentConversation && this.props.currentConversation !== 'null') {
+        if (this.props.currentConversation && this.props.currentConversation !== 'null' && this.state.message.length > 0) {
             this.props.firebase.push(`/conversations/${this.props.currentConversation}/messages`, {
                 from: firebase.auth().currentUser.email,
                 value: messageValue,
                 timestamp: + new Date(),
             });
+            this.setState({
+                message: ''
+            })
         }
     }
 
