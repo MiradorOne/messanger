@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import {store} from './app/store/index';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import AuthModal from './app/components/_common/AuthModal';
+import { Router, Route, browserHistory, Redirect } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import './index.css';
 
+const history = syncHistoryWithStore(browserHistory, store)
+
 ReactDOM.render(
-  <BrowserRouter>
-      <Provider store={store}>
-          <App />
-      </Provider>
-  </BrowserRouter>,
+    <Provider store={store}>
+        <Router history={history}>
+            <Route path="/" component={App} />
+            <Route path="/auth" component={AuthModal}/>                    
+        </Router>
+    </Provider>,
   document.getElementById('root')
 );

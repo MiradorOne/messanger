@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { firebaseConnect, pathToJS } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 
 const componentStyles = {
     width: '100%',
@@ -39,6 +42,10 @@ class AuthModal extends Component {
 
     }
 
+    componentWillReceiveProps(props) {
+        props.profile ? browserHistory.push('/') : '';
+    }
+
     handleChange(type,e) {
         this.setState({
             ...this.state,
@@ -52,11 +59,35 @@ class AuthModal extends Component {
         })
     }
 
+    checkCredentials(email,password,passwordConfirm,firstName,lastName,signIn,e) {
+        e.preventDefault();
+        if (signIn) {
+            this.props.firebase.login({
+                email: email,
+                password: password,
+                type: 'redirect',
+            }).then(() => {
+                browserHistory.push('/')
+            })
+        } else {
+            this.props.firebase.createUser(
+                {email, password},
+                {
+                    email,
+                    firstName,
+                    lastName
+                }
+            ).then(() => {
+                browserHistory.push('/')
+            })
+        }
+    }
+
     render() {
         const login = () => {
             return (
                 <div className="modal login" >
-                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password,'','','',this.state.signIn)}>
+                    <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,'','','',this.state.signIn)}>
                         <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
                         <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
                         <button className="btn-default" type="submit">Sign in</button>
@@ -69,7 +100,7 @@ class AuthModal extends Component {
         const register = () => {
             return (
                 <div className="modal register">
-                    <form action="#" method="POST" onSubmit={this.props.submitHandler.bind(this, this.state.email, this.state.password,this.state.passwordConfirm, this.state.firstName, this.state.lastName,this.state.signIn)}>
+                    <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,this.state.passwordConfirm, this.state.firstName, this.state.lastName,this.state.signIn)}>
                         <input type="text" placeholder="Email" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
                         <input type="text" placeholder="First Name" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'firstName')}/>
                         <input type="text" placeholder="Last Name" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'lastName')}/>
@@ -91,4 +122,10 @@ class AuthModal extends Component {
     }
 };
 
-export default AuthModal;
+const wrappedAuth = firebaseConnect()(AuthModal);
+
+export default connect(
+    ({ firebase }) => ({
+        profile: pathToJS(firebase, 'profile')
+    })
+)(wrappedAuth)
