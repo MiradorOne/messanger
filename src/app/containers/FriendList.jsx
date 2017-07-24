@@ -52,8 +52,6 @@ export class FriendList extends Component {
                             .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
         searchResult = _.orderBy(searchResult,'lastMessage.timestamp','desc');
-
-        console.log(searchResult)
                             
         const noConversationsMessage = () => {
             return (
