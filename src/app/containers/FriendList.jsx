@@ -41,11 +41,13 @@ export class FriendList extends Component {
     render() {
         const searchResult = Object.keys(this.state.conversations)
                             .map(value => {
-                                console.log(...this.state.conversations[value]);
+
                                 return {
                                     users: _.get(this.state.conversations[value],'users'),
+                                    lastMessage: _.orderBy(_.get(this.state.conversations[value],'messages'),'timestamp','desc')[0],
                                     convID: value
                                 }
+
                             })
                             .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
                             
@@ -69,9 +71,14 @@ export class FriendList extends Component {
                                 className={_.get(this.state.conversations[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
                                 onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
+
                                     <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
+                                    
                                     lastName={value.users[1].lastName === this.props.profile.lastName ? value.users[0].lastName : value.users[1].lastName}
+
                                     userID={value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id}
+
+                                    lastMessage={value.lastMessage ? value.lastMessage : ''}
                                     />
                                 </li>
                             )

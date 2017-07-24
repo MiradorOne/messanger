@@ -1,7 +1,7 @@
 import React from 'react';
 import UserImage from '../../../static/images/user-image.png';
 import * as firebase from 'firebase';
-import moment from 'moment';
+import { detectTime } from '../../../utils/timeDetector'
 
 const messageStyles = {
     backgroundColor: '#fff',
@@ -32,20 +32,6 @@ const Message = ({data}) => {
 
     const messageType = () => {
         return data.from === firebase.auth().currentUser.email ? 'message-row my-message' : 'messsage-row';
-    };
-
-    const detectTime = (timestamp) => {
-        const minutesFromTimestamp = +moment(timestamp).startOf('minute').fromNow().slice(0, 2);
-
-        if (minutesFromTimestamp < 30) {
-            return moment(timestamp).startOf('minute').fromNow();
-        } else if (isNaN(minutesFromTimestamp)) {
-            return 'less then minute ago';
-        } else if (minutesFromTimestamp > 30 && minutesFromTimestamp < 1440) {
-            return moment(timestamp).format('LT');
-        } else {
-            moment(timestamp).format('lll')
-        }
     };
 
     return (
