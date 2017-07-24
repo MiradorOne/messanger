@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 
 import '../../../styles/components/Friend.css';
 import UserImage from '../../../static/images/user-image.png';
 
-export default class Friend extends Component {
+class Friend extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            isOnline: false 
+        }
+        this.watchOnlineStatus();
+    }
+
+    watchOnlineStatus() {
+        const self = this;
+        firebase.database().ref(`/users/${this.props.userID}/isOnline`).on('value', function(snapshot) {
+             self.setState({
+                 isOnline: snapshot.val() || false
+             })
+        })
+    }
 
     render() {
         return (
-            <div className="Friend is-online" >
+            <div className={`Friend ${this.state.isOnline ? 'is-online' : ''}`} >
                 <div className="profile-img">
                     <img src={UserImage} alt=""/>
                 </div>
@@ -29,3 +46,5 @@ export default class Friend extends Component {
         )
     }
 }
+
+export default Friend;

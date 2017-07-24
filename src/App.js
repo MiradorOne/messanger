@@ -36,7 +36,18 @@ export class App extends Component {
         if (!props.profile) {
             firebase.app().delete();
             browserHistory.push('/auth');
+        } else {
+            this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});
+            this.setState({
+                currentUser: this.props.auth.uid
+            })
         }
+    }
+
+    componentWillUnmount() {
+        if (this.state.currentUser) {
+            this.props.firebase.update(`/users/${this.state.currentUser}/`, {isOnline: false});
+        }      
     }
 
     render() {
@@ -60,12 +71,10 @@ export class App extends Component {
 }
 
 const wrappedApp = firebaseConnect([
-    '/conversations'
 ])(App);
 
 export default connect(
     ({ firebase }) => ({
-        conversation: dataToJS(firebase, 'conversations'),
         authError: pathToJS(firebase, 'authError'),
         auth: pathToJS(firebase, 'auth'),
         profile: pathToJS(firebase, 'profile')

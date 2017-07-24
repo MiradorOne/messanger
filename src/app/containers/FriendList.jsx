@@ -71,7 +71,7 @@ export class FriendList extends Component {
                                 onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
                                     <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
                                     lastName={value.users[1].lastName === this.props.profile.lastName ? value.users[0].lastName : value.users[1].lastName}
-                                    convID={value.users[1].id}
+                                    userID={value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id}
                                     />
                                 </li>
                             )
