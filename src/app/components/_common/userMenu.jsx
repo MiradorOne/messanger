@@ -8,7 +8,8 @@ const menuStyles = {
     zIndex: '10',
     width: '100%',
     background: '#fff',
-    bottom: '-90px'
+    bottom: '-90px',
+    minWidth: '100px',
 };
 
 class UserMenu extends Component {
