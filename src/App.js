@@ -8,6 +8,7 @@ import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase'
 import { browserHistory } from 'react-router'
 
 import { initDB } from './db/index';
+import { getUserPermission } from './utils/notifications'
 import Inbox from './app/containers/Inbox';
 import FriendList from './app/containers/FriendList';
 import Chat from './app/containers/Chat';
@@ -30,6 +31,10 @@ export class App extends Component {
         this.setState({
             activeConversation: convID
         })
+    }
+
+    componentDidMount() {
+        getUserPermission();
     }
 
     componentWillReceiveProps(props) {
