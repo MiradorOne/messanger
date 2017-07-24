@@ -39,7 +39,7 @@ export class FriendList extends Component {
     }
 
     render() {
-        const searchResult = Object.keys(this.state.conversations)
+        let searchResult = Object.keys(this.state.conversations)
                             .map(value => {
 
                                 return {
@@ -50,6 +50,10 @@ export class FriendList extends Component {
 
                             })
                             .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+
+        searchResult = _.orderBy(searchResult,'lastMessage.timestamp','desc');
+
+        console.log(searchResult)
                             
         const noConversationsMessage = () => {
             return (
@@ -70,7 +74,7 @@ export class FriendList extends Component {
                                 <li key={i} 
                                 className={_.get(this.state.conversations[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
-                                onClick={this.props.selectConversation.bind(this,Object.keys(this.state.conversations)[i])}>
+                                onClick={this.props.selectConversation.bind(this,searchResult[i])}>
 
                                     <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
                                     

@@ -27,7 +27,7 @@ export class App extends Component {
         this.selectConversation = this.selectConversation.bind(this);
     }
 
-    selectConversation(convID) {
+    selectConversation({convID}) {
         this.setState({
             activeConversation: convID
         })
