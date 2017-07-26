@@ -25,7 +25,8 @@ const modalStyles = {
 const inputStyles = {
     padding: '10px 5px',
     display: 'block',
-    margin: '15px 0'
+    margin: '15px 0',
+    width: '100%'
 };
 
 class AuthModal extends Component {
@@ -55,7 +56,8 @@ class AuthModal extends Component {
 
     changeType() {
         this.setState({
-            signIn: !this.state.signIn
+            signIn: !this.state.signIn,
+            error: '',
         })
     }
 
@@ -70,6 +72,11 @@ class AuthModal extends Component {
                 type: 'redirect',
             }).then(() => {
                 browserHistory.push('/')
+            }).catch((err) =>{
+                this.setState({
+                    ...this.state,
+                    error: err
+                })
             })
         } else {
             if (!emailRe.test(email)) {
@@ -122,6 +129,7 @@ class AuthModal extends Component {
         const login = () => {
             return (
                 <div className="modal login" >
+                    <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p>                    
                     <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,'','','',this.state.signIn)}>
                         <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
                         <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
@@ -135,8 +143,8 @@ class AuthModal extends Component {
         const register = () => {
             return (
                 <div className="modal register">
-                    <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff'}}>{this.state.error ? this.state.error.message : ''}</p>
                     <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,this.state.passwordConfirm, this.state.firstName, this.state.lastName,this.state.signIn)}>
+                        <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p>                        
                         <input type="email" title="Email" placeholder="Email" minLength="5" maxLength="50" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>                            
                         <input type="text" pattern="([a-zA-Z]{2,30}\s*)+" title="Max length - 30. Min length - 2 Numbers are not allowed" placeholder="First Name" minLength="2" maxLength="30" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'firstName')}/>
                         <input type="text" pattern="[a-zA-Z]{2,45}" title="Max length - 45. Min length - 2. Numbers are not allowed" placeholder="Last Name" minLength="2" maxLength="45" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'lastName')}/>
