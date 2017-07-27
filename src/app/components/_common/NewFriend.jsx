@@ -1,12 +1,15 @@
 import React from 'react';
+import userPicutre from '../../../static/images/user-image.png'
 
 const NewFriend = ({firstName, id, lastName, startConversation, email}) => {
 	return (
 		<div className="New-Friend">
-			<div className="fisrtName">{firstName}</div>
-			<div className="SecondName">{lastName}</div>
-			<div className="email">{email}</div>
-			<hr></hr>
+			<img src={userPicutre} alt=""/>
+			<div className="info">
+				<div className="first-name">{firstName}</div>
+				<div className="second-name">{lastName}</div>
+				<div className="email">{email}</div>
+			</div>
 			<div className="StartConversation" onClick={startConversation.bind(this,{
 				firstName,
 				lastName,
@@ -14,7 +17,7 @@ const NewFriend = ({firstName, id, lastName, startConversation, email}) => {
 				id
 			})}> Start <span>&#8594;</span></div>
 
-</div>
+		</div>
 	);
 };
 

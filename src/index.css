@@ -184,7 +184,8 @@ ul {
   background-image: url("../src/static/images/icons/add-user-icon.png");
   background-repeat: no-repeat;
   background-position: center;
-  margin-left: 83px;
-  vertical-align: middle; }
+  vertical-align: middle;
+  float: right;
+  margin-right: 5px; }
 
 /*# sourceMappingURL=index.css.map */

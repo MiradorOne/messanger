@@ -9,9 +9,10 @@ const popupStyles = {
 	position: 'absolute',
 	zIndex: '10',
 	width: '100%',
+	minWidth: '320px',
 	background: '#fff',
-	top: '25px',
-	left: '230px',
+	top: '15px',
+	left: '100%',
 	padding: '10px 5px',
 	borderRadius: '5px'
 }
