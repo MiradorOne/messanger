@@ -3,7 +3,6 @@ import '../../../styles/components/ChatTopBar.css';
 import { firebaseConnect, pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import * as firebase from 'firebase';
-import Typist from 'react-typist';
 
 class ChatTopBar extends Component {
     constructor(){
