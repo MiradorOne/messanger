@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import '../../../styles/components/EnterMessage.css';
 import * as firebase from 'firebase';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firebaseConnect, pathToJS } from 'react-redux-firebase';
+import { connect } from 'react-redux';
 
 class EnterMessage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            message: ''
+            message: '',
         }
     }
 
@@ -33,9 +34,33 @@ class EnterMessage extends Component {
     }
 
     handleChange(e) {
+        const uid = this.props.auth.uid;
+        let currentUserIndex = '';
+
+         this.props.firebase.ref(`/conversations/${this.props.currentConversation}/users`).once('value',function(snapshot,) { //Get current user index from conversation
+             
+            const convUsers = snapshot.val();
+
+            Object.keys(convUsers).map(value => {
+                if (convUsers[value].id === uid) {
+                    currentUserIndex = value;
+                }
+            })
+             
+        });
+        
+        this.props.firebase.update(`/conversations/${this.props.currentConversation}/users/${currentUserIndex}/`,{isTyping: true}) //Set directly in this active conversation user typing status
+        
         this.setState({
-            message: e.target.value
+            message: e.target.value,
         })
+
+        const self = this;
+
+        setTimeout(function() {
+            self.props.firebase.update(`/conversations/${self.props.currentConversation}/users/${currentUserIndex}/`,{isTyping: false}) 
+        },3500)
+
     }
 
     handleClick() {
@@ -67,4 +92,10 @@ class EnterMessage extends Component {
     }
 }
 
-export default firebaseConnect()(EnterMessage);
+const wrapper = firebaseConnect()(EnterMessage);
+
+export default connect(
+    ({ firebase }) => ({
+        auth: pathToJS(firebase, 'auth'),
+    })
+)(wrapper);

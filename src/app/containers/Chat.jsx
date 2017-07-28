@@ -11,8 +11,8 @@ import _ from 'lodash';
 import '../../styles/containers/Chat.css';
 
 export default class Chat extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             messages: [],
@@ -60,7 +60,7 @@ export default class Chat extends Component {
 
         return (
             <div className="container Chat">
-                <ChatTopBar />
+                <ChatTopBar activeConversation={this.props.activeConversation}/>
                 <div className="messages" ref='scroll'>
                     {messages.length > 0 ? messages : (<div style={{
                         position: 'absolute',
