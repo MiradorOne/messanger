@@ -12,6 +12,13 @@ class EnterMessage extends Component {
             message: '',
             typingTimer: 0,
             doneTypingInterval: 5000,
+            currentUserConvIndex: 0,
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.currentConversation && nextProps.currenConversation !== this.props.currentConversation) { // Change status of previous conv when user change active conversation
+            this.props.firebase.update(`/conversations/${this.props.currentConversation}/users/${this.state.currentUserConvIndex}/`,{isTyping: false})
         }
     }
 
@@ -51,6 +58,10 @@ class EnterMessage extends Component {
             })
 
         });
+
+        this.setState({
+            currentUserConvIndex: currentUserIndex,
+        })
 
         this.props.firebase.update(`/conversations/${this.props.currentConversation}/users/${currentUserIndex}/`,{isTyping: true}) //Set directly in this active conversation user typing status
 
