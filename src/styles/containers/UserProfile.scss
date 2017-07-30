@@ -1,0 +1,70 @@
+$border-color: rgba(224, 228, 234, 1);
+
+.User-Profile {
+  background: #fff;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100%;
+
+  .container {
+    padding: 30px 0;
+  }
+
+  .topbar {
+    min-height: 60px;
+    border-bottom: 1px solid $border-color;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    line-height: 60px;
+    a {
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding-left:20px;
+      &:before {
+        content: '\2190 ';
+        font-size: 21px;
+      }
+    }
+  }
+
+  .full-name {
+    font-weight: 300;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 10px;
+  }
+
+  .info-list {
+
+    input {
+      text-align: right;
+      font-size: 16px;
+    }
+    li {
+      padding: 10px 0;
+      font-size:13px;
+      font-weight: lighter;
+      max-width: 50%;
+
+      span {
+        font-weight: 400;
+        padding-left: 15px;
+        float: right;
+        display: inline-block;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .profile-picture {
+    text-align: center;
+    img {
+      width: 150px;
+      border-radius:50%;
+      height: auto;
+    }
+  }
+}

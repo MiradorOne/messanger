@@ -130,6 +130,15 @@ ul {
 	@include span-columns(10 of 24, block-collapse);
 }
 
+.User-Profile {
+	.profile-picture {
+		@include span-columns(4 of 12);
+	}
+	.profile-info {
+		@include span-columns(8 of 12);
+	}
+}
+
 .Enter-Message, .Chat-Messages {
 	@include fill-parent();
 }

@@ -135,6 +135,21 @@ ul {
   .Chat:last-child {
     width: 40.98703%; }
 
+.User-Profile .profile-picture {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 31.76157%; }
+  .User-Profile .profile-picture:last-child {
+    margin-right: 0; }
+.User-Profile .profile-info {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 65.88078%; }
+  .User-Profile .profile-info:last-child {
+    margin-right: 0; }
+
 .Enter-Message, .Chat-Messages {
   width: 100%; }
 
@@ -155,6 +170,26 @@ ul {
 .icon-call {
   background-image: url("./static/images/icons/call.png");
   width: 23px; }
+
+.icon-edit {
+  background-image: url("./static/images/icons/edit.png");
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 4px;
+  left: 15px;
+  cursor: pointer; }
+  .icon-edit:hover {
+    background-image: url("./static/images/icons/edit-hover.png"); }
+
+.icon-edit-active {
+  background-image: url("./static/images/icons/edit-hover.png");
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 4px;
+  left: 15px;
+  cursor: pointer; }
 
 .icon-favourite {
   background-image: url("./static/images/icons/favourite.png"); }
