@@ -19,7 +19,23 @@ class EnterMessage extends Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.currentConversation && nextProps.currenConversation !== this.props.currentConversation) { // Change status of previous conv when user change active conversation
             this.props.firebase.update(`/conversations/${this.props.currentConversation}/users/${this.state.currentUserConvIndex}/`,{isTyping: false})
+
+            if (this.state.message.length > 0) {
+
+                localStorage.setItem(`${this.props.currentConversation}`,JSON.stringify({message: this.state.message}))
+
+                this.setState({
+                    message: '',
+                })
+
+            } else {
+                localStorage.removeItem(`${this.props.currentConversation}`)
+            }
         }
+        const localStorageObj = JSON.parse(localStorage.getItem(`${nextProps.currentConversation}`)) || '';
+        this.setState({
+            message: localStorageObj.message || ''
+        })
     }
 
     handleKeyPress(e) {
@@ -100,7 +116,7 @@ class EnterMessage extends Component {
                     <i className="icon icon-attach"/>
                 </div>
                 <div className="enter-field">
-                    <input type="text" placeholder="Type your message" className="input-default" 
+                    <input type="text" placeholder="Type your message" className="input-default" value={this.state.message}
                     onChange={this.handleChange.bind(this)} onKeyUp={this.keyUpHandler.bind(this)} onKeyDown={this.keyDownHandler.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}/>
                 </div>
                 <div className="emoji">
