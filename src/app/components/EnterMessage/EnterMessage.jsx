@@ -10,6 +10,8 @@ class EnterMessage extends Component {
 
         this.state = {
             message: '',
+            typingTimer: 0,
+            doneTypingInterval: 5000,
         }
     }
 
@@ -33,12 +35,13 @@ class EnterMessage extends Component {
         }
     }
 
-    handleChange(e) {
+    keyUpHandler() {
         const uid = this.props.auth.uid;
         let currentUserIndex = '';
+        clearTimeout(this.state.typingTimer);
 
-         this.props.firebase.ref(`/conversations/${this.props.currentConversation}/users`).once('value',function(snapshot,) { //Get current user index from conversation
-             
+        this.props.firebase.ref(`/conversations/${this.props.currentConversation}/users`).once('value',function(snapshot,) { //Get current user index from conversation
+
             const convUsers = snapshot.val();
 
             Object.keys(convUsers).map(value => {
@@ -46,21 +49,27 @@ class EnterMessage extends Component {
                     currentUserIndex = value;
                 }
             })
-             
+
         });
-        
+
         this.props.firebase.update(`/conversations/${this.props.currentConversation}/users/${currentUserIndex}/`,{isTyping: true}) //Set directly in this active conversation user typing status
-        
-        this.setState({
-            message: e.target.value,
-        })
 
         const self = this;
 
-        setTimeout(function() {
-            self.props.firebase.update(`/conversations/${self.props.currentConversation}/users/${currentUserIndex}/`,{isTyping: false}) 
-        },3500)
+        self.state.typingTimer = setTimeout(function () {
+            self.props.firebase.update(`/conversations/${self.props.currentConversation}/users/${currentUserIndex}/`,{isTyping: false})
 
+        }, self.state.doneTypingInterval)
+    }
+
+    keyDownHandler() {
+        clearTimeout(this.state.typingTimer);
+    }
+
+    handleChange(e) {
+        this.setState({
+            message: e.target.value,
+        })
     }
 
     handleClick() {
@@ -81,7 +90,7 @@ class EnterMessage extends Component {
                 </div>
                 <div className="enter-field">
                     <input type="text" placeholder="Type your message" className="input-default" 
-                    onChange={this.handleChange.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}/>
+                    onChange={this.handleChange.bind(this)} onKeyUp={this.keyUpHandler.bind(this)} onKeyDown={this.keyDownHandler.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}/>
                 </div>
                 <div className="emoji">
                     <i className="icon icon-emoji"/>
