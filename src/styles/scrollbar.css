@@ -12,9 +12,8 @@
   background-color: rgba(0, 0, 0, 0.4); }
 
 .Chat .messages {
-  overflow-y: scroll;
-  max-height: 70%; }
+  overflow-y: scroll; }
 .Chat ::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.45); }
+  background-color: #0084ff; }
 
 /*# sourceMappingURL=scrollbar.css.map */

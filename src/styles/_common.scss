@@ -128,6 +128,9 @@ ul {
 
 .Chat {
 	@include span-columns(10 of 24, block-collapse);
+	display: flex;
+	flex-basis: 100%;
+	flex-direction: column;
 }
 
 .User-Profile {

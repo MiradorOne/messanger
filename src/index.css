@@ -131,7 +131,10 @@ ul {
 .Chat {
   float: left;
   display: block;
-  width: 42.15212%; }
+  width: 42.15212%;
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column; }
   .Chat:last-child {
     width: 40.98703%; }
 

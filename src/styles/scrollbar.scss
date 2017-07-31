@@ -21,9 +21,8 @@
 .Chat {
 	.messages {
 		overflow-y: scroll;
-		max-height: 70%;
 	}
 	::-webkit-scrollbar-thumb {
-		background-color:  rgba(255,255,255,0.45);
+		background-color:  rgba(0,132,255,1);
 	}
 }

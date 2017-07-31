@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ChatTopBar from '../components/ChatTopBar/ChatTopBar';
 import EnterMessage from '../components/EnterMessage/EnterMessage';
 import Message from '../components/_common/Message';
+import Loading from '../components/_common/Loading';
 import * as firebase from 'firebase';
 import { firebaseConnect, pathToJS, dataToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
@@ -31,7 +32,6 @@ export default class Chat extends Component {
         if (convID && convID !== 'null') {
             const ref = firebase.database().ref(`/conversations/${convID}/messages`);
             ref.on('value',function(snapshot) {
-                console.log(snapshot.val())
                 const object = snapshot.val();
 
                 if (object && object !== "null") {
@@ -72,9 +72,10 @@ export default class Chat extends Component {
                         top: '50%',
                         left: '50%',
                         transform: 'translateY(-50%) translateX(-50%)'
-                    }}>Send your first message!</div>)}
+                    }}>{messages.length === 0 && this.props.activeConversation ? <Loading /> : 'Select conversation'}</div>)}
                 </div>
-                <EnterMessage currentConversation={this.props.activeConversation}/>
+                
+                {messages.length > 0 ? <EnterMessage currentConversation={this.props.activeConversation}/> : ''}
             </div>
         )
     }

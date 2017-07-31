@@ -10,7 +10,8 @@ const messageStyles = {
     fontWeight: '300',
     borderRadius: '5px',
     maxWidth: '405px',
-    flexBasis: '100%'
+    flexBasis: '100%',
+    wordWrap: 'break-word'
 };
 
 const rowStyles = {
@@ -29,10 +30,6 @@ const imageStyles = {
 };
 
 export default class Message extends Component {
-
-    shouldComponentUpdate() {
-        return false;
-    }
 
     render() {
         const messageType = () => {
