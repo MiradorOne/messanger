@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import UserImage from '../../../static/images/user-image.png';
 import * as firebase from 'firebase';
 import { detectTime } from '../../../utils/timeDetector'
@@ -28,32 +28,35 @@ const imageStyles = {
     height: '35px',
 };
 
-const Message = ({data}) => {
+export default class Message extends Component {
 
-    const messageType = () => {
-        return data.from === firebase.auth().currentUser.email ? 'message-row my-message' : 'messsage-row';
-    };
+    shouldComponentUpdate() {
+        return false;
+    }
 
-    return (
-        <div className={messageType()} style={rowStyles}>
-            <div className="user" style={userStyles}>
-                <img src={UserImage} alt="User" style={imageStyles}/>
+    render() {
+        const messageType = () => {
+            return this.props.data.from === firebase.auth().currentUser.email ? 'message-row my-message' : 'messsage-row';
+        };
+        return (
+            <div className={messageType()} style={rowStyles}>
+                <div className="user" style={userStyles}>
+                    <img src={UserImage} alt="User" style={imageStyles}/>
+                </div>
+                <div className="message" style={messageStyles}>
+                    <p>
+                        {this.props.data.value}
+                    </p>
+                </div>
+                <span className="timestamp" style={{
+                    fontSize:'11px',
+                    color: '#a5a9ae',
+                    display: 'block',
+                    width: '70px',
+                    paddingRight: '.3em',
+                    paddingLeft: '0.6em'
+                }}>{detectTime(this.props.data.timestamp)}</span>
             </div>
-            <div className="message" style={messageStyles}>
-                <p>
-                    {data.value}
-                </p>
-            </div>
-            <span className="timestamp" style={{
-                fontSize:'11px',
-                color: '#a5a9ae',
-                display: 'block',
-                width: '70px',
-                paddingRight: '.3em',
-                paddingLeft: '0.6em'
-            }}>{detectTime(data.timestamp)}</span>
-        </div>
-    )
-};
-
-export default Message;
+        )
+    }
+}

@@ -29,8 +29,9 @@ export default class Chat extends Component {
         let self = this;
 
         if (convID && convID !== 'null') {
-            firebase.database().ref(`/conversations/${convID}/messages`).on('value',function(snapshot) {
-
+            const ref = firebase.database().ref(`/conversations/${convID}/messages`);
+            ref.on('value',function(snapshot) {
+                console.log(snapshot.val())
                 const object = snapshot.val();
 
                 if (object && object !== "null") {
@@ -48,7 +49,9 @@ export default class Chat extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getMessages(nextProps.activeConversation);
+        if (nextProps.activeConversation !== this.props.activeConversation) {
+            this.getMessages(nextProps.activeConversation);
+        }
     }
 
     render() {

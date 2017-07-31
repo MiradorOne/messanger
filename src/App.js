@@ -13,6 +13,7 @@ import Inbox from './app/containers/Inbox';
 import FriendList from './app/containers/FriendList';
 import Chat from './app/containers/Chat';
 import ProfileBar from './app/containers/ProfileBar';
+import FriendChatWrapper from './app/components/FriendChatWrapper';
 
 export class App extends Component {
     constructor() {
@@ -21,16 +22,8 @@ export class App extends Component {
 
         this.state = {
             currentUser: '',
-            activeConversation: null,
         };
 
-        this.selectConversation = this.selectConversation.bind(this);
-    }
-
-    selectConversation({convID}) {
-        this.setState({
-            activeConversation: convID
-        })
     }
 
     componentDidMount() {
@@ -52,7 +45,7 @@ export class App extends Component {
     componentWillUnmount() {
         if (this.state.currentUser) {
             this.props.firebase.update(`/users/${this.state.currentUser}/`, {isOnline: false});
-        }      
+        }           
     }
 
     render() {
@@ -62,12 +55,7 @@ export class App extends Component {
 
                 <div className="App-header">
                     <Inbox />
-                    <FriendList currentUser={this.props.auth && this.props.auth.uid}
-                    activeConversation={this.state.activeConversation} 
-                    selectConversation={this.selectConversation}/>
-
-                    <Chat activeConversation={this.state.activeConversation}/>
-                    
+                    <FriendChatWrapper/>
                     <ProfileBar currentUser={this.state.currentUser}/>
                 </div>
             </div>
