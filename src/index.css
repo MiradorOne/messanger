@@ -152,6 +152,22 @@ ul {
   width: 65.88078%; }
   .User-Profile .profile-info:last-child {
     margin-right: 0; }
+.User-Profile .row {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%; }
+  .User-Profile .row:last-child {
+    margin-right: 0; }
+  .User-Profile .row .btn {
+    position: relative;
+    left: 58%;
+    border: 1px solid #e0e4ea;
+    background-color: #e0e4ea;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    margin-top: 20px; }
 
 .Enter-Message, .Chat-Messages {
   width: 100%; }

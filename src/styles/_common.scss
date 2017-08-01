@@ -140,6 +140,20 @@ ul {
 	.profile-info {
 		@include span-columns(8 of 12);
 	}
+
+    .row {
+      @include span-columns(12 of 12);
+      .btn {
+        position: relative;
+        left:58%;
+        border: 1px solid #e0e4ea;
+        background-color: #e0e4ea;
+        font-family:'Roboto', sans-serif;
+        font-size: 18px;
+        font-weight: 300;
+        margin-top: 20px;
+      }
+    }
 }
 
 .Enter-Message, .Chat-Messages {
