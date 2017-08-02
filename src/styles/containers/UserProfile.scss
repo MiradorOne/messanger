@@ -4,9 +4,45 @@ $border-color: rgba(224, 228, 234, 1);
   background: #fff;
   font-family: 'Roboto', sans-serif;
   min-height: 100%;
+  *::-webkit-input-placeholder {
+    color:    #000;
+  }
+  *:-moz-placeholder {
+    color:    #000;
+    opacity:  1;
+  }
+  *::-moz-placeholder {
+    color:    #000;
+    opacity:  1;
+  }
+  *:-ms-input-placeholder {
+    color:    #000;
+  }
 
   .container {
     padding: 30px 0;
+  }
+
+  .input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+
+    & + label {
+      font-size: 16px;
+      font-weight: 300;
+      color: #000;
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      cursor: pointer;
+      border: 1px solid #000;
+      max-width: 180px;
+      padding:10px 0;
+    }
   }
 
   .topbar {
@@ -55,6 +91,7 @@ $border-color: rgba(224, 228, 234, 1);
         float: right;
         display: inline-block;
         font-size: 16px;
+        color: rgba(41, 48, 55, 0.8);
       }
     }
   }

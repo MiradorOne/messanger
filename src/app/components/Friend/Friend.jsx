@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import {detectTime} from '../../../utils/timeDetector'
 
 import '../../../styles/components/Friend.css';
-import UserImage from '../../../static/images/user-image.png';
+import Placeholder from '../../../static/images/avatar-placeholder.png';
 
 class Friend extends Component {
     constructor(props){
@@ -23,11 +23,33 @@ class Friend extends Component {
         })
     }
 
+    componentWillUpdate(nexProps) {
+        this.getPicture();
+    }
+
+    getPicture() {
+        const self = this;
+        firebase.database().ref(`/users/${this.props.userID}/picture/`).once('value', (snapshot) => {
+            const pictureKey = Object.keys(snapshot.val())[0]
+            const pictureURL = snapshot.val()[pictureKey].downloadURL;
+
+            self.setState({
+                pictureURL 
+            })
+           
+        })
+     
+    }
+
     render() {
         return (
             <div className={`Friend ${this.state.isOnline ? 'is-online' : ''}`} >
                 <div className="profile-img">
-                    <img src={UserImage} alt=""/>
+                    <img style={{
+                        maxWidth: '55px',
+                        height: 'auto',
+                        borderRadius: '50%',
+                    }} src={this.state.pictureURL || Placeholder} alt=""/>                
                 </div>
                 <div className="content" style={{overflow: 'hidden', whiteSpace:'nowrap', textOverflow:'ellipsis'}}>
                     <div className="username">

@@ -101,7 +101,12 @@ class AuthModal extends Component {
                 {
                     email,
                     firstName,
-                    lastName
+                    lastName,
+                    picture: {
+                        '-ac': {
+                            downloadURL: 'https://firebasestorage.googleapis.com/v0/b/messanger-74db7.appspot.com/o/users%2Favatar-placeholder.png?alt=media&token=82e3afd0-c7e0-4567-8989-bde61ddf72db'
+                        }
+                    }
                 }
                 ).then(() => {
                     browserHistory.push('/')
