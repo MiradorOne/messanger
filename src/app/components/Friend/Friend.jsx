@@ -12,6 +12,7 @@ class Friend extends Component {
             isOnline: false 
         }
         this.watchOnlineStatus();
+        this.getPicture(this.props.userID);        
     }
 
     watchOnlineStatus() {
@@ -24,18 +25,20 @@ class Friend extends Component {
     }
 
     componentWillUpdate(nexProps) {
-        this.getPicture();
     }
 
-    getPicture() {
+    getPicture(id) {
         const self = this;
-        firebase.database().ref(`/users/${this.props.userID}/picture/`).once('value', (snapshot) => {
-            const pictureKey = Object.keys(snapshot.val())[0]
-            const pictureURL = snapshot.val()[pictureKey].downloadURL;
+        
+        firebase.database().ref(`/users/${id}/picture/`).once('value', (snapshot) => {
+            if (snapshot.val()) {
+                const pictureKey = Object.keys(snapshot.val())[0]
+                const pictureURL = snapshot.val()[pictureKey].downloadURL;
 
-            self.setState({
-                pictureURL 
-            })
+                self.setState({
+                    pictureURL 
+                })
+            }
            
         })
      
