@@ -18,7 +18,10 @@ import FriendChatWrapper from './app/components/FriendChatWrapper';
 export class App extends Component {
     constructor() {
         super();
-        initDB();
+        try {
+            initDB();
+        } catch (e) {
+        }  
 
         this.state = {
             currentUser: '',
@@ -56,7 +59,7 @@ export class App extends Component {
                 <div className="App-header">
                     <Inbox />
                     <FriendChatWrapper/>
-                    <ProfileBar currentUser={this.state.currentUser}/>
+                    <ProfileBar currentUser={this.state.currentUser}/> 
                 </div>
             </div>
         );
