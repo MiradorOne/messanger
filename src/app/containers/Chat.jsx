@@ -17,6 +17,7 @@ export default class Chat extends Component {
 
         this.state = {
             messages: [],
+            isLoading: false
         }
     }
 
@@ -28,6 +29,9 @@ export default class Chat extends Component {
 
     getMessages(convID) {
         let self = this;
+        self.setState({
+            isLoading: true 
+        })
 
         if (convID && convID !== 'null') {
             const ref = firebase.database().ref(`/conversations/${convID}/messages`);
@@ -36,11 +40,11 @@ export default class Chat extends Component {
 
                 if (object && object !== "null") {
                     self.setState({
-                        messages: object 
+                        messages: object,
                     })
                 } else {
                     self.setState({
-                        messages: [] 
+                        messages: [],
                     })
                 }
 
@@ -51,6 +55,9 @@ export default class Chat extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.activeConversation !== this.props.activeConversation) {
             this.getMessages(nextProps.activeConversation);
+            setTimeout(() => { 
+                this.setState({isLoading: false})
+            },1500)
         }
     }
 
@@ -61,10 +68,22 @@ export default class Chat extends Component {
             )
         });
 
+        const firstMessage = () => {
+            if (this.state.isLoading) {
+                return (
+                    <Loading />
+                )
+            } else {
+                return (
+                    <p>Send your first message</p>
+                )
+            }
+        }
+
         return (
             <div className="container Chat">
                 <ChatTopBar activeConversation={this.props.activeConversation}/>
-                <div className="messages" ref='scroll'>
+                <div className="messages" style={{minHeight: 'calc(100% - 160px)', marginBottom: '15px'}} ref='scroll'>
                     {messages.length > 0 ? messages : (<div style={{
                         position: 'absolute',
                         fontSize:'16px', 
@@ -72,10 +91,10 @@ export default class Chat extends Component {
                         top: '50%',
                         left: '50%',
                         transform: 'translateY(-50%) translateX(-50%)'
-                    }}>{messages.length === 0 && this.props.activeConversation ? <Loading /> : 'Select conversation'}</div>)}
+                    }}>{firstMessage()}</div>)}
                 </div>
                 
-                {messages.length > 0 ? <EnterMessage currentConversation={this.props.activeConversation}/> : ''}
+                {messages.length > 0 && this.props.activeConversation ? <EnterMessage currentConversation={this.props.activeConversation}/> : <EnterMessage currentConversation={this.props.activeConversation}/>}
             </div>
         )
     }

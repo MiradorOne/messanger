@@ -111,7 +111,7 @@ class EnterMessage extends Component {
 
     render() {
         return (
-            <div className="Enter-Message">
+            <div className="Enter-Message" style={{position: 'relative', top: '-15px'}}>
                 <div className="attach">
                     <i className="icon icon-attach"/>
                 </div>
