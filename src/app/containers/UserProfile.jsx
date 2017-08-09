@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../../styles/containers/UserProfile.css';
-// import * as firebase from 'firebase';
 import {browserHistory, Link} from 'react-router';
 import Placeholder from '../../static/images/avatar-placeholder.png';
 import {firebaseConnect, pathToJS} from 'react-redux-firebase';
@@ -78,7 +77,10 @@ class UserProfile extends Component {
         return (
             <div className="User-Profile">
                 <div className="topbar">
-                    <a href="#">Back</a>
+                    <a href="#" onClick={() => {
+                        console.log(this.context)
+                         browserHistory.push('/')
+                        }}>Back</a>
                 </div>
                 <main>
                     <div className="container">
