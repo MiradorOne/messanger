@@ -59,6 +59,30 @@ export default class Chat extends Component {
                 this.setState({isLoading: false})
             },1500)
         }
+        this.getUsersImages(nextProps)        
+    }
+
+    getUsersImages(nextProps) {
+        const currentUserImage = firebase.database().ref(`/users/${nextProps.currentUser}/picture/`).once('value')
+        const selectedUserImage = firebase.database().ref(`/users/${nextProps.selectedUser}/picture/`).once('value')
+
+        Promise.all([currentUserImage, selectedUserImage]).then((snapshots) => {
+            snapshots.map((snapshot) => {
+                console.log(snapshot)
+                let pictureKey = Object.keys(snapshot.val())[0]
+                const pictureURL = snapshot.val()[pictureKey].downloadURL;
+                return pictureURL;
+            })
+            // let pictureKey = Object.keys(snapshot[0].val())[0]
+            // const currentUserPictureURL = snapshot[0].val()[pictureKey].downloadURL;
+            
+            // pictureKey = Object.keys(snapshot[1].val())[0]
+            // const selectedUserPictureURL = snapshot[1].val()[pictureKey].downloadURL;
+            // this.setState({
+            //     currentUserPictureURL,
+            //     selectedUserPictureURL
+            // })
+        })
     }
 
     render() {

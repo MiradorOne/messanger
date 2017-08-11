@@ -9,7 +9,7 @@ class ProfileBar extends Component {
 	render() {
 		return (
 			<div className="container Profile-Bar">
-				<FriendProfile currentUser={this.props.profile}/>
+				<FriendProfile selectedUser={this.props.selectedUser} currentUser={this.props.profile}/>
 			</div>
 		);
 	}

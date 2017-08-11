@@ -72,7 +72,7 @@ export class FriendList extends Component {
                                 <li key={i} 
                                 className={_.get(this.state.conversations[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
-                                onClick={this.props.selectConversation.bind(this,searchResult[i])}>
+                                onClick={this.props.selectConversation.bind(this,searchResult[i], {userID: value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id})}>
 
                                     <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
                                     

@@ -12,7 +12,6 @@ import { getUserPermission } from './utils/notifications'
 import Inbox from './app/containers/Inbox';
 import FriendList from './app/containers/FriendList';
 import Chat from './app/containers/Chat';
-import ProfileBar from './app/containers/ProfileBar';
 import FriendChatWrapper from './app/components/FriendChatWrapper';
 
 export class App extends Component {
@@ -58,8 +57,7 @@ export class App extends Component {
 
                 <div className="App-header">
                     <Inbox />
-                    <FriendChatWrapper/>
-                    <ProfileBar currentUser={this.state.currentUser}/> 
+                    <FriendChatWrapper currentUser={this.state.currentUser}/>
                 </div>
             </div>
         );

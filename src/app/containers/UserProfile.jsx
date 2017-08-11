@@ -12,6 +12,11 @@ class UserProfile extends Component {
 
         this.state = {
             isEditable: false,
+            nickname: '',
+            telephone: '',
+            date: '',
+            gender: '',
+            language: '',
         }
 
         this.updateProfile = this.updateProfile.bind(this);
@@ -26,11 +31,11 @@ class UserProfile extends Component {
 
     updateProfile() {
         this.props.firebase.update(`users/${this.props.auth.uid}/`, {
-            nickname: this.state.nickname,
-            telephone: this.state.telephone,
-            date: this.state.date,
-            gender: this.state.gender,
-            language: this.state.language,
+            nickname: this.state.nickname.length > 0 ? this.state.nickname : this.props.profile.nickname,
+            telephone: this.state.telephone.length ? this.state.telephone : this.props.profile.telephone,
+            date: this.state.date.length ? this.state.date : this.props.profile.date,
+            gender: this.state.gender.length ? this.state.gender : this.props.profile.gender,
+            language: this.state.language.length ? this.state.language : this.props.profile.language,
         }).then(() => {
             this.setState({
                 isEditable: false
