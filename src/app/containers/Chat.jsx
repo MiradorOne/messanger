@@ -27,6 +27,15 @@ export default class Chat extends Component {
         messageNode.scrollIntoView(false);
     }
 
+    shouldComponentUpdate(nextProps, state) {
+        if (_.isEqual(this.props, nextProps) && _.isEqual(this.state, state)) {
+            return false;
+        } else {
+            return true;                   
+        }
+        
+    }
+
     getMessages(convID) {
         let self = this;
         self.setState({
@@ -63,32 +72,47 @@ export default class Chat extends Component {
     }
 
     getUsersImages(nextProps) {
-        const currentUserImage = firebase.database().ref(`/users/${nextProps.currentUser}/picture/`).once('value')
-        const selectedUserImage = firebase.database().ref(`/users/${nextProps.selectedUser}/picture/`).once('value')
-
-        Promise.all([currentUserImage, selectedUserImage]).then((snapshots) => {
-            snapshots.map((snapshot) => {
-                console.log(snapshot)
-                let pictureKey = Object.keys(snapshot.val())[0]
-                const pictureURL = snapshot.val()[pictureKey].downloadURL;
-                return pictureURL;
-            })
-            // let pictureKey = Object.keys(snapshot[0].val())[0]
-            // const currentUserPictureURL = snapshot[0].val()[pictureKey].downloadURL;
-            
-            // pictureKey = Object.keys(snapshot[1].val())[0]
-            // const selectedUserPictureURL = snapshot[1].val()[pictureKey].downloadURL;
-            // this.setState({
-            //     currentUserPictureURL,
-            //     selectedUserPictureURL
-            // })
+        
+        firebase.database().ref(`/users/${nextProps.currentUser}/picture/`).once('value', (snapshot) => {
+            let pictureKey = '';
+            let pictureURL = '';
+            let currentUserImage = '';        
+			if (snapshot.val()) {
+                pictureKey = Object.keys(snapshot.val())[0]
+                currentUserImage = snapshot.val()[pictureKey].downloadURL;
+                this.setState({
+                    currentUserImage: currentUserImage
+                })
+            } else {
+                this.setState({
+                    currentUserImage: null
+                })
+            }
         })
+
+        firebase.database().ref(`/users/${nextProps.selectedUser}/picture/`).once('value', (snapshot) => {
+            let pictureKey = '';
+            let pictureURL = '';
+            let selectedUserImage = '';        
+			if (snapshot.val()) {
+                pictureKey = Object.keys(snapshot.val())[0]
+                selectedUserImage = snapshot.val()[pictureKey].downloadURL;
+                this.setState({
+                    friendPictureURL: selectedUserImage 
+                })
+            } else {
+                this.setState({
+                    friendPictureURL: null
+                })
+            }
+        })
+
     }
 
     render() {
         const messages = Object.keys(this.state.messages).map((value,i) => {
             return (
-                <Message key={i} data={this.state.messages[value]}/>
+                <Message key={i} friendImage={this.state.friendPictureURL} currentUserImage={this.state.currentUserImage} data={this.state.messages[value]}/>
             )
         });
 

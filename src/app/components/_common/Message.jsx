@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UserImage from '../../../static/images/user-image.png';
+import Placeholder from '../../../static/images/avatar-placeholder.png';
 import * as firebase from 'firebase';
 import { detectTime } from '../../../utils/timeDetector'
 
@@ -27,6 +27,7 @@ const userStyles = {
 const imageStyles = {
     width: '35px',
     height: '35px',
+    borderRadius: '50%'
 };
 
 export default class Message extends Component {
@@ -38,7 +39,7 @@ export default class Message extends Component {
         return (
             <div className={messageType()} style={rowStyles}>
                 <div className="user" style={userStyles}>
-                    <img src={UserImage} alt="User" style={imageStyles}/>
+                    <img src={messageType() === 'message-row my-message' ? this.props.currentUserImage : (this.props.friendImage ? this.props.friendImage : Placeholder)} alt="User" style={imageStyles}/>
                 </div>
                 <div className="message" style={messageStyles}>
                     <p>
