@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import {detectTime} from '../../../utils/timeDetector'
+import _ from 'lodash';
 
 import '../../../styles/components/Friend.css';
 import Placeholder from '../../../static/images/avatar-placeholder.png';
@@ -9,10 +10,19 @@ class Friend extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isOnline: false 
+            isOnline: false,
         }
         this.watchOnlineStatus();
         this.getPicture(this.props.userID);        
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!_.isEqual(this.props.userID, nextProps.userID)) {
+            this.setState({
+                pictureURL: ''
+            })
+            this.getPicture(nextProps.userID);
+        }
     }
 
     watchOnlineStatus() {
@@ -22,9 +32,6 @@ class Friend extends Component {
                  isOnline: snapshot.val() || false
              })
         })
-    }
-
-    componentWillUpdate(nexProps) {
     }
 
     getPicture(id) {
