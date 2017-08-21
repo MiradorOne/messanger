@@ -7,6 +7,8 @@ import _ from 'lodash';
 import '../../styles/containers/FriendList.css';
 import Search from '../components/Search/Search';
 import Friend from '../components/Friend/Friend';
+import { getUnreadMessages, getAllMessages } from '../actions/messagesActions';
+import { changeMessageTypeToAll } from '../actions/ui';
 
 const KEYS_TO_FILTERS = ['users.firstName', 'users.lastName', 'users.email'];
 
@@ -19,16 +21,25 @@ export class FriendList extends Component {
             searchTerm: '',
         }
     }
+    
+    componentWillMount() {
+        this.props.dispatch(changeMessageTypeToAll());
+    }
 
-    componentWillReceiveProps({allConversations, profile}) { // Filter all conversations for user conversations
-        const userConversations = _.reduce(profile && profile.conversations, function(result, value, key) {
-            return _.isEqual(value, allConversations[key]) ?
-                result : _.assign(result,{[key]: allConversations[value]}); //TODO: find better approach
-        }, {});
+    componentWillReceiveProps({allConversations, profile, ui, auth, filteredMessages}) { // Filter all conversations for user conversations
+        
+        if (ui.messagesFilter === 'unread' && filteredMessages !== 'null') {
+        } else {                   
+            
+            const userConversations = _.reduce(profile && profile.conversations, function(result, value, key) {
+                return _.isEqual(value, allConversations[key]) ?
+                    result : _.assign(result,{[key]: allConversations[value]}); //TODO: find better approach
+            }, {});
 
-        this.setState({
-            conversations: userConversations,
-        });
+            this.setState({
+                conversations: userConversations,
+            });
+        }
     }
 
 
@@ -98,10 +109,12 @@ const wrappedComponent = firebaseConnect((props,firebase) => [
 ])(FriendList);
 
 export default connect(
-    ({ firebase }) => ({
+    ({ firebase, filteredMessages, ui }) => ({
         allConversations: dataToJS(firebase, 'conversations'),
         profile: pathToJS(firebase, 'profile'),
-        auth: pathToJS(firebase, 'auth')
+        auth: pathToJS(firebase, 'auth'),
+        ui,
+        filteredMessages: ui.messagesFilter !== 'all' ? filteredMessages : null,
     })
 )(wrappedComponent);
 

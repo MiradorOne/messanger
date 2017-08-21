@@ -51,6 +51,7 @@ class EnterMessage extends Component {
                 from: firebase.auth().currentUser.email,
                 value: messageValue,
                 timestamp: + new Date(),
+                type: 'unread'
             });
             this.setState({
                 message: ''

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Placeholder from '../../../static/images/avatar-placeholder.png';
 import * as firebase from 'firebase';
 import { detectTime } from '../../../utils/timeDetector'
@@ -30,7 +30,7 @@ const imageStyles = {
     borderRadius: '50%'
 };
 
-export default class Message extends Component {
+export default class Message extends PureComponent {
 
     render() {
         const messageType = () => {
