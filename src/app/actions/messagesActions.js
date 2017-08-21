@@ -16,14 +16,12 @@ export function getUnreadMessages(currentUserID) {
                         result : _.assign(result,{[key]: allConversations[value]});
                 }, {});
 
-                let unreadMessages = [];
+                let unreadMessages = {};
                 
                 _.filter(filteredConversations, function(object, conv_key) {
                     _.forOwn(object.messages, (val, key) => {
                         if (val.type) {
-                            unreadMessages.push({
-                                [conv_key]: object
-                            });
+                            unreadMessages[conv_key] = object;
                         }
                     });
                 })

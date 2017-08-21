@@ -3,14 +3,12 @@ import { changeMessageTypeToUnread, changeMessageTypeToAll } from '../../actions
 import {connect} from 'react-redux';
 
 class Navigation extends Component {
-
-
     render() {
         return (
             <div className="Navigation">
                 <ul className="link-group messages-group bottom-border">
-                    <li onClick={() => {this.props.dispatch(changeMessageTypeToAll())}} className="active">All messages</li>
-                    <li onClick={() => {this.props.dispatch(changeMessageTypeToUnread())}}>Unread <span className="count">5</span></li>
+                    <li onClick={() => {this.props.dispatch(changeMessageTypeToAll())}} className={this.props.filter === 'all' ? 'active' : ''}>All messages</li>
+                    <li onClick={() => {this.props.dispatch(changeMessageTypeToUnread())}} className={this.props.filter === 'unread' ? 'active' : ''}>Unread <span className="count"></span></li>
                     {/* <li>Important <span className="count">228</span></li>
                     <li>Drafs <span className="count">66</span></li> */}
                 </ul>
@@ -30,4 +28,10 @@ class Navigation extends Component {
     }
 }
 
-export default connect()(Navigation);
+function mapStateToProps(state) {
+    return {
+        filter: state.ui.messagesFilter
+    }
+}
+
+export default connect(mapStateToProps)(Navigation);

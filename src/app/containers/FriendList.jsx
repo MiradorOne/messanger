@@ -8,7 +8,6 @@ import '../../styles/containers/FriendList.css';
 import Search from '../components/Search/Search';
 import Friend from '../components/Friend/Friend';
 import { getUnreadMessages, getAllMessages } from '../actions/messagesActions';
-import { changeMessageTypeToAll } from '../actions/ui';
 
 const KEYS_TO_FILTERS = ['users.firstName', 'users.lastName', 'users.email'];
 
@@ -17,28 +16,27 @@ export class FriendList extends Component {
         super(props);
 
         this.state = {
-            conversations: [],
             searchTerm: '',
         }
     }
-    
-    componentWillMount() {
-        this.props.dispatch(changeMessageTypeToAll());
-    }
 
-    componentWillReceiveProps({allConversations, profile, ui, auth, filteredMessages}) { // Filter all conversations for user conversations
-        
-        if (ui.messagesFilter === 'unread' && filteredMessages !== 'null') {
-        } else {                   
-            
-            const userConversations = _.reduce(profile && profile.conversations, function(result, value, key) {
-                return _.isEqual(value, allConversations[key]) ?
-                    result : _.assign(result,{[key]: allConversations[value]}); //TODO: find better approach
-            }, {});
+    componentWillReceiveProps({ui, auth}) { // Filter all conversations for user conversations
+        if (auth && auth.uid.length > 0) {
 
-            this.setState({
-                conversations: userConversations,
-            });
+            switch (ui.messagesFilter) {
+                case 'unread': {
+                    if (this.props.ui.messagesFilter !== ui.messagesFilter) {
+                        this.props.dispatch(getUnreadMessages(auth.uid));
+                    }
+                    break;
+                }
+                case 'all': {
+                    if (Object.keys(this.props.filteredMessages).length === 0 || this.props.ui.messagesFilter !== ui.messagesFilter) {
+                        this.props.dispatch(getAllMessages(auth.uid));
+                    }
+                    break;
+                }
+            }
         }
     }
 
@@ -50,17 +48,17 @@ export class FriendList extends Component {
     }
 
     render() {
-        let searchResult = Object.keys(this.state.conversations)
-                            .map(value => {
+        let searchResult = Object.keys(this.props.filteredMessages)
+            .map(value => {
 
-                                return {
-                                    users: _.get(this.state.conversations[value],'users'),
-                                    lastMessage: _.orderBy(_.get(this.state.conversations[value],'messages'),'timestamp','desc')[0],
-                                    convID: value
-                                }
+                return {
+                    users: _.get(this.props.filteredMessages[value],'users'),
+                    lastMessage: _.orderBy(_.get(this.props.filteredMessages[value],'messages'),'timestamp','desc')[0],
+                    convID: value
+                }
 
-                            })
-                            .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+            })
+            .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
         searchResult = _.orderBy(searchResult,'lastMessage.timestamp','desc');
                             
@@ -71,31 +69,30 @@ export class FriendList extends Component {
                 </li>
             )
         };
-
         return (
             <div className="container Friend-List">
                 <Search handleChange={this.handleChange.bind(this)}/>
-                <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px' }}>
+                <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px', position: 'relative' }}>
                     {
-                        Object.keys(this.state.conversations).length === 0 ? noConversationsMessage() :
-                        searchResult.map((value, i) => {
-                            return (
-                                <li key={i} 
-                                className={_.get(this.state.conversations[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
+                        Object.keys(this.props.filteredMessages).length === 0 ? noConversationsMessage() :
+                            searchResult.map((value, i) => {
+                                return (
+                                    <li key={i}
+                                        className={_.get(this.props.filteredMessages[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
-                                onClick={this.props.selectConversation.bind(this,searchResult[i], {userID: value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id})}>
+                                        onClick={this.props.selectConversation.bind(this,searchResult[i], {userID: value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id})}>
 
-                                    <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
-                                    
-                                    lastName={value.users[1].lastName === this.props.profile.lastName ? value.users[0].lastName : value.users[1].lastName}
+                                        <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
 
-                                    userID={value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id}
+                                                lastName={value.users[1].lastName === this.props.profile.lastName ? value.users[0].lastName : value.users[1].lastName}
 
-                                    lastMessage={value.lastMessage ? value.lastMessage : ''}
-                                    />
-                                </li>
-                            )
-                        })
+                                                userID={value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id}
+
+                                                lastMessage={value.lastMessage ? value.lastMessage : ''}
+                                        />
+                                    </li>
+                                )
+                            })
                     }
 
                 </ul>
@@ -114,7 +111,7 @@ export default connect(
         profile: pathToJS(firebase, 'profile'),
         auth: pathToJS(firebase, 'auth'),
         ui,
-        filteredMessages: ui.messagesFilter !== 'all' ? filteredMessages : null,
+        filteredMessages
     })
 )(wrappedComponent);
 
