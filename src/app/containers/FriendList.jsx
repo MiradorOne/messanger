@@ -20,13 +20,13 @@ export class FriendList extends Component {
         }
     }
 
-    componentWillReceiveProps({ui, auth}) { // Filter all conversations for user conversations
+    componentWillReceiveProps({ui, auth, profile}) { // Filter all conversations for user conversations
         if (auth && auth.uid.length > 0) {
 
             switch (ui.messagesFilter) {
                 case 'unread': {
                     if (this.props.ui.messagesFilter !== ui.messagesFilter) {
-                        this.props.dispatch(getUnreadMessages(auth.uid));
+                        this.props.dispatch(getUnreadMessages(auth.uid, profile.email));
                     }
                     break;
                 }
@@ -63,11 +63,19 @@ export class FriendList extends Component {
         searchResult = _.orderBy(searchResult,'lastMessage.timestamp','desc');
                             
         const noConversationsMessage = () => {
-            return (
-                <li className="no-conversation">
-                    You don't have conversations yet! Search friend to start conversation
-                </li>
-            )
+            if (this.props.ui.messagesFilter === 'all') {
+                return (
+                    <li className="no-conversation">
+                        You don't have conversations yet! Search friend to start conversation
+                    </li>
+                )
+            } else {
+                return (
+                    <li className="no-conversation">
+                        No result
+                    </li>
+                )
+            }
         };
         return (
             <div className="container Friend-List">

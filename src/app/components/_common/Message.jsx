@@ -34,10 +34,10 @@ export default class Message extends PureComponent {
 
     render() {
         const messageType = () => {
-            return this.props.data.from === firebase.auth().currentUser.email ? 'message-row my-message' : 'messsage-row';
+            return this.props.data.from === firebase.auth().currentUser.email ? 'message-row my-message' : 'message-row';
         };
         return (
-            <div className={messageType()} style={rowStyles}>
+            <div className={messageType() + `${this.props.data.type === 'unread' ? ' unread' : ''}`} style={rowStyles}>
                 <div className="user" style={userStyles}>
                     <img src={messageType() === 'message-row my-message' ? this.props.currentUserImage : (this.props.friendImage ? this.props.friendImage : Placeholder)} alt="User" style={imageStyles}/>
                 </div>

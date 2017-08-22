@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import _ from 'lodash';
 
-export function getUnreadMessages(currentUserID) {
+export function getUnreadMessages(currentUserID, userEmail) {
     return dispatch => {
 
         firebase.database().ref('/conversations').once('value', (f_snapshot) => {
@@ -20,7 +20,7 @@ export function getUnreadMessages(currentUserID) {
                 
                 _.filter(filteredConversations, function(object, conv_key) {
                     _.forOwn(object.messages, (val, key) => {
-                        if (val.type) {
+                        if (val.type && val.from !== userEmail) {
                             unreadMessages[conv_key] = object;
                         }
                     });
