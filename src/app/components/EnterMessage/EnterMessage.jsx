@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../../../styles/components/EnterMessage.css';
 import * as firebase from 'firebase';
-import { firebaseConnect, pathToJS } from 'react-redux-firebase';
+import { firebaseConnect, pathToJS, dataToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 class EnterMessage extends Component {
     constructor(props) {
@@ -45,6 +46,20 @@ class EnterMessage extends Component {
         }
     }
 
+    makeMessagesAsRead (conv_id) {
+        const self = this;
+        firebase.database().ref(`/conversations/${conv_id}`).once('value', (snapshot) => {
+        }).then((snapshot) => {
+            const data = snapshot.val();
+
+            _.forOwn(data.messages, function(message, key) {
+                if (message.from !== self.props.auth.email && message.type === 'unread') {
+                    firebase.database().ref(`/conversations/${conv_id}/messages/${key}/`).update({ type: ''});
+                } 
+            })   
+        })
+    }
+
     sendMessage(messageValue) {
         if (this.props.currentConversation && this.props.currentConversation !== 'null' && this.state.message.length > 0) {
             this.props.firebase.push(`/conversations/${this.props.currentConversation}/messages`, {
@@ -56,6 +71,7 @@ class EnterMessage extends Component {
             this.setState({
                 message: ''
             })
+            this.makeMessagesAsRead(this.props.currentConversation);
         }
     }
 

@@ -142,7 +142,10 @@ export default class Chat extends Component {
                     }}>{firstMessage()}</div>)}
                 </div>
                 
-                {messages.length > 0 && this.props.activeConversation ? <EnterMessage currentConversation={this.props.activeConversation}/> : <EnterMessage currentConversation={this.props.activeConversation}/>}
+                {messages.length > 0 && this.props.activeConversation ? 
+                <EnterMessage currentConversation={this.props.activeConversation}/> 
+                : 
+                <EnterMessage currentConversation={this.props.activeConversation}/>}
             </div>
         )
     }

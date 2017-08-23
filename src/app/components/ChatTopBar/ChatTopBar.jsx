@@ -66,7 +66,7 @@ class ChatTopBar extends Component {
         return (
             <div className="Chat-TopBar">
                 <div className="status">
-                    <p>{this.state.friendIsTyping ? (`${this.state.friend.firstName} ${this.state.friend.lastName} is typing`) : ''}</p>
+                    {this.state.friend ? <p>{this.state.friendIsTyping ? (`${this.state.friend.firstName} ${this.state.friend.lastName} is typing`) : ''}</p> : ''}
                 </div>
                 {/* <div className="user-actions">
                     <div className="favourite">
