@@ -18,22 +18,34 @@ export class FriendList extends Component {
         this.state = {
             searchTerm: '',
         }
-    }
 
-    componentWillReceiveProps({ui, auth, profile}) { // Filter all conversations for user conversations
-        if (auth && auth.uid.length > 0) {
+        if (props.auth && props.auth.uid.length > 0) {
 
-            switch (ui.messagesFilter) {
+            switch (props.ui.messagesFilter) {
                 case 'unread': {
-                    if (this.props.ui.messagesFilter !== ui.messagesFilter) {
-                        this.props.dispatch(getUnreadMessages(auth.uid, profile.email));
-                    }
+                    props.dispatch(getUnreadMessages(props.auth.uid, props.profile.email));                    
                     break;
                 }
                 case 'all': {
-                    if (Object.keys(this.props.filteredMessages).length === 0 || this.props.ui.messagesFilter !== ui.messagesFilter) {
-                        this.props.dispatch(getAllMessages(auth.uid));
+                    if (Object.keys(props.filteredMessages).length === 0 ) {
+                        props.dispatch(getAllMessages(props.auth.uid));
                     }
+                    break;
+                }
+            }
+        }
+    }
+
+    componentWillReceiveProps({ui, auth, profile}) { 
+        if (ui.messagesFilter !== this.props.ui.messagesFilter) {
+
+            switch (ui.messagesFilter) {
+                case 'unread': {
+                    this.props.dispatch(getUnreadMessages(auth.uid, profile.email));
+                    break;
+                }
+                case 'all': {
+                    this.props.dispatch(getAllMessages(auth.uid));
                     break;
                 }
             }

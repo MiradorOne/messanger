@@ -9,3 +9,14 @@ export function getFilteredMessages (state = {}, action) {
         default: return state
     } 
 }
+
+export function countFilteredMessages ( state = {}, action) {
+    switch (action.type) {
+        case 'COUNT_UNREAD_MESSAGES': {
+            return {
+                unread: action.payload
+            }
+        }
+        default: return state        
+    }
+}
