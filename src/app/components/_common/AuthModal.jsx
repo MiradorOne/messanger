@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { firebaseConnect, pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import {initDB} from '../../../db/index';
 
 const componentStyles = {
     width: '100%',
@@ -40,7 +41,10 @@ class AuthModal extends Component {
             firstName: '',
             lastName: '',
         };
-
+        try{
+            initDB();
+        } catch(e) {
+        }
     }
 
     componentWillReceiveProps(props) {

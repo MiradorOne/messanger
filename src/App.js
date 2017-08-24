@@ -4,14 +4,12 @@ import './styles/scrollbar.css';
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
 import { connect } from 'react-redux'
-import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase'
+import { firebaseConnect, pathToJS } from 'react-redux-firebase'
 import { browserHistory } from 'react-router'
 
 import { initDB } from './db/index';
 import { getUserPermission } from './utils/notifications'
 import Inbox from './app/containers/Inbox';
-import FriendList from './app/containers/FriendList';
-import Chat from './app/containers/Chat';
 import FriendChatWrapper from './app/components/FriendChatWrapper';
 
 export class App extends Component {

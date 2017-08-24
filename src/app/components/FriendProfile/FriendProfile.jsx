@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import '../../../styles/components/FriendProfile.css';
 import Placeholder from '../../../static/images/avatar-placeholder.png';
 import UserMenu from '../_common/userMenu';
-import * as firebase from 'firebase';
-import { firebaseConnect, pathToJS} from 'react-redux-firebase';
+import { firebaseConnect} from 'react-redux-firebase';
 import { connect } from 'react-redux';
 
 const initialState = {

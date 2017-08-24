@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../styles/containers/UserProfile.css';
-import {browserHistory, Link} from 'react-router';
+import {browserHistory} from 'react-router';
 import Placeholder from '../../static/images/avatar-placeholder.png';
 import {firebaseConnect, pathToJS} from 'react-redux-firebase';
 import {connect} from 'react-redux';

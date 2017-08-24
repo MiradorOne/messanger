@@ -25,6 +25,10 @@ class Friend extends Component {
         }
     }
 
+    componentWillUnmount() {
+        firebase.database().ref(`/users/${this.props.userID}/isOnline`).off('value');
+    }
+
     watchOnlineStatus() {
         const self = this;
         firebase.database().ref(`/users/${this.props.userID}/isOnline`).on('value', function(snapshot) {

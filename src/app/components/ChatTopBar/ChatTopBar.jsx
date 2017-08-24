@@ -38,7 +38,8 @@ class ChatTopBar extends Component {
                         friendUserIndex = value;
                         friendUserId = convUsers[value].id;
                     }
-                })
+                    return null;
+                });
              
                 //Get friend name
                 self.props.firebase.ref(`/users/${friendUserId}/`).once('value').then((snapshot) => {

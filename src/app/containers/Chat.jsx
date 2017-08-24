@@ -5,8 +5,6 @@ import EnterMessage from '../components/EnterMessage/EnterMessage';
 import Message from '../components/_common/Message';
 import Loading from '../components/_common/Loading';
 import * as firebase from 'firebase';
-import { firebaseConnect, pathToJS, dataToJS } from 'react-redux-firebase';
-import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import '../../styles/containers/Chat.css';
@@ -75,7 +73,6 @@ export default class Chat extends Component {
         
         firebase.database().ref(`/users/${nextProps.currentUser}/picture/`).once('value', (snapshot) => {
             let pictureKey = '';
-            let pictureURL = '';
             let currentUserImage = '';        
 			if (snapshot.val()) {
                 pictureKey = Object.keys(snapshot.val())[0]
@@ -92,7 +89,6 @@ export default class Chat extends Component {
 
         firebase.database().ref(`/users/${nextProps.selectedUser}/picture/`).once('value', (snapshot) => {
             let pictureKey = '';
-            let pictureURL = '';
             let selectedUserImage = '';        
 			if (snapshot.val()) {
                 pictureKey = Object.keys(snapshot.val())[0]

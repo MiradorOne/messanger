@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../../styles/components/EnterMessage.css';
 import * as firebase from 'firebase';
-import { firebaseConnect, pathToJS, dataToJS } from 'react-redux-firebase';
+import { firebaseConnect, pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -88,6 +88,7 @@ class EnterMessage extends Component {
                 if (convUsers[value].id === uid) {
                     currentUserIndex = value;
                 }
+                return null;
             })
 
         });

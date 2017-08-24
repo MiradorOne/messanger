@@ -17,7 +17,7 @@ export class FriendList extends Component {
 
         this.state = {
             searchTerm: '',
-        }
+        };
 
         if (props.auth && props.auth.uid.length > 0) {
 
@@ -30,6 +30,10 @@ export class FriendList extends Component {
                     if (Object.keys(props.filteredMessages).length === 0 ) {
                         props.dispatch(getAllMessages(props.auth.uid));
                     }
+                    break;
+                }
+                default: {
+                    this.props.dispatch(getAllMessages(props.auth.uid));
                     break;
                 }
             }
@@ -45,6 +49,10 @@ export class FriendList extends Component {
                     break;
                 }
                 case 'all': {
+                    this.props.dispatch(getAllMessages(auth.uid));
+                    break;
+                }
+                default: {
                     this.props.dispatch(getAllMessages(auth.uid));
                     break;
                 }
@@ -89,35 +97,37 @@ export class FriendList extends Component {
                 )
             }
         };
-        return (
-            <div className="container Friend-List">
-                <Search handleChange={this.handleChange.bind(this)}/>
-                <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px', position: 'relative' }}>
-                    {
-                        Object.keys(this.props.filteredMessages).length === 0 ? noConversationsMessage() :
-                            searchResult.map((value, i) => {
-                                return (
-                                    <li key={i}
-                                        className={_.get(this.props.filteredMessages[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
+        if (true) {
+            return (
+                <div className="container Friend-List">
+                    <Search handleChange={this.handleChange.bind(this)}/>
+                    <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px', position: 'relative' }}>
+                        {
+                            Object.keys(this.props.filteredMessages).length === 0 ? noConversationsMessage() :
+                                searchResult.map((value, i) => {
+                                    return (
+                                        <li key={i}
+                                            className={_.get(this.props.filteredMessages[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
-                                        onClick={this.props.selectConversation.bind(this,searchResult[i], {userID: value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id})}>
+                                            onClick={this.props.selectConversation.bind(this,searchResult[i], {userID: value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id})}>
 
-                                        <Friend firstName={value.users[1].firstName === this.props.profile.firstName ? value.users[0].firstName : value.users[1].firstName}
+                                            <Friend firstName={value.users[1].firstName === (this.props.profile ? this.props.profile.firstName : '') ? value.users[0].firstName : value.users[1].firstName}
 
-                                                lastName={value.users[1].lastName === this.props.profile.lastName ? value.users[0].lastName : value.users[1].lastName}
+                                                    lastName={value.users[1].lastName === (this.props.profile ? this.props.profile.lastName : '') ? value.users[0].lastName : value.users[1].lastName}
 
-                                                userID={value.users[1].id === this.props.auth.uid ? value.users[0].id : value.users[1].id}
+                                                    userID={value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id}
 
-                                                lastMessage={value.lastMessage ? value.lastMessage : ''}
-                                        />
-                                    </li>
-                                )
-                            })
-                    }
+                                                    lastMessage={value.lastMessage ? value.lastMessage : ''}
+                                            />
+                                        </li>
+                                    )
+                                })
+                        }
 
-                </ul>
-            </div>
-        )
+                    </ul>
+                </div>
+            )
+        }
     }
 }
 

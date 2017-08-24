@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
-import { browserHostory } from 'react-router';
+import { browserHistory } from 'react-router';
 import {Link} from 'react-router';
+import {initDB} from '../../../db/index';
 
 const menuStyles = {
     border: '1px solid #eee',
@@ -23,7 +24,7 @@ class UserMenu extends Component {
                         <Link to="profile" >Profile</Link>
                     </li>
                     <li style={{ borderBottom: '1px solid #eee', padding: '10px 0', textAlign: 'center' }}><a href="#"
-                    onClick={() => {this.props.firebase.logout().then(() => {browserHostory.push('/auth')})}}>Log out</a></li>
+                    onClick={() => {this.props.firebase.logout().then(() => {initDB();browserHistory.push('/auth')})}}>Log out</a></li>
                 </ul>
             </div>
         )
