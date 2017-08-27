@@ -42,8 +42,10 @@ export function countUnreadMessages(currentUserID, userEmail) {
                 const userConversation = s_snapshot.val();
 
                 const filteredConversations = _.reduce(userConversation, function(result, value, key) {
-                    return _.isEqual(value, allConversations[key]) ?
-                        result : _.assign(result,{[key]: allConversations[value]});
+                    if (allConversations && allConversations[key]) {
+                        return _.isEqual(value, allConversations[key]) ?
+                            result : _.assign(result,{[key]: allConversations[value]});
+                    }
                 }, {});
 
                 let messagesCounter = 0;
@@ -63,10 +65,8 @@ export function countUnreadMessages(currentUserID, userEmail) {
 
 export function getAllMessages (currentUserID) {
     return dispatch => {
-        firebase.database().ref('/conversations').once('value', (f_snapshot) => {
-        }).then((f_snapshot) => {
-            
-            firebase.database().ref(`/users/${currentUserID}/conversations/`).once('value', (s_snapshot) => {
+        firebase.database().ref('/conversations').on('value', (f_snapshot) => {
+            firebase.database().ref(`/users/${currentUserID}/conversations/`).on('value', (s_snapshot) => {
                 const allConversations = f_snapshot.val();                
                 const userConversation = s_snapshot.val();
 
