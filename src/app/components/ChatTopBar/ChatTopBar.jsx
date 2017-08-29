@@ -41,7 +41,6 @@ class ChatTopBar extends Component {
                     return null;
                 });
              
-                //Get friend name
                 self.props.firebase.ref(`/users/${friendUserId}/`).once('value').then((snapshot) => {
                     self.setState({
                         friend: snapshot.val()
@@ -67,7 +66,12 @@ class ChatTopBar extends Component {
         return (
             <div className="Chat-TopBar">
                 <div className="status">
-                    {this.state.friend ? <p>{this.state.friendIsTyping ? (`${this.state.friend.firstName} ${this.state.friend.lastName} is typing`) : ''}</p> : ''}
+                    {this.state.friend 
+                    ? <p>{this.state.friendIsTyping 
+                          ? (`${this.state.friend.firstName} ${this.state.friend.lastName} is typing`) 
+                          : ''}
+                      </p> 
+                    : ''}
                 </div>
                 {/* <div className="user-actions">
                     <div className="favourite">

@@ -134,8 +134,14 @@ class EnterMessage extends Component {
                     <i className="icon icon-attach"/>
                 </div>
                 <div className="enter-field">
-                    <input type="text" placeholder="Type your message" className="input-default" value={this.state.message}
-                    onChange={this.handleChange.bind(this)} onKeyUp={this.keyUpHandler.bind(this)} onKeyDown={this.keyDownHandler.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}/>
+                    <input type="text" 
+                           placeholder="Type your message" 
+                           className="input-default" 
+                           value={this.state.message}
+                           onChange={this.handleChange.bind(this)} 
+                           onKeyUp={this.keyUpHandler.bind(this)} 
+                           onKeyDown={this.keyDownHandler.bind(this)} 
+                           onKeyPress={this.handleKeyPress.bind(this)}/>
                 </div>
                 <div className="emoji">
                     <i className="icon icon-emoji"/>

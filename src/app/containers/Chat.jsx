@@ -108,7 +108,10 @@ export default class Chat extends Component {
     render() {
         const messages = Object.keys(this.state.messages).map((value,i) => {
             return (
-                <Message key={i} friendImage={this.state.friendPictureURL} currentUserImage={this.state.currentUserImage} data={this.state.messages[value]}/>
+                <Message key={i} 
+                         friendImage={this.state.friendPictureURL} 
+                         currentUserImage={this.state.currentUserImage} 
+                         data={this.state.messages[value]}/>
             )
         });
 
@@ -127,7 +130,9 @@ export default class Chat extends Component {
         return (
             <div className="container Chat">
                 <ChatTopBar activeConversation={this.props.activeConversation}/>
+
                 <div className="messages" style={{minHeight: 'calc(100% - 160px)', marginBottom: '15px'}} ref='scroll'>
+
                     {messages.length > 0 ? messages : (<div style={{
                         position: 'absolute',
                         fontSize:'16px', 
@@ -136,12 +141,16 @@ export default class Chat extends Component {
                         left: '50%',
                         transform: 'translateY(-50%) translateX(-50%)'
                     }}>{firstMessage()}</div>)}
+
                 </div>
                 
                 {messages.length > 0 && this.props.activeConversation ? 
-                <EnterMessage currentConversation={this.props.activeConversation}/> 
+                
+                <EnterMessage 
+                    currentConversation={this.props.activeConversation}/> 
                 : 
-                <EnterMessage currentConversation={this.props.activeConversation}/>}
+                <EnterMessage 
+                    currentConversation={this.props.activeConversation}/>}
             </div>
         )
     }

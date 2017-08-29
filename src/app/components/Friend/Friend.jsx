@@ -60,17 +60,21 @@ class Friend extends Component {
             <div className={`Friend ${this.state.isOnline ? 'is-online' : ''}`} >
                 <div className="profile-img">
                     <img style={{
-                        maxWidth: '55px',
-                        height: 'auto',
-                        borderRadius: '50%',
-                    }} src={this.state.pictureURL || Placeholder} alt=""/>                
+                            maxWidth: '55px',
+                            height: 'auto',
+                            borderRadius: '50%',
+                         }} src={this.state.pictureURL || Placeholder} alt=""/>                
                 </div>
-                <div className="content" style={{overflow: 'hidden', whiteSpace:'nowrap', textOverflow:'ellipsis'}}>
+                <div className="content" style={{
+                                            overflow: 'hidden', 
+                                            whiteSpace:'nowrap', 
+                                            textOverflow:'ellipsis'
+                                         }}>
                     <div className="username">
                         {this.props.firstName + ' ' + this.props.lastName}
                     </div>
                     <span className="last-message">
-                    {this.props.lastMessage && this.props.lastMessage.value}
+                        {this.props.lastMessage && this.props.lastMessage.value}
                     </span>
                 </div>
                 <div className="additional" style={{position: 'relative'}}>

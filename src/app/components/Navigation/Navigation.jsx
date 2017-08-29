@@ -16,8 +16,16 @@ class Navigation extends Component {
         return (
             <div className="Navigation">
                 <ul className="link-group messages-group bottom-border">
-                    <li onClick={() => {this.props.dispatch(changeMessageTypeToAll())}} className={this.props.filter === 'all' ? 'active' : ''}>All conversations</li>
-                    <li onClick={() => {this.props.dispatch(changeMessageTypeToUnread())}} className={this.props.filter === 'unread' ? 'active' : ''}>Unread <span className="count">{this.props.filteredMessagesAmount.unread}</span></li>
+                    <li onClick={() => {this.props.dispatch(changeMessageTypeToAll())}} 
+                        className={this.props.filter === 'all' ? 'active' : ''}>
+                        All conversations
+                    </li>
+
+                    <li onClick={() => {this.props.dispatch(changeMessageTypeToUnread())}} 
+                        className={this.props.filter === 'unread' ? 'active' : ''}>
+                        Unread 
+                        <span className="count">{this.props.filteredMessagesAmount.unread}</span>
+                    </li>
                     {/* <li>Important <span className="count">228</span></li>
                     <li>Drafs <span className="count">66</span></li> */}
                 </ul>

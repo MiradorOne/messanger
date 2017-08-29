@@ -31,11 +31,27 @@ class UserProfile extends Component {
 
     updateProfile() {
         this.props.firebase.update(`users/${this.props.auth.uid}/`, {
-            nickname: this.state.nickname.length > 0 ? this.state.nickname : this.props.profile.nickname,
-            telephone: this.state.telephone.length ? this.state.telephone : this.props.profile.telephone,
-            date: this.state.date.length ? this.state.date : this.props.profile.date,
-            gender: this.state.gender.length ? this.state.gender : this.props.profile.gender,
-            language: this.state.language.length ? this.state.language : this.props.profile.language,
+
+            nickname:   this.state.nickname.length > 0 
+                        ? this.state.nickname 
+                        : this.props.profile.nickname,
+
+            telephone:  this.state.telephone.length 
+                        ? this.state.telephone 
+                        : this.props.profile.telephone,
+
+            date:       this.state.date.length 
+                        ? this.state.date 
+                        : this.props.profile.date,
+
+            gender:     this.state.gender.length 
+                        ? this.state.gender 
+                        : this.props.profile.gender,
+                        
+            language:   this.state.language.length 
+                        ? this.state.language 
+                        : this.props.profile.language,
+
         }).then(() => {
             this.setState({
                 isEditable: false
@@ -45,8 +61,10 @@ class UserProfile extends Component {
 
     fileSelect(e) {
         if (e.target.files.length === 1) {
+
             this.props.firebase.remove(`users/${this.props.auth.uid}/picture`);
             this.props.firebase.uploadFile(`/users/${this.props.auth.uid}/`, e.target.files[0], `users/${this.props.auth.uid}/picture`)
+
         }
     }
 
@@ -56,48 +74,112 @@ class UserProfile extends Component {
             if (this.state.isEditable) {
                 return (
                     <ul>
-                         <li>Nickname: <span><input onChange={this.handleChange.bind(this,'nickname')} className="input-default" type="text" placeholder={profile.nickname || 'Your nickname'}/></span></li>
-                        <li>Telephone: <span><input onChange={this.handleChange.bind(this,'telephone')} className="input-default" type="text" placeholder={profile.telephone || 'Telephone'}/></span></li>
-                        <li>Date of Birth: <span><input onChange={this.handleChange.bind(this,'date')} className="input-default" type="date" placeholder={profile.date || 'Date of Birth'}/></span></li>
-                        <li>Gender: <span><input onChange={this.handleChange.bind(this,'gender')} className="input-default" type="text" placeholder={profile.gender || 'Gender'}/></span></li>
-                        <li>Language: <span><input onChange={this.handleChange.bind(this,'language')} className="input-default" type="text" placeholder={profile.language || 'Language'}/></span></li> 
+                        <li>Nickname: 
+                            <span>
+                                <input onChange={this.handleChange.bind(this,'nickname')} 
+                                       className="input-default" 
+                                       type="text" 
+                                       placeholder={profile.nickname || 'Your nickname'}/>
+                            </span>
+                        </li>
+                        <li>Telephone: 
+                            <span>
+                                <input onChange={this.handleChange.bind(this,'telephone')} 
+                                       className="input-default" 
+                                       type="text" 
+                                       placeholder={profile.telephone || 'Telephone'}/>
+                            </span>
+                        </li>
+                        <li>Date of Birth: 
+                            <span>
+                                <input onChange={this.handleChange.bind(this,'date')} 
+                                       className="input-default" 
+                                       type="date" 
+                                       placeholder={profile.date || 'Date of Birth'}/>
+                            </span>
+                        </li>
+                        <li>Gender: 
+                            <span>
+                                <input onChange={this.handleChange.bind(this,'gender')} 
+                                       className="input-default" 
+                                       type="text" 
+                                       placeholder={profile.gender || 'Gender'}/>
+                            </span>
+                        </li>
+                        <li>Language: 
+                            <span>
+                                <input onChange={this.handleChange.bind(this,'language')} 
+                                       className="input-default" type="text" 
+                                       placeholder={profile.language || 'Language'}/>
+                            </span>
+                        </li> 
                     </ul>
                 )
             } else {
                 return (
                     <ul>
-                        <li>Nickname: <span>{profile.nickname || 'Your nickname'}</span></li>
-                        <li>Telephone: <span>{profile.telephone || 'Telephone'}</span></li>
-                        <li>Date of Birth: <span>{profile.date || 'Date of Birth'}</span></li>
-                        <li>Gender: <span>{profile.gender || 'Gender'}</span></li>
-                        <li>Language: <span>{profile.language || 'Language'}</span></li>
+                        <li>Nickname: 
+                            <span>
+                                {profile.nickname || 'Your nickname'}
+                            </span>
+                        </li>
+                        <li>Telephone: 
+                            <span>
+                                {profile.telephone || 'Telephone'}
+                            </span>
+                        </li>
+                        <li>Date of Birth: 
+                            <span>
+                                {profile.date || 'Date of Birth'}
+                            </span>
+                        </li>
+                        <li>Gender: 
+                            <span>
+                                {profile.gender || 'Gender'}
+                            </span>
+                        </li>
+                        <li>Language: 
+                            <span>
+                                {profile.language || 'Language'}
+                            </span>
+                        </li>
                     </ul>
                 )
             }
         }
 
-        const pictureKey = this.props && this.props.profile && Object.keys(this.props.profile.picture)[0];
-        const pictureURL = this.props.profile && this.props.profile.picture[pictureKey].downloadURL;
+        const pictureKey = this.props && 
+                           this.props.profile && 
+                           Object.keys(this.props.profile.picture)[0];
+
+        const pictureURL = this.props.profile && 
+                           this.props.profile.picture[pictureKey].downloadURL;
 
         return (
             <div className="User-Profile">
                 <div className="topbar">
-                    <a href="#" onClick={() => {
-                        console.log(this.context)
-                         browserHistory.push('/')
-                        }}>Back</a>
+                    <a href="#" onClick={() => {browserHistory.push('/')}}>Back</a>
                 </div>
                 <main>
                     <div className="container">
                         <div className="profile-picture">
-                            <img src={pictureURL || Placeholder} alt=""/>
-                            <input onChange={this.fileSelect} className='input-file' id='file' type="file" multiple='false' accept='.jpg,.png,.jpeg'/>
+                            <img src={pictureURL || Placeholder} 
+                                 alt=""/>
+
+                            <input onChange={this.fileSelect} 
+                                   className='input-file' 
+                                   id='file' 
+                                   type="file" 
+                                   multiple='false' 
+                                   accept='.jpg,.png,.jpeg'/>
+
                             <label htmlFor='file'>Choose a picture</label>
                         </div>
                         <div className="profile-info">
                             <div className="full-name">
                                 <p>
                                     {this.props.profile && this.props.profile.firstName + ' ' + this.props.profile.lastName}
+
                                     <i className={`icon ${this.state.isEditable ? 'icon-edit-active' : 'icon-edit'}`}
                                        onClick={() => {this.setState({isEditable: !this.state.isEditable})}}></i>
                                 </p>
@@ -108,12 +190,18 @@ class UserProfile extends Component {
                         </div>                        
                     </div>
                     <div className="row">
-                        {this.state.isEditable ? <button style={{color: '#000'}} type='submit' onClick={this.updateProfile} className='btn btn-default'>Save</button> : ''}
+                        {this.state.isEditable 
+                        
+                        ? 
+
+                        <button style={{color: '#000'}} 
+                                type='submit' 
+                                onClick={this.updateProfile} 
+                                className='btn btn-default'>Save</button> 
+
+                        : ''}
                     </div>
                 </main>
-                <footer>
-
-                </footer>
             </div>
         )
     }

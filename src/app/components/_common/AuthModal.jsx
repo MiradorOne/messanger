@@ -138,12 +138,26 @@ class AuthModal extends Component {
         const login = () => {
             return (
                 <div className="modal login" >
-                    <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p>                    
+                    <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p> 
+
                     <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,'','','',this.state.signIn)}>
-                        <input type="text" placeholder="Email" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>
-                        <input type="password" placeholder="Password" name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
+
+                        <input type="text" 
+                               placeholder="Email" 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'email')}/>
+
+                        <input type="password" 
+                               placeholder="Password" 
+                               name="password" 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'password')}/>
+
                         <button className="btn-default" type="submit">Sign in</button>
                     </form>
+                    
                     <button className="btn-default" style={{ marginTop: '15px', width: '102px' }} onClick={this.changeType.bind(this)}>Register</button>
                 </div>
             )
@@ -153,12 +167,60 @@ class AuthModal extends Component {
             return (
                 <div className="modal register">
                     <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,this.state.passwordConfirm, this.state.firstName, this.state.lastName,this.state.signIn)}>
-                        <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p>                        
-                        <input type="email" title="Email" placeholder="Email" minLength="5" maxLength="50" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'email')}/>                            
-                        <input type="text" pattern="([a-zA-Z]{2,30}\s*)+" title="Max length - 30. Min length - 2 Numbers are not allowed" placeholder="First Name" minLength="2" maxLength="30" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'firstName')}/>
-                        <input type="text" pattern="[a-zA-Z]{2,45}" title="Max length - 45. Min length - 2. Numbers are not allowed" placeholder="Last Name" minLength="2" maxLength="45" required className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'lastName')}/>
-                        <input type="password" title="Min length - 6" placeholder="Password" minLength="6" maxLength="30" required name="password" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'password')}/>
-                        <input type="password" title="Confirm your password" placeholder="Confirm password" minLength="6" maxLength="30" required name="password_confirm" className="input-default" style={inputStyles} onChange={this.handleChange.bind(this,'passwordConfirm')}/>
+                        <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p> 
+
+                        <input type="email" 
+                               title="Email" 
+                               placeholder="Email" 
+                               minLength="5" 
+                               maxLength="50" 
+                               required 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'email')}/>  
+
+                        <input type="text" 
+                               pattern="([a-zA-Z]{2,30}\s*)+" 
+                               title="Max length - 30. Min length - 2 Numbers are not allowed" 
+                               placeholder="First Name" 
+                               minLength="2" maxLength="30" 
+                               required 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'firstName')}/>
+
+                        <input type="text" 
+                               pattern="[a-zA-Z]{2,45}" 
+                               title="Max length - 45. Min length - 2. Numbers are not allowed" 
+                               placeholder="Last Name" 
+                               minLength="2" maxLength="45" 
+                               required 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'lastName')}/>
+
+                        <input type="password" 
+                               title="Min length - 6" 
+                               placeholder="Password" 
+                               minLength="6" 
+                               maxLength="30" 
+                               required 
+                               name="password" 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'password')}/>
+
+                        <input type="password" 
+                               title="Confirm your password" 
+                               placeholder="Confirm password" 
+                               minLength="6" 
+                               maxLength="30" 
+                               required 
+                               name="password_confirm" 
+                               className="input-default" 
+                               style={inputStyles} 
+                               onChange={this.handleChange.bind(this,'passwordConfirm')}/>
+
                         <button className="btn-default" type="submit">Register</button>
                     </form>
                     <button className="btn-default" style={{ marginTop: '15px', width: '102px' }} onClick={this.changeType.bind(this)}>Sign in</button>

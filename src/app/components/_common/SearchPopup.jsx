@@ -115,19 +115,27 @@ class SearchPopup extends Component {
 
 		return (
 			<div className="Search-Popup" style={popupStyles}>
-				<input type="text" className="input-default" placeholder="Enter friend name or email" 
-				style={inputStyles} 
-				onChange={this.handleChange.bind(this)}/>
+				
+				<input type="text" 
+					   className="input-default" 
+					   placeholder="Enter friend name or email" 
+					   style={inputStyles} 
+					   onChange={this.handleChange.bind(this)}/>
 
 				<ul className="search-result" style={resultStyles}>
+
 					{ this.state.searchTerm.length === 0 ? '' : searchResult.map((user,i) => {
 						return (
 							<li key={i}>
-								<NewFriend firstName={user.firstName} id={user.id} lastName={user.lastName}
-								startConversation={this.startConversation.bind(this)} email={user.email}/>
+								<NewFriend firstName={user.firstName} 
+										   id={user.id} 
+										   lastName={user.lastName}
+										   startConversation={this.startConversation.bind(this)} 
+										   email={user.email}/>
 							</li>
 						)
 					})}
+
 				</ul>
 
 			</div>

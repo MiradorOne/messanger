@@ -20,11 +20,21 @@ class UserMenu extends Component {
         return (
             <div className="user-menu" style={menuStyles}>
                 <ul>
-                    <li style={{ padding: '10px 0', textAlign: 'center' }}>
+                    <li style={{ 
+                            padding: '10px 0',
+                            textAlign: 'center' 
+                        }}>
                         <Link to="profile" >Profile</Link>
                     </li>
-                    <li style={{ borderBottom: '1px solid #eee', padding: '10px 0', textAlign: 'center' }}><a href="#"
-                    onClick={() => {this.props.firebase.logout().then(() => {initDB();browserHistory.push('/auth')})}}>Log out</a></li>
+                    <li style={{ 
+                            borderBottom: '1px solid #eee', 
+                            padding: '10px 0', 
+                            textAlign: 'center' 
+                        }}>
+                        <a href="#" onClick={() => {this.props.firebase.logout().then(() => {initDB();browserHistory.push('/auth')})}}>
+                            Log out
+                        </a>
+                    </li>
                 </ul>
             </div>
         )
