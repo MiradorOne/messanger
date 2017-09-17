@@ -1,0 +1,19 @@
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 9px;
+  position: absolute; }
+
+::-webkit-scrollbar-thumb {
+  border: none;
+  border-radius: 5px;
+  width: 9px; }
+
+.Friend-List ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.Chat .messages {
+  overflow-y: scroll; }
+.Chat ::-webkit-scrollbar-thumb {
+  background-color: #0084ff; }
+
+/*# sourceMappingURL=scrollbar.css.map */

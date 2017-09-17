@@ -1,0 +1,79 @@
+.User-Profile {
+  background: #fff;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100%; }
+  .User-Profile *::-webkit-input-placeholder {
+    color: #000; }
+  .User-Profile *:-moz-placeholder {
+    color: #000;
+    opacity: 1; }
+  .User-Profile *::-moz-placeholder {
+    color: #000;
+    opacity: 1; }
+  .User-Profile *:-ms-input-placeholder {
+    color: #000; }
+  .User-Profile .container {
+    padding: 30px 0; }
+  .User-Profile .input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1; }
+    .User-Profile .input-file + label {
+      font-size: 16px;
+      font-weight: 300;
+      color: #000;
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      cursor: pointer;
+      border: 1px solid #000;
+      max-width: 180px;
+      padding: 10px 0; }
+  .User-Profile .topbar {
+    min-height: 60px;
+    border-bottom: 1px solid #e0e4ea;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    line-height: 60px; }
+    .User-Profile .topbar a {
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding-left: 20px; }
+      .User-Profile .topbar a:before {
+        content: '\2190 ';
+        font-size: 21px; }
+  .User-Profile .full-name {
+    font-weight: 300;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    border-bottom: 1px solid #e0e4ea;
+    padding-bottom: 10px; }
+  .User-Profile .info-list input {
+    text-align: right;
+    font-size: 16px; }
+  .User-Profile .info-list li {
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: lighter;
+    max-width: 50%; }
+    .User-Profile .info-list li span {
+      font-weight: 400;
+      padding-left: 15px;
+      float: right;
+      display: inline-block;
+      font-size: 16px;
+      color: rgba(41, 48, 55, 0.8); }
+  .User-Profile .profile-picture {
+    text-align: center; }
+    .User-Profile .profile-picture img {
+      width: 150px;
+      border-radius: 50%;
+      height: auto; }
+
+/*# sourceMappingURL=UserProfile.css.map */

@@ -1,0 +1,87 @@
+.Inbox {
+  background-color: #1D242C;
+  display: block;
+  padding: 30px;
+  color: #a1a5a7;
+  font-family: 'Roboto', sans-serif;
+  position: relative; }
+  .Inbox h2 {
+    padding-left: 10px;
+    color: #fff; }
+  .Inbox .Search-Popup {
+    position: relative; }
+    .Inbox .Search-Popup::before {
+      position: absolute;
+      content: '';
+      display: block;
+      left: -15px;
+      border-style: solid;
+      border-width: 12.5px 15px 12.5px 0;
+      border-color: transparent #ffffff transparent transparent; }
+  .Inbox .link-group {
+    padding: 25px 0 35px; }
+    .Inbox .link-group li {
+      padding: 10px;
+      cursor: pointer;
+      position: relative; }
+      .Inbox .link-group li:hover {
+        color: #fff; }
+      .Inbox .link-group li .count {
+        color: #fff;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px; }
+    .Inbox .link-group .active {
+      color: #fff;
+      border-radius: 4px;
+      background-color: rgba(64, 74, 83, 0.56);
+      box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, 0.06); }
+
+.New-Friend {
+  display: inline-block;
+  height: auto;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  text-align: left;
+  margin: 10px 0;
+  padding: 15px 10px;
+  clear: both;
+  overflow: hidden; }
+  .New-Friend img {
+    vertical-align: middle;
+    cursor: pointer; }
+  .New-Friend .first-name, .New-Friend .second-name {
+    display: inline-block;
+    color: #000;
+    font-weight: 400;
+    font-size: 16px; }
+  .New-Friend .info {
+    padding-left: 15px; }
+  .New-Friend .second-name {
+    padding-left: 5px; }
+  .New-Friend .info {
+    display: inline-block;
+    max-width: 75%;
+    vertical-align: middle; }
+  .New-Friend .email {
+    display: inline-block;
+    text-align: right;
+    color: rgba(4, 4, 4, 0.8);
+    font-weight: 300;
+    padding-top: 5px;
+    font-size: 14px; }
+  .New-Friend .StartConversation {
+    cursor: pointer;
+    text-transform: uppercase;
+    color: rgba(41, 48, 55, 0.8);
+    text-align: right;
+    font-weight: 400;
+    margin-right: 22px;
+    margin-top: 7px; }
+  .New-Friend .StartConversation span {
+    vertical-align: 1px; }
+
+/*# sourceMappingURL=Inbox.css.map */

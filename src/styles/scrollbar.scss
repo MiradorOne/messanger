@@ -1,0 +1,28 @@
+//======== Scrollbar styles ========//
+
+::-webkit-scrollbar {
+	background-color: rgba(0,0,0,0);
+	width: 9px;
+	position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+	border: none;
+	border-radius: 5px;
+	width: 9px;
+}
+
+.Friend-List {
+	::-webkit-scrollbar-thumb {
+		background-color:  rgba(0,0,0,0.4);
+	}
+}
+
+.Chat {
+	.messages {
+		overflow-y: scroll;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color:  rgba(0,132,255,1);
+	}
+}

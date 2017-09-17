@@ -6,9 +6,19 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "bourbon-neat": "^1.8.0",
+    "firebase": "^4.0.0",
+    "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "redux": "^3.6.0"
+    "react-redux": "^5.0.5",
+    "react-redux-firebase": "^1.4.3",
+    "react-router": "^3",
+    "react-router-redux": "^4.0.8",
+    "react-search-input": "^0.11.2",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.8.1",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

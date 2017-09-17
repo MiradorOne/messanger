@@ -1,0 +1,15 @@
+.Chat {
+  background-color: #E8EBF0;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
+  position: relative; }
+  .Chat .unread:not(.my-message)::before {
+    content: 'New';
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    color: #0084FF;
+    top: -25px;
+    left: 15px;
+    font-size: 10px; }
+
+/*# sourceMappingURL=Chat.css.map */

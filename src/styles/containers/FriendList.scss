@@ -1,0 +1,35 @@
+.Friend-List {
+	padding: 20px 0;
+	//background-color: #21282F;
+	background: -webkit-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: -moz-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: -o-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: -ms-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
+	background: linear-gradient(-67deg, #242a31 31%, #2d343c 69%);
+	box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
+	font-family:'Roboto', sans-serif;
+
+	ul {
+		li {
+			cursor: pointer;
+			padding: 0 20px;
+			transition: background-color ease 0.15s;
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+
+			&.selected {
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+	.no-conversation
+{
+	text-align: center;
+	margin: 175px 10px;
+	text-align: center;
+	color: rgb(183, 231, 241);
+	font-size: 17px;
+	font-weight: 300;
+}
+}
