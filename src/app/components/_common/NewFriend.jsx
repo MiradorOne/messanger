@@ -1,10 +1,8 @@
 import React from 'react';
-import userPicutre from '../../../static/images/user-image.png'
 
 const NewFriend = ({firstName, id, lastName, startConversation, email}) => {
 	return (
 		<div className="New-Friend">
-			<img src={userPicutre} alt=""/>
 			<div className="info">
 				<div className="first-name">{firstName}</div>
 				<div className="second-name">{lastName}</div>
