@@ -105,17 +105,25 @@ export class FriendList extends Component {
                         {
                             Object.keys(this.props.filteredMessages).length === 0 ? noConversationsMessage() :
                                 searchResult.map((value, i) => {
+
+                                    const userID = value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id;
+                                    const firstName = value.users[1].firstName === (this.props.profile ? this.props.profile.firstName : '') ? value.users[0].firstName : value.users[1].firstName;
+                                    const lastName = value.users[1].lastName === (this.props.profile ? this.props.profile.lastName : '') ? value.users[0].lastName : value.users[1].lastName;
+
                                     return (
                                         <li key={i}
-                                            className={_.get(this.props.filteredMessages[this.props.activeConversation], 'users[1].email') === value.users[1].email ? 'selected' : ''}
 
-                                            onClick={this.props.selectConversation.bind(this,searchResult[i], {userID: value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id})}>
+                                            className={this.props.selectedUserID === userID ? 'selected' : ''}
 
-                                            <Friend firstName={value.users[1].firstName === (this.props.profile ? this.props.profile.firstName : '') ? value.users[0].firstName : value.users[1].firstName}
+                                            onClick={this.props.selectConversation.bind(this,
+                                                                                        searchResult[i], 
+                                                                                        {userID: value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id})}>
 
-                                                    lastName={value.users[1].lastName === (this.props.profile ? this.props.profile.lastName : '') ? value.users[0].lastName : value.users[1].lastName}
+                                            <Friend firstName={firstName}
 
-                                                    userID={value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id}
+                                                    lastName={lastName}
+
+                                                    userID={userID}
 
                                                     lastMessage={value.lastMessage ? value.lastMessage : ''}
                                             />
