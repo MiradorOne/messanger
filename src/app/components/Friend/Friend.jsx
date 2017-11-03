@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import {detectTime} from '../../../utils/timeDetector'
+import {emojify} from 'react-emojione';
 import _ from 'lodash';
 
 import '../../../styles/components/Friend.css';
@@ -74,7 +75,10 @@ class Friend extends Component {
                         {this.props.firstName + ' ' + this.props.lastName}
                     </div>
                     <span className="last-message">
-                        {this.props.lastMessage && this.props.lastMessage.value}
+                        {this.props.lastMessage && emojify(this.props.lastMessage.value, {style: {
+                            width: '20px',
+                            height: '20px'
+                        }})}
                     </span>
                 </div>
                 <div className="additional" style={{position: 'relative'}}>

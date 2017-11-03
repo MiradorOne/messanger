@@ -7,10 +7,12 @@
   },
   "dependencies": {
     "bourbon-neat": "^1.8.0",
+    "emojione-picker": "^2.2.1",
     "firebase": "^4.0.0",
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-emojione": "^5.0.0",
     "react-redux": "^5.0.5",
     "react-redux-firebase": "^1.4.3",
     "react-router": "^3",

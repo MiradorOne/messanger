@@ -3,6 +3,8 @@ import '../../../styles/components/EnterMessage.css';
 import * as firebase from 'firebase';
 import { firebaseConnect, pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import EmojiPicker  from 'emojione-picker';
+import {emojify} from 'react-emojione';
 import _ from 'lodash';
 
 class EnterMessage extends Component {
@@ -14,6 +16,7 @@ class EnterMessage extends Component {
             typingTimer: 0,
             doneTypingInterval: 5000,
             currentUserConvIndex: 0,
+            showEmoji: false
         }
     }
 
@@ -36,6 +39,18 @@ class EnterMessage extends Component {
         const localStorageObj = JSON.parse(localStorage.getItem(`${nextProps.currentConversation}`)) || '';
         this.setState({
             message: localStorageObj.message || ''
+        })
+    }
+
+    toggleEmoji(e) {
+        this.setState({
+            showEmoji: !this.state.showEmoji
+        })
+    }
+
+    addEmojisToMessage(data) {
+        this.setState({
+            message: this.state.message + data.shortname
         })
     }
 
@@ -144,7 +159,13 @@ class EnterMessage extends Component {
                            onKeyPress={this.handleKeyPress.bind(this)}/>
                 </div>
                 <div className="emoji">
-                    <i className="icon icon-emoji"/>
+                    <i className="icon icon-emoji" onClick={this.toggleEmoji.bind(this)}/>
+                    {this.state.showEmoji
+                        ?
+                        <EmojiPicker search={true} onChange={this.addEmojisToMessage.bind(this)}/>
+                        :
+                        ''
+                    }
                 </div>
                 <button className="send input-default icon icon-send" onClick={this.handleClick.bind(this)}/>
             </div>
