@@ -26,7 +26,8 @@ export default class FriendChatWrapper extends Component {
             <span className="FriendChatWrapper">
                 <FriendList 
                         activeConversation={this.state.activeConversation} 
-                        selectConversation={this.selectConversation}/>
+                        selectConversation={this.selectConversation}
+                        selectedUserID={this.state.userID}/>
 
                 <Chat currentUser={this.props.currentUser} selectedUser={this.state.userID} activeConversation={this.state.activeConversation}/>
                 <ProfileBar currentUser={this.state.currentUser} selectedUser={this.state.userID} activeConversation={this.state.activeConversation}/> 
