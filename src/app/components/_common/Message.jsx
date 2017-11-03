@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import Placeholder from '../../../static/images/avatar-placeholder.png';
 import * as firebase from 'firebase';
-import { detectTime } from '../../../utils/timeDetector'
+import { detectTime } from '../../../utils/timeDetector';
+import {emojify} from 'react-emojione';
 
 const messageStyles = {
     backgroundColor: '#fff',
@@ -49,7 +50,7 @@ export default class Message extends PureComponent {
                 </div>
                 <div className="message" style={messageStyles}>
                     <p>
-                        {this.props.data.value}
+                        {emojify(this.props.data.value)}
                     </p>
                 </div>
                 <span className="timestamp" style={{

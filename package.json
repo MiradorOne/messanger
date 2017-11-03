@@ -1,16 +1,18 @@
 {
   "name": "messanger",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
   "dependencies": {
     "bourbon-neat": "^1.8.0",
+    "emojione-picker": "^2.2.1",
     "firebase": "^4.0.0",
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-emojione": "^5.0.0",
     "react-redux": "^5.0.5",
     "react-redux-firebase": "^1.4.3",
     "react-router": "^3",
