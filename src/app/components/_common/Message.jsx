@@ -3,6 +3,7 @@ import Placeholder from '../../../static/images/avatar-placeholder.png';
 import * as firebase from 'firebase';
 import { detectTime } from '../../../utils/timeDetector';
 import {emojify} from 'react-emojione';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const messageStyles = {
     backgroundColor: '#fff',
@@ -40,13 +41,14 @@ export default class Message extends PureComponent {
                                         : 'message-row';
         };
         return (
-            <div className={messageType() + `${this.props.data.type === 'unread' ? ' unread' : ''}`} style={rowStyles}>
+   
+            <div key={this.props.dataKey} className={messageType() + `${this.props.data.type === 'unread' ? ' unread' : ''}`} style={rowStyles}>
                 <div className="user" style={userStyles}>
                     <img src={messageType() === 'message-row my-message' 
                                             ? this.props.currentUserImage 
                                             : (this.props.friendImage ? this.props.friendImage : Placeholder)} 
-                         alt="User" 
-                         style={imageStyles}/>
+                        alt="User" 
+                        style={imageStyles}/>
                 </div>
                 <div className="message" style={messageStyles}>
                     <p>
@@ -62,6 +64,7 @@ export default class Message extends PureComponent {
                     paddingLeft: '0.6em'
                 }}>{detectTime(this.props.data.timestamp)}</span>
             </div>
+
         )
     }
 }

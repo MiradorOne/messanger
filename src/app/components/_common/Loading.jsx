@@ -6,7 +6,7 @@ const spinnerStyles = {
     left: '50%'
 }
 
-const Loading = () => {
+const Loading = ({color}) => {
 
     return (
         <div className="loading" style={spinnerStyles}>
@@ -15,9 +15,9 @@ const Loading = () => {
                     className="uil-reload">
                 <rect x="0" y="0" width="100" height="100" fill="none" className="bk"></rect>
                 <g>
-                    <path d="M50 15A35 35 0 1 0 74.787 25.213" fill="none" stroke="#293037"
+                    <path d="M50 15A35 35 0 1 0 74.787 25.213" fill="none" stroke={color || '#293037'}
                             strokeWidth="12px"></path>
-                    <path d="M50 0L50 30L66 15L50 0" fill="#293037"></path>
+                    <path d="M50 0L50 30L66 15L50 0" fill={color || '#293037'}></path>
                     <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s"
                                         repeatCount="indefinite"></animateTransform>
                 </g>
