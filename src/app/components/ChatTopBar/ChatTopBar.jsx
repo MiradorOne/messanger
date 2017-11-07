@@ -67,7 +67,7 @@ class ChatTopBar extends Component {
             <div className="Chat-TopBar">
                 <div className="status">
                     {this.state.friend 
-                    ? <p>{this.state.friendIsTyping 
+                    ? <p style={{position: 'absolute', top: '50%', transform: 'translateY(-50%)'}}>{this.state.friendIsTyping 
                           ? (`${this.state.friend.firstName} ${this.state.friend.lastName} is typing`) 
                           : ''}
                       </p> 

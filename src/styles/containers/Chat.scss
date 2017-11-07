@@ -5,15 +5,9 @@
 	position: relative;
 
 	.unread:not(.my-message) {
-		&::before {
-			content: 'New';
-			position: relative;
-			font-family:'Roboto', sans-serif;
-			color: #0084FF;
-			top: -25px;
-			left: 15px;
-			font-size: 10px;
-		}
+		margin: 0 auto !important;
+		padding: 20px 0;
+		background-color: #dde1e8;
 	}
 	.message {
 		p {

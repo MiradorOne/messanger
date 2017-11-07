@@ -274,4 +274,27 @@ ul {
   opacity: 1;
   transition: opacity 400ms ease-in; }
 
+@-webkit-keyframes typing {
+  0% {
+    width: 0;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    opacity: 0; }
+  40% {
+    opacity: 0.8; }
+  100% {
+    width: 100%;
+    opacity: 1; } }
+@keyframes typing {
+  0% {
+    width: 0;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    opacity: 0; }
+  100% {
+    width: 100%;
+    opacity: 1; } }
+
 /*# sourceMappingURL=index.css.map */
