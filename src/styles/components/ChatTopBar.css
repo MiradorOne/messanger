@@ -1,4 +1,5 @@
 .Chat-TopBar {
+  position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
   .Chat-TopBar .status, .Chat-TopBar .user-actions, .Chat-TopBar .favourite, .Chat-TopBar .call, .Chat-TopBar .videocall {
     display: inline-block; }
@@ -10,5 +11,8 @@
     float: right; }
   .Chat-TopBar .status {
     padding: 30px; }
+    .Chat-TopBar .status p {
+      animation: typing 1.5s infinite;
+      animation-delay: 1s; }
 
 /*# sourceMappingURL=ChatTopBar.css.map */
