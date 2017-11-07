@@ -23,11 +23,22 @@ export class App extends Component {
         this.state = {
             currentUser: '',
         };
+        this.handleWindowClose =this.handleWindowClose.bind(this);
+    }
 
+    handleWindowClose(e) {
+        e.preventDefault();
+        if (this.state.currentUser) {
+            this.props.firebase.update(`/users/${this.state.currentUser}/`, {isOnline: false}).then(() => {
+                return e.returnValue = true;
+            });
+        };
     }
 
     componentDidMount() {
         getUserPermission();
+        window.addEventListener("beforeunload",this.handleWindowClose);
+        this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});        
     }
 
     componentWillReceiveProps(props) {
@@ -35,7 +46,6 @@ export class App extends Component {
             firebase.app().delete();
             browserHistory.push('/auth');
         } else {
-            this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});
             this.setState({
                 currentUser: this.props.auth.uid
             })
@@ -45,7 +55,8 @@ export class App extends Component {
     componentWillUnmount() {
         if (this.state.currentUser) {
             this.props.firebase.update(`/users/${this.state.currentUser}/`, {isOnline: false});
-        }           
+        }  
+        window.removeEventListener('onbeforeunload',this.handleWindowClose);
     }
 
     render() {
