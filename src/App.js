@@ -38,7 +38,9 @@ export class App extends Component {
     componentDidMount() {
         getUserPermission();
         window.addEventListener("beforeunload",this.handleWindowClose);
-        this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});        
+        if (this.props.auth && this.props.auth.uid) {
+            this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});
+        }        
     }
 
     componentWillReceiveProps(props) {
