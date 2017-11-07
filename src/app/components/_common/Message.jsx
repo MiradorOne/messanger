@@ -19,7 +19,7 @@ const messageStyles = {
 const rowStyles = {
     display: 'flex',
     alignItems: 'center',
-    margin: '20px 0'
+    padding: '10px 0'
 };
 
 const userStyles = {

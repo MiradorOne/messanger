@@ -4,8 +4,14 @@
 	box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
 	position: relative;
 
+	.message-row {
+		transition: background-color 0.7s ease;
+		&:last-child {
+			margin-bottom: 15px;
+		}
+	}
+
 	.unread:not(.my-message) {
-		margin: 0 auto !important;
 		padding: 20px 0;
 		background-color: #dde1e8;
 	}

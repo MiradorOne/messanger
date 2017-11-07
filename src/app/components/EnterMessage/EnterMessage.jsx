@@ -84,9 +84,12 @@ class EnterMessage extends Component {
                 type: 'unread'
             });
             this.setState({
-                message: ''
+                message: '',
+                showEmoji: false
             })
-            this.makeMessagesAsRead(this.props.currentConversation);
+            if (document.querySelectorAll('.message-row.unread').length > 0) {
+                this.makeMessagesAsRead(this.props.currentConversation) 
+            } 
         }
     }
 
@@ -127,19 +130,16 @@ class EnterMessage extends Component {
     }
 
     handleChange(e) {
+        if (document.querySelectorAll('.message-row.unread').length > 0) {
+            this.makeMessagesAsRead(this.props.currentConversation) 
+        }               
         this.setState({
             message: e.target.value,
         })
     }
 
     handleClick() {
-        if (this.props.currentConversation && this.props.currentConversation !== 'null') {
-            this.props.firebase.push(`/conversations/${this.props.currentConversation}/messages`, {
-                from: firebase.auth().currentUser.email,
-                value: this.state.message,
-                timestamp: + new Date(),
-            });
-        }
+        this.sendMessage(this.state.message)
     }
 
     render() {
