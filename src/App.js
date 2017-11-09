@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { connect } from 'react-redux'
 import { firebaseConnect, pathToJS } from 'react-redux-firebase'
 import { browserHistory } from 'react-router'
+import Notifications from './utils/notifications'
 
 import { initDB } from './db/index';
 import { getUserPermission } from './utils/notifications'
@@ -23,6 +24,8 @@ export class App extends Component {
         this.state = {
             currentUser: '',
         };
+        this.notifications = new Notifications();                
+
         this.handleWindowClose =this.handleWindowClose.bind(this);
     }
 
@@ -36,7 +39,7 @@ export class App extends Component {
     }
 
     componentDidMount() {
-        getUserPermission();
+        this.notifications.getUserPermission();
         window.addEventListener("beforeunload",this.handleWindowClose);
         if (this.props.auth && this.props.auth.uid) {
             this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});
