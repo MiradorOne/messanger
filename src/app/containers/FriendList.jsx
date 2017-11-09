@@ -137,6 +137,8 @@ export class FriendList extends Component {
 
                                                             userID={userID}
 
+                                                            currentUserEmail={this.props.auth.email}
+
                                                             lastMessage={value.lastMessage ? value.lastMessage : ''}
                                                     />
                                                 </li>
