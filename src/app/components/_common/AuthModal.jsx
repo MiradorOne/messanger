@@ -175,10 +175,9 @@ class AuthModal extends Component {
                             <span>Don't have an account?</span><span className='register-link' onClick={this.changeType.bind(this)}> Sign up</span>
                         </div>
 
-                        <button className="btn-default" type="submit" style={buttonStyles}>Sign in</button>
+                        <button className="btn-default pulse" type="submit" style={buttonStyles}>Sign in</button>
                     </form>
                     
-                    {/* <button className="btn-default" style={buttonStyles} onClick={this.changeType.bind(this)}>Register</button> */}
                 </div>
             )
         };
@@ -245,7 +244,7 @@ class AuthModal extends Component {
                                style={inputStyles} 
                                onChange={this.handleChange.bind(this,'passwordConfirm')}/>
 
-                        <button className="btn-default" type="submit" style={buttonStyles}>Register</button>
+                        <button className="btn-default pulse" type="submit" style={buttonStyles}>Register</button>
                     </form>
                 </div>
             )

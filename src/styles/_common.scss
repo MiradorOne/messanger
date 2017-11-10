@@ -85,6 +85,10 @@ ul {
 			background-color: rgba(0,0,0,0);
 			border-bottom: 1px solid #fff;
 			color: #fff;
+			transition: all 0.5s ease;
+			&:focus {
+				border-bottom-color: #000;
+			}
 		}
 		::-webkit-input-placeholder {
 			color: #fff;

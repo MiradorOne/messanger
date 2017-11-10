@@ -73,7 +73,10 @@ ul {
     padding: 15px 5px;
     background-color: transparent;
     border-bottom: 1px solid #fff;
-    color: #fff; }
+    color: #fff;
+    transition: all 0.5s ease; }
+    .Auth-Modal .modal.register input:focus {
+      border-bottom-color: #000; }
   .Auth-Modal .modal.register ::-webkit-input-placeholder {
     color: #fff;
     font-size: 15px; }
@@ -387,5 +390,14 @@ ul {
     background-position: 0% 50%; }
   100% {
     background-position: 100% 50%; } }
+.pulse:hover,
+.pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+  animation-duration: 0.7s; }
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 black; } }
 
 /*# sourceMappingURL=index.css.map */
