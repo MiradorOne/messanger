@@ -70,3 +70,29 @@
 	float: right;
 	margin-right: 5px;
 }
+
+.icon-input-user, .icon-lock {
+	position: absolute;
+	background-size: contain;
+	width: 22px;
+	height: 22px;
+	top: 28px;
+	left: 10px;
+}
+
+.icon-input-user {
+	background-image: url("../src/static/images/icons/user.png");
+}
+
+.icon-lock {
+	background-image: url("../src/static/images/icons/lock.png");
+}
+
+.icon-back-arrow {
+	background-size: contain;
+	cursor: pointer;
+	width: 22px;
+	height: 22px;
+	float: left;
+	background-image: url("../src/static/images/icons/left-arrow.png");
+}

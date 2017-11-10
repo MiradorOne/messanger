@@ -17,18 +17,27 @@ const modalStyles = {
     left: '50%',
     transform: 'translateY(-50%) translateX(-50%)',
     backgroundColor: 'rgba(35,42,50,0)',
-    border: '2px solid #fff',
     borderRadius: '5px',
     padding: '50px 80px',
-    textAlign: 'center'
+    textAlign: 'center',
+    minWidth: '500px',
 };
 
 const inputStyles = {
-    padding: '10px 5px',
     display: 'block',
     margin: '15px 0',
+    fontSize: '16px',
     width: '100%'
 };
+
+const buttonStyles = {
+    backgroundColor: 'rgba(55,52,71,0.3)',
+    textTransform: 'uppercase',
+    outline: 'none',
+    border: 'none',
+    marginBottom: '15px',
+    fontSize: '16px',    
+}
 
 class AuthModal extends Component {
     constructor(props) {
@@ -138,27 +147,38 @@ class AuthModal extends Component {
         const login = () => {
             return (
                 <div className="modal login" >
-                    <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p> 
+                    <h3 style={{color: '#fff', padding: '20px 0', textTransform: 'uppercase', fontSize: '22px'}}>Login</h3>
+                    <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px', textDecoration: 'underline'}}>{this.state.error ? this.state.error.message : ''}</p> 
 
                     <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,'','','',this.state.signIn)}>
 
-                        <input type="text" 
-                               placeholder="Email" 
-                               className="input-default" 
-                               style={inputStyles} 
-                               onChange={this.handleChange.bind(this,'email')}/>
+                        <fieldset >
+                            <i className="icon icon-input-user"/>
+                            <input type="text" 
+                                placeholder="Email" 
+                                className="input-default" 
+                                style={inputStyles} 
+                                onChange={this.handleChange.bind(this,'email')}/>
+                        </fieldset>        
 
-                        <input type="password" 
-                               placeholder="Password" 
-                               name="password" 
-                               className="input-default" 
-                               style={inputStyles} 
-                               onChange={this.handleChange.bind(this,'password')}/>
+                        <fieldset>        
+                            <i className="icon icon-lock"/>
+                            <input type="password" 
+                                placeholder="Password" 
+                                name="password" 
+                                className="input-default" 
+                                style={inputStyles} 
+                                onChange={this.handleChange.bind(this,'password')}/>
+                        </fieldset>        
 
-                        <button className="btn-default" type="submit">Sign in</button>
+                        <div>
+                            <span>Don't have an account?</span><span className='register-link' onClick={this.changeType.bind(this)}> Sign up</span>
+                        </div>
+
+                        <button className="btn-default" type="submit" style={buttonStyles}>Sign in</button>
                     </form>
                     
-                    <button className="btn-default" style={{ marginTop: '15px', width: '102px' }} onClick={this.changeType.bind(this)}>Register</button>
+                    {/* <button className="btn-default" style={buttonStyles} onClick={this.changeType.bind(this)}>Register</button> */}
                 </div>
             )
         };
@@ -167,8 +187,12 @@ class AuthModal extends Component {
             return (
                 <div className="modal register">
                     <form action="#" method="POST" onSubmit={this.checkCredentials.bind(this, this.state.email, this.state.password,this.state.passwordConfirm, this.state.firstName, this.state.lastName,this.state.signIn)}>
-                        <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px'}}>{this.state.error ? this.state.error.message : ''}</p> 
-
+                        <p style={{fontFamily: '"Roboto", sans-serif', color: '#fff', maxWidth: '250px', textDecoration: 'underline'}}>{this.state.error ? this.state.error.message : ''}</p> 
+                        <h3 style={{color: '#fff', padding: '20px 0', textTransform: 'uppercase', fontSize: '22px'}}>
+                        <i className="icon icon-back-arrow" onClick={this.changeType.bind(this)}></i>
+                            Sign up
+                        </h3>
+                        
                         <input type="email" 
                                title="Email" 
                                placeholder="Email" 
@@ -221,9 +245,8 @@ class AuthModal extends Component {
                                style={inputStyles} 
                                onChange={this.handleChange.bind(this,'passwordConfirm')}/>
 
-                        <button className="btn-default" type="submit">Register</button>
+                        <button className="btn-default" type="submit" style={buttonStyles}>Register</button>
                     </form>
-                    <button className="btn-default" style={{ marginTop: '15px', width: '102px' }} onClick={this.changeType.bind(this)}>Sign in</button>
                 </div>
             )
         };

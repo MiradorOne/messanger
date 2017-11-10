@@ -72,11 +72,96 @@ ul {
 }
 
 .Auth-Modal {
-	background: #284571;
-	background: -moz-linear-gradient(-45deg, #284571 0%, #2989d8 43%, #207cca 52%, #2c3642 100%, #2c3642 100%);
-	background: -webkit-linear-gradient(-45deg, #284571 0%,#2989d8 43%,#207cca 52%,#2c3642 100%,#2c3642 100%);
-	background: linear-gradient(135deg, #284571 0%,#2989d8 43%,#207cca 52%,#2c3642 100%,#2c3642 100%);
+	background: linear-gradient(270deg,#cc6aa5,#3e91cc,#2dcca7,#7E57C2);
+	background-size: 800% 100%;
+	-webkit-animation: bg-pan-left 20s infinite;
+	animation: bg-pan-left 20s infinite;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#284571', endColorstr='#2c3642',GradientType=1 );
+	font-family: Roboto, sans-serif;
+
+	.modal.register {
+		input {
+			padding: 15px 5px;
+			background-color: rgba(0,0,0,0);
+			border-bottom: 1px solid #fff;
+			color: #fff;
+		}
+		::-webkit-input-placeholder {
+			color: #fff;
+			font-size: 15px;
+		}
+		::-moz-placeholder {
+			color: #fff;
+			font-size: 15px;
+		}
+		:-ms-input-placeholder {
+			color: #fff;
+			font-size: 15px;
+		}
+		:-moz-placeholder {
+			color: #fff;
+			font-size: 15px;
+		}
+	}
+
+	fieldset {
+		border: none;
+		position: relative;
+		input {
+			padding: 15px 5px 15px 40px;
+			color: rgb(80, 80, 80);
+			background-color: rgb(217, 218, 220);
+			border-bottom: none;
+		}
+
+		&+div {
+			text-align: right;
+			padding-top: 10px;
+		}
+	}
+
+	span {
+		font-style: italic;
+		font-size: 12px;
+		color: #2d2d2d;
+	}
+
+	span.register-link {
+		color: #fff;
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	h3 {
+		letter-spacing: 1.5px;
+	}
+
+	::-webkit-input-placeholder {
+		color: rgb(80, 80, 80);
+		font-size: 15px;
+	}
+	::-moz-placeholder {
+		color: rgb(80, 80, 80);
+		font-size: 15px;
+	}
+	:-ms-input-placeholder {
+		color: rgb(80, 80, 80);
+		font-size: 15px;
+	}
+	:-moz-placeholder {
+		color: rgb(80, 80, 80);
+		font-size: 15px;
+	}
+	button[type='submit'] {
+		margin-top: 30px;
+		width:50%;
+	}
+
+	button {
+		font-family: Roboto, sans-serif;
+	}
 }
 
 //======== Components grid ========//
