@@ -1,6 +1,6 @@
 {
   "name": "messanger",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.9.5"
