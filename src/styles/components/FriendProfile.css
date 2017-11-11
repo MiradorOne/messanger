@@ -37,7 +37,8 @@
       text-align: center;
       color: rgba(41, 48, 55, 0.8);
       font-weight: 500;
-      font-size: 20px; }
+      font-size: 20px;
+      width: 100%; }
       .Friend-Profile .user-image h3 span {
         color: rgba(41, 48, 55, 0.8);
         font-size: 14px;

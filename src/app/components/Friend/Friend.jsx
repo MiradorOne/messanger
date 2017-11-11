@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import {detectTime} from '../../../utils/timeDetector'
 import {emojify} from 'react-emojione';
 import _ from 'lodash';
+import Notifications from '../../../utils/notifications'
 
 import '../../../styles/components/Friend.css';
 import Placeholder from '../../../static/images/avatar-placeholder.png';
@@ -14,7 +15,8 @@ class Friend extends Component {
             isOnline: false,
         }
         this.watchOnlineStatus();
-        this.getPicture(this.props.userID);        
+        this.getPicture(this.props.userID);
+        this.notifications = new Notifications();                
     }
 
     componentWillReceiveProps(nextProps) {
@@ -23,6 +25,18 @@ class Friend extends Component {
                 pictureURL: ''
             })
             this.getPicture(nextProps.userID);
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const lastMessage = this.props.lastMessage;
+        if (!_.isEqual(lastMessage, prevProps.lastMessage)) {
+
+            if (!_.isEqual(lastMessage.from,this.props.currentUserEmail) && !document.hasFocus()) {
+
+                this.notifications.spawnNotification(lastMessage.value,this.state.pictureURL, `${this.props.firstName} ${this.props.lastName}`);
+            
+            }           
         }
     }
 

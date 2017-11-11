@@ -3,10 +3,12 @@ import {createFilter} from 'react-search-input';
 import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import '../../styles/containers/FriendList.css';
 import Search from '../components/Search/Search';
 import Friend from '../components/Friend/Friend';
+import Loading from '../components/_common/Loading';
 import { getUnreadMessages, getAllMessages } from '../actions/messagesActions';
 
 const KEYS_TO_FILTERS = ['users.firstName', 'users.lastName', 'users.email'];
@@ -92,50 +94,66 @@ export class FriendList extends Component {
             } else {
                 return (
                     <li className="no-conversation">
-                        No result
+                        No messages
                     </li>
                 )
             }
         };
-        if (true) {
-            return (
+        return (
+            
                 <div className="container Friend-List">
                     <Search handleChange={this.handleChange.bind(this)}/>
-                    <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px', position: 'relative' }}>
-                        {
-                            Object.keys(this.props.filteredMessages).length === 0 ? noConversationsMessage() :
-                                searchResult.map((value, i) => {
+                    <ReactCSSTransitionGroup
+                        transitionName="fade-in"
+                        transitionAppear={true}
+                        transitionEnterTimeout={400}
+                        transitionLeaveTiemout={400}                            
+                        transitionAppearTimeout={400}
+                    >
 
-                                    const userID = value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id;
-                                    const firstName = value.users[1].firstName === (this.props.profile ? this.props.profile.firstName : '') ? value.users[0].firstName : value.users[1].firstName;
-                                    const lastName = value.users[1].lastName === (this.props.profile ? this.props.profile.lastName : '') ? value.users[0].lastName : value.users[1].lastName;
+                        {!this.props.ui.isFeatching ? 
 
-                                    return (
-                                        <li key={i}
+                            <ul style={{ height: '100%', overflowY: 'scroll', paddingBottom: '200px', position: 'relative' }}>
+                                {
+                                    Object.keys(this.props.filteredMessages).length === 0 ? noConversationsMessage() :
+                                        searchResult.map((value, i) => {
 
-                                            className={this.props.selectedUserID === userID ? 'selected' : ''}
+                                            const userID = value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id;
+                                            const firstName = value.users[1].firstName === (this.props.profile ? this.props.profile.firstName : '') ? value.users[0].firstName : value.users[1].firstName;
+                                            const lastName = value.users[1].lastName === (this.props.profile ? this.props.profile.lastName : '') ? value.users[0].lastName : value.users[1].lastName;
 
-                                            onClick={this.props.selectConversation.bind(this,
-                                                                                        searchResult[i], 
-                                                                                        {userID: value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id})}>
+                                            return (
+                                                <li key={i}
 
-                                            <Friend firstName={firstName}
+                                                    className={this.props.selectedUserID === userID ? 'selected' : ''}
 
-                                                    lastName={lastName}
+                                                    onClick={this.props.selectConversation.bind(this,
+                                                                                                searchResult[i], 
+                                                                                                {userID: value.users[1].id === (this.props.auth ? this.props.auth.uid : '') ? value.users[0].id : value.users[1].id})}>
 
-                                                    userID={userID}
+                                                    <Friend firstName={firstName}
 
-                                                    lastMessage={value.lastMessage ? value.lastMessage : ''}
-                                            />
-                                        </li>
-                                    )
-                                })
-                        }
+                                                            lastName={lastName}
 
-                    </ul>
+                                                            userID={userID}
+
+                                                            currentUserEmail={this.props.auth.email}
+
+                                                            lastMessage={value.lastMessage ? value.lastMessage : ''}
+                                                    />
+                                                </li>
+                                            )
+                                        })
+                                }
+
+                            </ul>   
+
+                        : <Loading color="#fff"/>}
+                        
+                </ReactCSSTransitionGroup>
+                    
                 </div>
-            )
-        }
+        )
     }
 }
 

@@ -11,6 +11,7 @@ const middleware = applyMiddleware(thunk.withExtraArgument(getFirebase));
 const createStoreWithFirebase = compose(
     reactReduxFirebase(config, { userProfile: 'users', enableLogging: false }),
     middleware,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )(createStore);
 
 export const store = createStoreWithFirebase(rootReducer, {});

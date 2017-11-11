@@ -6,6 +6,7 @@ import Message from '../components/_common/Message';
 import Loading from '../components/_common/Loading';
 import * as firebase from 'firebase';
 import _ from 'lodash';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import '../../styles/containers/Chat.css';
 
@@ -15,14 +16,16 @@ export default class Chat extends Component {
 
         this.state = {
             messages: [],
-            isLoading: false
+            isLoading: false,
         }
     }
 
     componentDidUpdate() {
-        const node = ReactDOM.findDOMNode(this.refs['scroll']);
-        const messageNode = _.last(node.childNodes);
-        messageNode.scrollIntoView(false);
+        window.requestAnimationFrame(() => {
+            const node = ReactDOM.findDOMNode(this.refs['scroll']);
+            const messageNode = _.last(node.childNodes);
+            node.scrollTop = node.scrollHeight;
+        })
     }
 
     shouldComponentUpdate(nextProps, state) {
@@ -31,7 +34,7 @@ export default class Chat extends Component {
         } else {
             return true;                   
         }
-        
+    
     }
 
     getMessages(convID) {
@@ -48,6 +51,7 @@ export default class Chat extends Component {
                 if (object && object !== "null") {
                     self.setState({
                         messages: object,
+                        isLoading: false
                     })
                 } else {
                     self.setState({
@@ -108,7 +112,8 @@ export default class Chat extends Component {
     render() {
         const messages = Object.keys(this.state.messages).map((value,i) => {
             return (
-                <Message key={i} 
+                <Message key={i}
+                         data-key={i} 
                          friendImage={this.state.friendPictureURL} 
                          currentUserImage={this.state.currentUserImage} 
                          data={this.state.messages[value]}/>
@@ -126,24 +131,39 @@ export default class Chat extends Component {
                 )
             }
         }
-
+            
         return (
             <div className="container Chat">
+            
                 <ChatTopBar activeConversation={this.props.activeConversation}/>
 
-                <div className="messages" style={{minHeight: 'calc(100% - 160px)', marginBottom: '15px'}} ref='scroll'>
+                    <div className="messages" style={{minHeight: 'calc(100% - 145px)', marginBottom: '15px'}} ref='scroll'>
 
-                    {messages.length > 0 ? messages : (<div style={{
-                        position: 'absolute',
-                        fontSize:'16px', 
-                        textTransform:'uppercase',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translateY(-50%) translateX(-50%)'
-                    }}>{firstMessage()}</div>)}
+                        {messages.length > 0  ? 
+                        
+                        <ReactCSSTransitionGroup 
+                            transitionName="fade-in"
+                            transitionAppear={true}
+                            transitionEnter={false}
+                            transitionLeave={false}                            
+                            transitionAppearTimeout={400}
+                        >
 
-                </div>
-                
+                            {messages} 
+                    
+                        </ReactCSSTransitionGroup>
+
+                        : (<div style={{
+                            position: 'absolute',
+                            fontSize:'16px', 
+                            textTransform:'uppercase',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translateY(-50%) translateX(-50%)'
+                        }}>{firstMessage()}</div>)}
+
+                    </div>
+          
                 {messages.length > 0 && this.props.activeConversation ? 
                 
                 <EnterMessage 

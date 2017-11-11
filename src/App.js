@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { connect } from 'react-redux'
 import { firebaseConnect, pathToJS } from 'react-redux-firebase'
 import { browserHistory } from 'react-router'
+import Notifications from './utils/notifications'
 
 import { initDB } from './db/index';
 import { getUserPermission } from './utils/notifications'
@@ -23,11 +24,26 @@ export class App extends Component {
         this.state = {
             currentUser: '',
         };
+        this.notifications = new Notifications();                
 
+        this.handleWindowClose =this.handleWindowClose.bind(this);
+    }
+
+    handleWindowClose(e) {
+        e.preventDefault();
+        if (this.state.currentUser) {
+            this.props.firebase.update(`/users/${this.state.currentUser}/`, {isOnline: false}).then(() => {
+                return e.returnValue = true;
+            });
+        };
     }
 
     componentDidMount() {
-        getUserPermission();
+        this.notifications.getUserPermission();
+        window.addEventListener("beforeunload",this.handleWindowClose);
+        if (this.props.auth && this.props.auth.uid) {
+            this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});
+        }        
     }
 
     componentWillReceiveProps(props) {
@@ -35,7 +51,6 @@ export class App extends Component {
             firebase.app().delete();
             browserHistory.push('/auth');
         } else {
-            this.props.firebase.update(`/users/${this.props.auth.uid}/`, {isOnline: true});
             this.setState({
                 currentUser: this.props.auth.uid
             })
@@ -45,7 +60,8 @@ export class App extends Component {
     componentWillUnmount() {
         if (this.state.currentUser) {
             this.props.firebase.update(`/users/${this.state.currentUser}/`, {isOnline: false});
-        }           
+        }  
+        window.removeEventListener('onbeforeunload',this.handleWindowClose);
     }
 
     render() {

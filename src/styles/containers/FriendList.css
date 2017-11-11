@@ -1,5 +1,6 @@
 .Friend-List {
   padding: 20px 0;
+  position: relative;
   background: -webkit-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
   background: -moz-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
   background: -o-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
@@ -19,8 +20,11 @@
     text-align: center;
     margin: 175px 10px;
     text-align: center;
-    color: #b7e7f1;
+    color: #fff;
     font-size: 17px;
     font-weight: 300; }
+    .Friend-List .no-conversation:hover {
+      background-color: transparent;
+      cursor: auto; }
 
 /*# sourceMappingURL=FriendList.css.map */

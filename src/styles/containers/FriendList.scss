@@ -1,6 +1,7 @@
 .Friend-List {
 	padding: 20px 0;
 	//background-color: #21282F;
+	position: relative;
 	background: -webkit-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
 	background: -moz-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
 	background: -o-linear-gradient(157deg, #242a31 31%, #2d343c 69%);
@@ -23,13 +24,16 @@
 			}
 		}
 	}
-	.no-conversation
-{
+	.no-conversation {
 	text-align: center;
 	margin: 175px 10px;
 	text-align: center;
-	color: rgb(183, 231, 241);
+	color: #fff;
 	font-size: 17px;
 	font-weight: 300;
-}
+		&:hover {
+			background-color: rgba(0,0,0,0);
+			cursor: auto;
+		}
+	}
 }

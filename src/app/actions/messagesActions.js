@@ -65,6 +65,8 @@ export function countUnreadMessages(currentUserID, userEmail) {
 
 export function getAllMessages (currentUserID) {
     return dispatch => {
+        dispatch({type: 'IS_FEATCHING', payload: true});
+
         firebase.database().ref('/conversations').on('value', (f_snapshot) => {
             firebase.database().ref(`/users/${currentUserID}/conversations/`).on('value', (s_snapshot) => {
                 const allConversations = f_snapshot.val();                
@@ -76,6 +78,8 @@ export function getAllMessages (currentUserID) {
                 }, {});
 
                 dispatch({type: 'GET_ALL_MESSAGES', payload: filteredConversations})
+                dispatch({type: 'IS_FEATCHING', payload: false});
+        
             })
         })
     }
